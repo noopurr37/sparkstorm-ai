@@ -31,8 +31,7 @@ const Hero = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              Intelligence as a{" "}
-              <span className="text-gradient">Service</span>
+              <span className="text-gradient">SparkStorm AI</span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
