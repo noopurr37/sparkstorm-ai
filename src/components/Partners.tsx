@@ -12,7 +12,7 @@ const Partners = () => {
   
   const [isVisible, setIsVisible] = useState(false);
   const [teamMembers, setTeamMembers] = useState([
-    { id: 1, name: "Siva", image: "" },
+    { id: 1, name: "Siva", image: "/lovable-uploads/8ef771d4-addc-488c-a4a2-394948b74e04.png" },
     { id: 2, name: "Girija", image: "" },
   ]);
   
