@@ -22,10 +22,6 @@ const Partners = () => {
 
   const partners = [
     { name: "Signa Tech", delay: 100 },
-    { name: "TechNova", delay: 200 },
-    { name: "HealthSync", delay: 300 },
-    { name: "AI Ventures", delay: 400 },
-    { name: "Cloud Dynamics", delay: 500 },
   ];
 
   return (
@@ -49,7 +45,7 @@ const Partners = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+        <div className="flex justify-center">
           {partners.map((partner, index) => (
             <div 
               key={index}
@@ -59,7 +55,7 @@ const Partners = () => {
                 animation: isVisible ? `fade-in 0.6s ease-out ${partner.delay}ms forwards` : 'none'
               }}
             >
-              <div className="h-28 w-full bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-center p-6">
+              <div className="h-28 w-full max-w-xs bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-center p-6">
                 <span className="text-lg font-medium text-gray-600">{partner.name}</span>
               </div>
             </div>
