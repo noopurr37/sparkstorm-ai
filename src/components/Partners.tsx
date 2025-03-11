@@ -1,6 +1,8 @@
 
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const Partners = () => {
   const [ref, inView] = useInView({
@@ -9,6 +11,10 @@ const Partners = () => {
   });
   
   const [isVisible, setIsVisible] = useState(false);
+  const [teamMembers, setTeamMembers] = useState([
+    { id: 1, name: "Siva", image: "" },
+    { id: 2, name: "Girija", image: "" },
+  ]);
   
   useEffect(() => {
     if (inView) {
@@ -23,6 +29,17 @@ const Partners = () => {
   const partners = [
     { name: "Signa Tech", delay: 100 },
   ];
+
+  const handleImageUpload = (id: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const imageUrl = URL.createObjectURL(event.target.files[0]);
+      setTeamMembers(prev => 
+        prev.map(member => 
+          member.id === id ? { ...member, image: imageUrl } : member
+        )
+      );
+    }
+  };
 
   return (
     <section id="partners" className="py-14 bg-white">
@@ -45,7 +62,7 @@ const Partners = () => {
           </p>
         </div>
         
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-12">
           {partners.map((partner, index) => (
             <div 
               key={index}
@@ -60,6 +77,45 @@ const Partners = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className={`mt-12 transition-all duration-700 delay-200 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}>
+          <h3 className="text-2xl font-bold text-center mb-8">Our Key Team Members</h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {teamMembers.map((member) => (
+              <div key={member.id} className="bg-gray-50 rounded-xl border border-gray-100 p-6">
+                <div className="flex flex-col items-center">
+                  <div className="w-40 h-40 mb-4 rounded-full overflow-hidden border-2 border-blue-100 flex items-center justify-center bg-gray-100">
+                    {member.image ? (
+                      <img 
+                        src={member.image} 
+                        alt={`${member.name}'s profile`} 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="text-gray-400">No image</div>
+                    )}
+                  </div>
+                  <h4 className="text-xl font-semibold mb-2">{member.name}</h4>
+                  <div className="mt-2">
+                    <Input
+                      type="file"
+                      accept="image/*"
+                      id={`image-upload-${member.id}`}
+                      onChange={(e) => handleImageUpload(member.id, e)}
+                      className="cursor-pointer"
+                    />
+                    <label htmlFor={`image-upload-${member.id}`} className="block text-sm text-gray-600 mt-1">
+                      Upload profile picture
+                    </label>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
