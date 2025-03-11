@@ -14,7 +14,7 @@ const Partners = () => {
   const [teamMembers, setTeamMembers] = useState([
     { id: 1, name: "Siva", image: "/lovable-uploads/8ef771d4-addc-488c-a4a2-394948b74e04.png", allowUpload: false },
     { id: 2, name: "Girija", image: "/lovable-uploads/65ee5a53-727d-49ed-8146-843c3eb992cc.png", allowUpload: false },
-    { id: 3, name: "Muzamill", image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png", allowUpload: true },
+    { id: 3, name: "Muzamill", image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png", role: "COO", allowUpload: true },
   ]);
   
   useEffect(() => {
@@ -101,6 +101,9 @@ const Partners = () => {
                     )}
                   </div>
                   <h4 className="text-xl font-semibold mb-2">{member.name}</h4>
+                  {member.role && (
+                    <p className="text-gray-600 mb-3">{member.role}</p>
+                  )}
                   {member.allowUpload && (
                     <div className="mt-2">
                       <Input
