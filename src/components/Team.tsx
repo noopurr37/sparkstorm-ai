@@ -100,7 +100,7 @@ const Team = () => {
     {
       name: "Noopur Gupta",
       role: "Founder & CEO",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+      image: "/lovable-uploads/ae1d15ed-0b22-438d-aede-6554e09de8ed.png",
       delay: 100,
     },
     {
