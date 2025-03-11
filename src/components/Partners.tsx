@@ -29,14 +29,14 @@ const Partners = () => {
   ];
 
   return (
-    <section id="partners" className="py-20 bg-white">
+    <section id="partners" className="py-14 bg-white">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block mb-4 px-4 py-1.5 bg-blue-50 rounded-full">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
             <p className="text-xs sm:text-sm font-medium text-blue-600">Our Partners</p>
           </div>
           
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-700 ${
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
             Collaborating with Industry Leaders
@@ -49,7 +49,7 @@ const Partners = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
           {partners.map((partner, index) => (
             <div 
               key={index}
@@ -59,7 +59,7 @@ const Partners = () => {
                 animation: isVisible ? `fade-in 0.6s ease-out ${partner.delay}ms forwards` : 'none'
               }}
             >
-              <div className="h-32 w-full bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-center p-6">
+              <div className="h-28 w-full bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-center p-6">
                 <span className="text-lg font-medium text-gray-600">{partner.name}</span>
               </div>
             </div>

@@ -15,7 +15,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="home" className="relative overflow-hidden pt-20 pb-16 sm:pt-24 sm:pb-20 lg:pt-32 lg:pb-32">
+    <section id="home" className="relative overflow-hidden pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-28 lg:pb-20">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
         <div className="absolute top-[10%] right-[15%] w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] bg-blue-400 rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse-soft"></div>
@@ -26,16 +26,16 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row lg:items-center">
           {/* Hero Text Content */}
           <div className={`w-full lg:w-1/2 lg:pr-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="inline-block mb-4 px-4 py-1.5 bg-blue-50 rounded-full">
+            <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
               <p className="text-xs sm:text-sm font-medium text-blue-600">Transforming Business with AI</p>
             </div>
             
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
               Intelligence as a{" "}
               <span className="text-gradient">Service</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
+            <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
               SparkStorm AI delivers cutting-edge conversational AI chatbots and secure healthcare applications to transform your business and empower your users.
             </p>
             
@@ -50,8 +50,8 @@ const Hero = () => {
           </div>
           
           {/* Hero Visual Content - Now with feature cards only */}
-          <div className={`w-full lg:w-1/2 mt-12 lg:mt-0 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="relative h-[300px] md:h-[400px]">
+          <div className={`w-full lg:w-1/2 mt-10 lg:mt-0 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="relative h-[260px] md:h-[360px]">
               {/* Chatbot Card */}
               <div className="glass-card absolute top-0 left-0 p-6 w-[200px] md:w-[260px] animate-float">
                 <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">

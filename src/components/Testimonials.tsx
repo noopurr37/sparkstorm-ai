@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
@@ -90,14 +89,14 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="py-24 bg-gray-50">
+    <section id="testimonials" className="py-16 bg-gray-50">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-block mb-4 px-4 py-1.5 bg-blue-50 rounded-full">
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
             <p className="text-xs sm:text-sm font-medium text-blue-600">Testimonials</p>
           </div>
           
-          <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-all duration-700 ${
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
             What Our Clients Say
@@ -123,18 +122,18 @@ const Testimonials = () => {
             >
               {testimonials.map((testimonial, index) => (
                 <div key={index} className="w-full flex-shrink-0 px-4">
-                  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12 relative overflow-hidden">
-                    <div className="absolute top-4 right-4 md:top-8 md:right-8 text-blue-100">
-                      <Quote size={64} />
+                  <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:p-8 relative overflow-hidden">
+                    <div className="absolute top-4 right-4 md:top-6 md:right-6 text-blue-100">
+                      <Quote size={48} />
                     </div>
                     <blockquote className="relative z-10">
-                      <p className="text-xl md:text-2xl leading-relaxed font-medium text-gray-700 mb-8">
+                      <p className="text-lg md:text-xl leading-relaxed font-medium text-gray-700 mb-6">
                         "{testimonial.quote}"
                       </p>
                       <footer>
                         <div className="flex items-center">
-                          <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mr-4">
-                            <span className="text-blue-600 font-bold text-xl">
+                          <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                            <span className="text-blue-600 font-bold text-lg">
                               {testimonial.author.charAt(0)}
                             </span>
                           </div>
@@ -154,7 +153,7 @@ const Testimonials = () => {
           </div>
           
           {/* Navigation Buttons */}
-          <div className="flex justify-between mt-8">
+          <div className="flex justify-between mt-6">
             <Button 
               variant="outline" 
               size="icon" 

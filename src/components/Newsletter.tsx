@@ -48,7 +48,7 @@ const Newsletter = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-primary text-white relative overflow-hidden">
+    <section className="py-14 bg-gradient-primary text-white relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-blue-400 rounded-full opacity-20 mix-blend-overlay filter blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-cyan-400 rounded-full opacity-20 mix-blend-overlay filter blur-3xl"></div>
@@ -60,17 +60,17 @@ const Newsletter = () => {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Stay Updated with SparkStorm AI
             </h2>
-            <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
+            <p className="text-lg opacity-90 mb-6 max-w-2xl mx-auto">
               Subscribe to our newsletter for the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.
             </p>
           </div>
           
           <form 
             onSubmit={handleSubmit}
-            className={`flex flex-col sm:flex-row gap-4 max-w-xl mx-auto transition-all duration-700 delay-200 ${
+            className={`flex flex-col sm:flex-row gap-3 max-w-xl mx-auto transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
@@ -90,7 +90,7 @@ const Newsletter = () => {
           </form>
           
           <p 
-            className={`text-sm opacity-80 mt-6 transition-all duration-700 delay-300 ${
+            className={`text-sm opacity-80 mt-4 transition-all duration-700 delay-300 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
