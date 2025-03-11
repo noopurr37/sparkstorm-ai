@@ -31,8 +31,8 @@ const Hero = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              Intelligent Solutions for a{" "}
-              <span className="text-gradient">Smarter Future</span>
+              Intelligence as a{" "}
+              <span className="text-gradient">Service</span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl">
