@@ -137,6 +137,10 @@
   -webkit-text-fill-color: transparent;
 }
 
+.text-royal-blue {
+  color: #2B4EAA; /* Royal blue color */
+}
+
 .floating-animation {
   animation: floating 3s ease-in-out infinite;
 }

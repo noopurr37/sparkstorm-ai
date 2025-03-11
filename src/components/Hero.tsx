@@ -31,7 +31,7 @@ const Hero = () => {
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
-              <span className="text-gradient">SparkStorm AI</span>
+              <span className="text-royal-blue">SparkStorm AI</span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
