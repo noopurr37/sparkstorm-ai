@@ -106,7 +106,7 @@ const Team = () => {
     {
       name: "Muzamill Iqbal",
       role: "COO",
-      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+      image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png",
       delay: 200,
     },
     {
