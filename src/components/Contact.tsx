@@ -108,7 +108,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-500 mb-1">Email</h4>
-                    <p className="text-gray-800">info@sparkstormai.com</p>
+                    <p className="text-gray-800">ask@sparkstorm.ai</p>
                   </div>
                 </div>
                 
@@ -118,7 +118,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-500 mb-1">Phone</h4>
-                    <p className="text-gray-800">+1 (555) 123-4567</p>
+                    <p className="text-gray-800">+1 (512) 337-2056</p>
                   </div>
                 </div>
                 
@@ -128,7 +128,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-sm font-medium text-gray-500 mb-1">Location</h4>
-                    <p className="text-gray-800">San Francisco, CA</p>
+                    <p className="text-gray-800">Austin, Texas</p>
                     <p className="text-gray-800">United States</p>
                   </div>
                 </div>
