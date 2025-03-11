@@ -106,7 +106,7 @@ const Team = () => {
     {
       name: "Shloak Gupta",
       role: "Co-Founder and Volunteer",
-      image: "/lovable-uploads/349c88b8-0e90-439a-a2a2-07d7a6f4f723.png",
+      image: "/lovable-uploads/94c0df59-f974-4381-bce3-1c2fc0ee67f9.png",
       delay: 200,
     },
     {
