@@ -118,7 +118,7 @@ const Team = () => {
     {
       name: "Rachel Pulice",
       role: "UX Designer",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+      image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png",
       delay: 400,
     },
   ];
