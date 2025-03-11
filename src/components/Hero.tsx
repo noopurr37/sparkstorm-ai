@@ -27,7 +27,7 @@ const Hero = () => {
           {/* Hero Text Content */}
           <div className={`w-full lg:w-1/2 lg:pr-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
-              <p className="text-xs sm:text-sm font-medium text-blue-600">Transforming Business with AI</p>
+              <p className="text-xs sm:text-sm font-medium text-blue-600">Building AI aware businesses</p>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
