@@ -12,9 +12,9 @@ const Partners = () => {
   
   const [isVisible, setIsVisible] = useState(false);
   const [teamMembers, setTeamMembers] = useState([
-    { id: 1, name: "Siva", image: "/lovable-uploads/8ef771d4-addc-488c-a4a2-394948b74e04.png" },
-    { id: 2, name: "Girija", image: "/lovable-uploads/65ee5a53-727d-49ed-8146-843c3eb992cc.png" },
-    { id: 3, name: "Muzamill", image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png" },
+    { id: 1, name: "Siva", image: "/lovable-uploads/8ef771d4-addc-488c-a4a2-394948b74e04.png", allowUpload: false },
+    { id: 2, name: "Girija", image: "/lovable-uploads/65ee5a53-727d-49ed-8146-843c3eb992cc.png", allowUpload: false },
+    { id: 3, name: "Muzamill", image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png", allowUpload: true },
   ]);
   
   useEffect(() => {
@@ -101,18 +101,20 @@ const Partners = () => {
                     )}
                   </div>
                   <h4 className="text-xl font-semibold mb-2">{member.name}</h4>
-                  <div className="mt-2">
-                    <Input
-                      type="file"
-                      accept="image/*"
-                      id={`image-upload-${member.id}`}
-                      onChange={(e) => handleImageUpload(member.id, e)}
-                      className="cursor-pointer"
-                    />
-                    <label htmlFor={`image-upload-${member.id}`} className="block text-sm text-gray-600 mt-1">
-                      Upload profile picture
-                    </label>
-                  </div>
+                  {member.allowUpload && (
+                    <div className="mt-2">
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        id={`image-upload-${member.id}`}
+                        onChange={(e) => handleImageUpload(member.id, e)}
+                        className="cursor-pointer"
+                      />
+                      <label htmlFor={`image-upload-${member.id}`} className="block text-sm text-gray-600 mt-1">
+                        Upload profile picture
+                      </label>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
