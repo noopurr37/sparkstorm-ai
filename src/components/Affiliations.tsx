@@ -55,10 +55,12 @@ const Affiliations = () => {
           
           {/* PVSA Award */}
           <div className="glass-card p-8 flex flex-col md:flex-row items-center justify-center md:justify-start gap-6">
-            <div className="w-20 h-20 bg-white rounded-full shadow-sm flex items-center justify-center">
-              <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-sm text-gray-500">
-                PVSA Logo
-              </div>
+            <div className="w-24 h-24 bg-white rounded-full shadow-sm flex items-center justify-center overflow-hidden">
+              <img 
+                src="/lovable-uploads/dfcc5169-02a0-4fa3-bff5-42f9c9ff85f6.png" 
+                alt="President's Volunteer Service Award" 
+                className="w-20 h-20 object-contain"
+              />
             </div>
             <div className="text-center md:text-left">
               <h3 className="text-xl font-semibold mb-2">President's Volunteer Service Award</h3>
