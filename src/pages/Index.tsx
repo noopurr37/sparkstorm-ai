@@ -38,6 +38,13 @@ const Index = () => {
       </main>
       <footer className="bg-gray-900 text-white py-8 text-center">
         <div className="container mx-auto px-4">
+          <div className="mb-4">
+            <img 
+              src="/lovable-uploads/29312d6b-5f6a-4a11-b1cc-4ab04284a888.png" 
+              alt="SparkStorm AI Logo" 
+              className="h-10 mx-auto filter brightness-0 invert"
+            />
+          </div>
           <p className="text-sm">© {new Date().getFullYear()} SparkStorm AI. All rights reserved.</p>
           <div className="mt-4 flex justify-center space-x-4">
             <a href="#" className="text-gray-400 hover:text-white transition">Privacy Policy</a>

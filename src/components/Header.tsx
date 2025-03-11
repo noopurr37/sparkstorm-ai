@@ -36,9 +36,13 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <div className="w-40 h-10 bg-gray-200 rounded flex items-center justify-center text-sm text-gray-500">
-              SparkStorm AI Logo
-            </div>
+            <a href="#home" className="w-auto h-10">
+              <img 
+                src="/lovable-uploads/29312d6b-5f6a-4a11-b1cc-4ab04284a888.png" 
+                alt="SparkStorm AI Logo" 
+                className="h-10 md:h-12 w-auto"
+              />
+            </a>
           </div>
 
           {/* Desktop Navigation */}
