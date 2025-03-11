@@ -49,11 +49,11 @@ const Hero = () => {
             </div>
           </div>
           
-          {/* Hero Visual Content */}
+          {/* Hero Visual Content - Now with feature cards only */}
           <div className={`w-full lg:w-1/2 mt-12 lg:mt-0 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="relative">
+            <div className="relative h-[300px] md:h-[400px]">
               {/* Chatbot Card */}
-              <div className="glass-card absolute -top-10 -left-12 md:top-0 md:-left-16 p-6 max-w-[200px] md:max-w-[240px] animate-float">
+              <div className="glass-card absolute top-0 left-0 p-6 w-[200px] md:w-[260px] animate-float">
                 <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
                   <MessageCircle className="w-6 h-6 text-blue-600" />
                 </div>
@@ -62,22 +62,12 @@ const Hero = () => {
               </div>
               
               {/* Health App Card */}
-              <div className="glass-card absolute -bottom-10 -right-8 md:-bottom-16 md:-right-12 p-6 max-w-[200px] md:max-w-[240px] animate-float" style={{ animationDelay: "1.5s" }}>
+              <div className="glass-card absolute bottom-0 right-0 p-6 w-[200px] md:w-[260px] animate-float" style={{ animationDelay: "1.5s" }}>
                 <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
                   <HeartPulse className="w-6 h-6 text-purple-600" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">Health Vault</h3>
                 <p className="text-sm text-gray-500">Secure medical data at your fingertips</p>
-              </div>
-              
-              {/* Main Illustration - Reduced size */}
-              <div className="glass-card mx-auto w-full max-w-[400px] aspect-[4/3] flex items-center justify-center">
-                <img
-                  src="https://images.unsplash.com/photo-1531297484001-80022131f5a1"
-                  alt="AI Technology"
-                  className="w-full h-full object-cover rounded-lg"
-                  loading="lazy"
-                />
               </div>
             </div>
           </div>
