@@ -93,9 +93,9 @@ const Partners = () => {
         }`}>
           <h3 className="text-2xl font-bold text-center mb-8">Our Key Team Members</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="flex justify-center gap-8 max-w-6xl mx-auto">
             {teamMembers.map((member) => (
-              <div key={member.id} className="bg-gray-50 rounded-xl border border-gray-100 p-6">
+              <div key={member.id} className="bg-gray-50 rounded-xl border border-gray-100 p-6 w-64">
                 <div className="flex flex-col items-center">
                   <div className="w-40 h-40 mb-4 rounded-full overflow-hidden border-2 border-blue-100 flex items-center justify-center bg-gray-100">
                     {member.image ? (
