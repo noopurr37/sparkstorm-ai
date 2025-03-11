@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Input } from "@/components/ui/input";
@@ -13,6 +14,7 @@ const Partners = () => {
   const [teamMembers, setTeamMembers] = useState([
     { id: 1, name: "Siva", image: "/lovable-uploads/8ef771d4-addc-488c-a4a2-394948b74e04.png" },
     { id: 2, name: "Girija", image: "/lovable-uploads/65ee5a53-727d-49ed-8146-843c3eb992cc.png" },
+    { id: 3, name: "Muzamill", image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png" },
   ]);
   
   useEffect(() => {
@@ -83,7 +85,7 @@ const Partners = () => {
         }`}>
           <h3 className="text-2xl font-bold text-center mb-8">Our Key Team Members</h3>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {teamMembers.map((member) => (
               <div key={member.id} className="bg-gray-50 rounded-xl border border-gray-100 p-6">
                 <div className="flex flex-col items-center">
