@@ -70,8 +70,8 @@ const Hero = () => {
                 <p className="text-sm text-gray-500">Secure medical data at your fingertips</p>
               </div>
               
-              {/* Main Illustration */}
-              <div className="glass-card mx-auto w-full max-w-[500px] aspect-[4/3] flex items-center justify-center">
+              {/* Main Illustration - Reduced size */}
+              <div className="glass-card mx-auto w-full max-w-[400px] aspect-[4/3] flex items-center justify-center">
                 <img
                   src="https://images.unsplash.com/photo-1531297484001-80022131f5a1"
                   alt="AI Technology"
