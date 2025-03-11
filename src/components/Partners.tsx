@@ -4,6 +4,15 @@ import { useInView } from "react-intersection-observer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+// Define the type for team members
+interface TeamMember {
+  id: number;
+  name: string;
+  image: string;
+  allowUpload: boolean;
+  role?: string; // Make role optional
+}
+
 const Partners = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -11,7 +20,7 @@ const Partners = () => {
   });
   
   const [isVisible, setIsVisible] = useState(false);
-  const [teamMembers, setTeamMembers] = useState([
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
     { id: 1, name: "Siva", image: "/lovable-uploads/8ef771d4-addc-488c-a4a2-394948b74e04.png", allowUpload: false },
     { id: 2, name: "Girija", image: "/lovable-uploads/65ee5a53-727d-49ed-8146-843c3eb992cc.png", allowUpload: false },
   ]);
