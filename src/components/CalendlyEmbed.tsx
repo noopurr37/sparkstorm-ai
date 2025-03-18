@@ -17,15 +17,14 @@ const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({
   buttonClassName = "",
   children
 }) => {
-  // We're no longer initializing the badge widget here since it's in the HTML
   useEffect(() => {
-    // Load Calendly CSS (still needed for the inline widget)
+    // Load Calendly CSS (for the inline widget)
     const calendlyCSS = document.createElement('link');
     calendlyCSS.href = 'https://assets.calendly.com/assets/external/widget.css';
     calendlyCSS.rel = 'stylesheet';
     document.head.appendChild(calendlyCSS);
     
-    // Load Calendly script (still needed for the inline widget)
+    // Load Calendly script (for the inline widget)
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
