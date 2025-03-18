@@ -43,7 +43,7 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <CalendlyEmbed url={calendlyUrl} buttonText="Schedule Time with Me">
+              <CalendlyEmbed url={calendlyUrl}>
                 <Button className="btn-primary inline-flex items-center gap-2">
                   <Calendar size={16} /> Schedule Time with Me <ArrowRight size={16} />
                 </Button>

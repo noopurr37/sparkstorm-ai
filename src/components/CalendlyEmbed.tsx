@@ -1,6 +1,6 @@
 
 import React, { useEffect } from 'react';
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
 
@@ -13,7 +13,7 @@ interface CalendlyEmbedProps {
 
 const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({ 
   url, 
-  buttonText = "Book a Demo", 
+  buttonText = "Schedule Time with Me", 
   buttonClassName = "",
   children
 }) => {
@@ -55,6 +55,7 @@ const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] h-[650px] p-0">
+        <DialogTitle className="sr-only">Schedule Meeting</DialogTitle>
         <div 
           className="calendly-inline-widget w-full h-full"
           data-url={`${url}?hide_gdpr_banner=1`}

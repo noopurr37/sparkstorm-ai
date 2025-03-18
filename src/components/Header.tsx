@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -91,7 +90,7 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <CalendlyEmbed url={calendlyUrl} buttonText="Schedule Time with Me" />
+            <CalendlyEmbed url={calendlyUrl} />
           </div>
 
           {/* Mobile Menu Button */}
@@ -154,7 +153,7 @@ const Header = () => {
               Contact
             </a>
             <div className="px-3 py-2">
-              <CalendlyEmbed url={calendlyUrl} buttonText="Schedule Time with Me" buttonClassName="w-full" />
+              <CalendlyEmbed url={calendlyUrl} buttonClassName="w-full" />
             </div>
           </div>
         </div>
