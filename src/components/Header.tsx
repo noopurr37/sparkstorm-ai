@@ -1,163 +1,92 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Calendar } from "lucide-react";
+
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import CalendlyEmbed from "./CalendlyEmbed";
+import { Link } from "react-router-dom";
 
 const Header = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
-  // Calendly URL
-  const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white bg-opacity-80 backdrop-blur-md shadow-sm py-3"
-          : "bg-transparent py-5"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <a href="#home" className="w-auto h-10">
-              <img 
-                src="/lovable-uploads/29312d6b-5f6a-4a11-b1cc-4ab04284a888.png" 
-                alt="SparkStorm AI Logo" 
-                className="h-10 md:h-12 w-auto"
-              />
-            </a>
-          </div>
+    <header className="bg-white py-4 shadow-sm sticky top-0 z-50">
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <Link to="/" className="flex items-center space-x-2">
+          <img
+            src="/lovable-uploads/29312d6b-5f6a-4a11-b1cc-4ab04284a888.png"
+            alt="SparkStorm AI Logo"
+            className="h-10"
+          />
+          <span className="text-xl font-bold text-gray-900">SparkStorm AI</span>
+        </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-10">
-            <a
-              href="#home"
-              className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors"
-            >
-              Home
-            </a>
-            <a
-              href="#services"
-              className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors"
-            >
-              Services
-            </a>
-            <a
-              href="#team"
-              className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors"
-            >
-              Team
-            </a>
-            <a
-              href="#partners"
-              className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors"
-            >
-              Partners
-            </a>
-            <a
-              href="#testimonials"
-              className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors"
-            >
-              Testimonials
-            </a>
-            <a
-              href="#contact"
-              className="text-sm font-medium text-gray-800 hover:text-blue-600 transition-colors"
-            >
-              Contact
-            </a>
-          </nav>
-
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <CalendlyEmbed url={calendlyUrl} />
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              type="button"
-              className="p-2 rounded-md text-gray-800 hover:bg-gray-100 transition-colors"
-              onClick={toggleMobileMenu}
-            >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+        {/* Mobile menu button */}
+        <div className="lg:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={toggleMenu}
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </Button>
         </div>
+
+        {/* Desktop navigation */}
+        <nav className="hidden lg:flex items-center space-x-8">
+          <a href="#services" className="text-gray-700 hover:text-primary transition">
+            Services
+          </a>
+          <a href="#team" className="text-gray-700 hover:text-primary transition">
+            Team
+          </a>
+          <a href="#testimonials" className="text-gray-700 hover:text-primary transition">
+            Testimonials
+          </a>
+          <a href="#contact" className="text-gray-700 hover:text-primary transition">
+            Contact
+          </a>
+        </nav>
+
+        {/* Mobile menu */}
+        {isMenuOpen && (
+          <div className="lg:hidden absolute top-16 left-0 right-0 bg-white shadow-md py-4 px-4 z-50">
+            <nav className="flex flex-col space-y-4">
+              <a 
+                href="#services" 
+                className="text-gray-700 hover:text-primary transition"
+                onClick={toggleMenu}
+              >
+                Services
+              </a>
+              <a 
+                href="#team" 
+                className="text-gray-700 hover:text-primary transition"
+                onClick={toggleMenu}
+              >
+                Team
+              </a>
+              <a 
+                href="#testimonials" 
+                className="text-gray-700 hover:text-primary transition"
+                onClick={toggleMenu}
+              >
+                Testimonials
+              </a>
+              <a 
+                href="#contact" 
+                className="text-gray-700 hover:text-primary transition"
+                onClick={toggleMenu}
+              >
+                Contact
+              </a>
+            </nav>
+          </div>
+        )}
       </div>
-
-      {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white absolute left-0 right-0 top-full shadow-lg animate-fade-in origin-top">
-          <div className="px-2 pt-2 pb-3 space-y-1">
-            <a
-              href="#home"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </a>
-            <a
-              href="#services"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Services
-            </a>
-            <a
-              href="#team"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Team
-            </a>
-            <a
-              href="#partners"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Partners
-            </a>
-            <a
-              href="#testimonials"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Testimonials
-            </a>
-            <a
-              href="#contact"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:bg-gray-100 transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Contact
-            </a>
-            <div className="px-3 py-2">
-              <CalendlyEmbed url={calendlyUrl} buttonClassName="w-full" />
-            </div>
-          </div>
-        </div>
-      )}
     </header>
   );
 };
