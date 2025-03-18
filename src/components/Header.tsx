@@ -91,7 +91,7 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <CalendlyEmbed url={calendlyUrl} buttonText="Book a Demo" />
+            <CalendlyEmbed url={calendlyUrl} buttonText="Schedule Time with Me" />
           </div>
 
           {/* Mobile Menu Button */}
@@ -154,7 +154,7 @@ const Header = () => {
               Contact
             </a>
             <div className="px-3 py-2">
-              <CalendlyEmbed url={calendlyUrl} buttonText="Book a Demo" buttonClassName="w-full" />
+              <CalendlyEmbed url={calendlyUrl} buttonText="Schedule Time with Me" buttonClassName="w-full" />
             </div>
           </div>
         </div>
