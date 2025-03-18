@@ -18,10 +18,22 @@
           url: 'https://calendly.com/noopurgupta01/1x1', 
           text: 'Schedule time with me', 
           color: '#0069ff', 
-          textColor: '#ffffff' 
+          textColor: '#ffffff',
+          position: 'right',
+          branding: false
         }); 
       }
     </script>
+    <style>
+      /* Custom styles to position the Calendly badge in the top right corner */
+      .calendly-badge-widget {
+        position: fixed !important;
+        top: 20px !important;
+        bottom: auto !important;
+        right: 20px !important;
+        z-index: 9999 !important;
+      }
+    </style>
   </head>
 
   <body>
