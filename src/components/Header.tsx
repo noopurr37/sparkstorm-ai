@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <header className="bg-white py-4 shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
-        {/* Logo - brought back */}
+        {/* Logo and Home link */}
         <div className="flex items-center">
           <Link to="/" className="flex items-center space-x-2 mr-8">
             <img
@@ -22,7 +22,7 @@ const Header = () => {
               alt="SparkStorm AI Logo"
               className="h-10"
             />
-            <span className="text-xl font-bold text-gray-900">SparkStorm AI</span>
+            <span className="text-xl font-bold text-gray-900">Home</span>
           </Link>
           
           {/* Desktop navigation - still on the left */}
