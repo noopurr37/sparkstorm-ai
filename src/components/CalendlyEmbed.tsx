@@ -34,6 +34,7 @@ const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({
     script.onload = () => {
       // @ts-ignore
       if (window.Calendly) {
+        console.log("Initializing Calendly badge widget");
         // @ts-ignore
         window.Calendly.initBadgeWidget({ 
           url: url, 
@@ -41,32 +42,47 @@ const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({
           color: '#0069ff', 
           textColor: '#ffffff' 
         });
+      } else {
+        console.log("Calendly not available yet");
       }
     };
 
     return () => {
-      // Clean up
-      document.body.removeChild(script);
-      document.head.removeChild(calendlyCSS);
+      try {
+        // Clean up - ensure elements exist before removing
+        if (document.body.contains(script)) {
+          document.body.removeChild(script);
+        }
+        if (document.head.contains(calendlyCSS)) {
+          document.head.removeChild(calendlyCSS);
+        }
+      } catch (error) {
+        console.error("Error during cleanup:", error);
+      }
     };
   }, [url]);
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        {children || (
-          <Button className={`btn-primary inline-flex items-center gap-2 ${buttonClassName}`}>
-            <Calendar size={16} /> {buttonText}
-          </Button>
-        )}
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] h-[650px] p-0">
-        <div 
-          className="calendly-inline-widget w-full h-full"
-          data-url={`${url}?hide_gdpr_banner=1`}
-        />
-      </DialogContent>
-    </Dialog>
+    <>
+      {/* This div is for the badge widget to appear */}
+      <div id="calendly-badge-widget"></div>
+      
+      <Dialog>
+        <DialogTrigger asChild>
+          {children || (
+            <Button className={`btn-primary inline-flex items-center gap-2 ${buttonClassName}`}>
+              <Calendar size={16} /> {buttonText}
+            </Button>
+          )}
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[600px] h-[650px] p-0">
+          <div 
+            className="calendly-inline-widget w-full h-full"
+            data-url={`${url}?hide_gdpr_banner=1`}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 
