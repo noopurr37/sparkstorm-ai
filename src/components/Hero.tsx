@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, HeartPulse, Calendar } from "lucide-react";
@@ -7,7 +6,7 @@ const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
   
   // Calendly URL
-  const calendlyUrl = "https://calendly.com/sparkstorm-ai/demo";
+  const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
 
   useEffect(() => {
     const timer = setTimeout(() => {

@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -15,7 +14,7 @@ const Index = () => {
   const { toast } = useToast();
   
   // Calendly URL (in case it's needed for other buttons later)
-  const calendlyUrl = "https://calendly.com/sparkstorm-ai/demo";
+  const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
   
   useEffect(() => {
     // Welcome toast when the page loads

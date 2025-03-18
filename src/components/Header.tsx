@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +7,7 @@ const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Calendly URL
-  const calendlyUrl = "https://calendly.com/sparkstorm-ai/demo";
+  const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
 
   useEffect(() => {
     const handleScroll = () => {
