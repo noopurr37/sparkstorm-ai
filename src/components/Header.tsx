@@ -1,6 +1,8 @@
+
 import { useState, useEffect } from "react";
 import { Menu, X, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import CalendlyEmbed from "./CalendlyEmbed";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -89,9 +91,7 @@ const Header = () => {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="btn-primary" onClick={() => window.open(calendlyUrl, "_blank")}>
-              <Calendar size={16} className="mr-1" /> Book a Demo
-            </Button>
+            <CalendlyEmbed url={calendlyUrl} buttonText="Book a Demo" />
           </div>
 
           {/* Mobile Menu Button */}
@@ -154,9 +154,7 @@ const Header = () => {
               Contact
             </a>
             <div className="px-3 py-2">
-              <Button className="w-full btn-primary" onClick={() => window.open(calendlyUrl, "_blank")}>
-                <Calendar size={16} className="mr-1" /> Book a Demo
-              </Button>
+              <CalendlyEmbed url={calendlyUrl} buttonText="Book a Demo" buttonClassName="w-full" />
             </div>
           </div>
         </div>

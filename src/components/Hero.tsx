@@ -1,6 +1,8 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, HeartPulse, Calendar } from "lucide-react";
+import CalendlyEmbed from "./CalendlyEmbed";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -41,12 +43,11 @@ const Hero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button 
-                className="btn-primary inline-flex items-center gap-2"
-                onClick={() => window.open(calendlyUrl, "_blank")}
-              >
-                <Calendar size={16} /> Book a Demo <ArrowRight size={16} />
-              </Button>
+              <CalendlyEmbed url={calendlyUrl} buttonText="Book a Demo">
+                <Button className="btn-primary inline-flex items-center gap-2">
+                  <Calendar size={16} /> Book a Demo <ArrowRight size={16} />
+                </Button>
+              </CalendlyEmbed>
               <Button variant="outline" className="btn-secondary">
                 Request a Quote
               </Button>
