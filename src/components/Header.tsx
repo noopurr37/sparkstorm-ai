@@ -22,7 +22,7 @@ const Header = () => {
               alt="SparkStorm AI Logo"
               className="h-10"
             />
-            <span className="text-xl font-bold text-gray-900">Home</span>
+            <span className="text-gray-700 hover:text-primary transition">Home</span>
           </Link>
           
           {/* Desktop navigation - still on the left */}
