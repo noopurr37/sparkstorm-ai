@@ -16,14 +16,14 @@ const Header = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo and Home link */}
         <div className="flex items-center">
-          <Link to="/" className="flex items-center space-x-2 mr-8">
+          <a href="#home" className="flex items-center space-x-2 mr-8">
             <img
               src="/lovable-uploads/29312d6b-5f6a-4a11-b1cc-4ab04284a888.png"
               alt="SparkStorm AI Logo"
               className="h-10"
             />
             <span className="text-gray-700 hover:text-primary transition">Home</span>
-          </Link>
+          </a>
           
           {/* Desktop navigation - still on the left */}
           <nav className="hidden lg:flex items-center space-x-8">
@@ -58,6 +58,13 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden absolute top-16 left-0 right-0 bg-white shadow-md py-4 px-4 z-50">
             <nav className="flex flex-col space-y-4">
+              <a 
+                href="#home" 
+                className="text-gray-700 hover:text-primary transition"
+                onClick={toggleMenu}
+              >
+                Home
+              </a>
               <a 
                 href="#services" 
                 className="text-gray-700 hover:text-primary transition"
