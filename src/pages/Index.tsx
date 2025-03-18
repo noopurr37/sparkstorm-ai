@@ -14,6 +14,9 @@ import { useToast } from "@/hooks/use-toast";
 const Index = () => {
   const { toast } = useToast();
   
+  // Calendly URL (in case it's needed for other buttons later)
+  const calendlyUrl = "https://calendly.com/sparkstorm-ai/demo";
+  
   useEffect(() => {
     // Welcome toast when the page loads
     toast({
