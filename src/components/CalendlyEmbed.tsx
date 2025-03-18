@@ -18,17 +18,38 @@ const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({
   children
 }) => {
   useEffect(() => {
+    // Load Calendly CSS
+    const calendlyCSS = document.createElement('link');
+    calendlyCSS.href = 'https://assets.calendly.com/assets/external/widget.css';
+    calendlyCSS.rel = 'stylesheet';
+    document.head.appendChild(calendlyCSS);
+    
     // Load Calendly script
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
     document.body.appendChild(script);
+    
+    // Initialize the badge widget when script is loaded
+    script.onload = () => {
+      // @ts-ignore
+      if (window.Calendly) {
+        // @ts-ignore
+        window.Calendly.initBadgeWidget({ 
+          url: url, 
+          text: 'Schedule time with me', 
+          color: '#0069ff', 
+          textColor: '#ffffff' 
+        });
+      }
+    };
 
     return () => {
       // Clean up
       document.body.removeChild(script);
+      document.head.removeChild(calendlyCSS);
     };
-  }, []);
+  }, [url]);
 
   return (
     <Dialog>
