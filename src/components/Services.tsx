@@ -1,7 +1,7 @@
 
-import { useEffect, useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { MessageCircle, HeartPulse, Zap, Bot, Shield, BarChart } from "lucide-react";
+import { MessageSquare, Globe, Smartphone, HeartPulse } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -81,40 +81,28 @@ const Services = () => {
   
   const services = [
     {
-      icon: <Bot className="w-7 h-7 text-blue-600" />,
-      title: "AI Chatbots for Business",
-      description: "Custom conversational AI solutions designed to automate customer interactions, answer queries, and enhance overall business efficiency.",
+      icon: <MessageSquare className="w-7 h-7 text-blue-600" />,
+      title: "AI Chatbots",
+      description: "Custom conversational AI chatbots designed to automate customer interactions, answer queries, and enhance your business's digital presence 24/7.",
       delay: 100,
     },
     {
-      icon: <HeartPulse className="w-7 h-7 text-blue-600" />,
-      title: "Personal Health Vault App",
-      description: "A secure mobile application that empowers users to store, manage, and access their medical records anytime, anywhere.",
+      icon: <Globe className="w-7 h-7 text-blue-600" />,
+      title: "Website Development",
+      description: "Professional, responsive websites built with modern technologies to showcase your brand, engage visitors, and drive conversions.",
       delay: 200,
     },
     {
-      icon: <Zap className="w-7 h-7 text-blue-600" />,
-      title: "Business Process Automation",
-      description: "Streamline repetitive tasks and workflows with intelligent automation solutions that save time and reduce errors.",
+      icon: <Smartphone className="w-7 h-7 text-blue-600" />,
+      title: "Mobile Applications",
+      description: "Feature-rich mobile apps for iOS and Android that provide seamless user experiences and help your business reach customers on any device.",
       delay: 300,
     },
     {
-      icon: <Shield className="w-7 h-7 text-blue-600" />,
-      title: "Secure Healthcare Solutions",
-      description: "HIPAA-compliant healthcare applications designed with advanced security features to protect sensitive patient information.",
+      icon: <HeartPulse className="w-7 h-7 text-blue-600" />,
+      title: "Personal Health Vault",
+      description: "Secure, HIPAA-compliant applications for storing and managing personal health records with advanced security features to protect sensitive information.",
       delay: 400,
-    },
-    {
-      icon: <MessageCircle className="w-7 h-7 text-blue-600" />,
-      title: "Customer Engagement Tools",
-      description: "Enhance customer relationships with intelligent conversation systems that provide personalized support 24/7.",
-      delay: 500,
-    },
-    {
-      icon: <BarChart className="w-7 h-7 text-blue-600" />,
-      title: "AI-Powered Analytics",
-      description: "Gain valuable insights from your data with advanced analytics and reporting tools powered by artificial intelligence.",
-      delay: 600,
     },
   ];
 
@@ -137,11 +125,11 @@ const Services = () => {
           <p className={`text-lg text-gray-600 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            We deliver innovative technology solutions that transform how businesses operate and how people manage their health information.
+            We deliver innovative technology solutions that transform how businesses operate and how people manage their digital presence.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
