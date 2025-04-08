@@ -45,7 +45,7 @@ const Hero = () => {
             <div className="flex flex-col sm:flex-row gap-4">
               <CalendlyEmbed url={calendlyUrl}>
                 <Button className="btn-primary inline-flex items-center gap-2">
-                  <Calendar size={16} /> Schedule Time with Me <ArrowRight size={16} />
+                  <Calendar size={16} /> Book Demo <ArrowRight size={16} />
                 </Button>
               </CalendlyEmbed>
               <Button variant="outline" className="btn-secondary">

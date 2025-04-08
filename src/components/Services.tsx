@@ -53,7 +53,7 @@ const ServiceCard = ({ icon, title, description, delay }: ServiceCardProps) => {
         </CardContent>
         <CardFooter>
           <Button variant="ghost" className="p-0 text-blue-600 hover:text-blue-800 hover:bg-transparent">
-            Learn more
+            Book Demo
           </Button>
         </CardFooter>
       </Card>

@@ -13,7 +13,7 @@ interface CalendlyEmbedProps {
 
 const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({ 
   url, 
-  buttonText = "Schedule Time with Me", 
+  buttonText = "Book Demo", 
   buttonClassName = "",
   children
 }) => {
