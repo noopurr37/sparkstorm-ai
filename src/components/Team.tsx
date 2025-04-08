@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Twitter, Mail } from "lucide-react";
@@ -110,15 +109,15 @@ const Team = () => {
       delay: 200,
     },
     {
-      name: "Shloak Gupta",
-      role: "Founding Member",
-      image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
-      delay: 300,
-    },
-    {
       name: "Rachel Pulice",
       role: "UX Designer",
       image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png",
+      delay: 300,
+    },
+    {
+      name: "Shloak Gupta",
+      role: "Founding Member",
+      image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
       delay: 400,
     },
   ];
