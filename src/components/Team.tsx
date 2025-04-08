@@ -116,7 +116,7 @@ const Team = () => {
       delay: 300,
     },
     {
-      name: "Muzamill",
+      name: "Muzammil",
       role: "COO",
       image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png",
       delay: 400,
