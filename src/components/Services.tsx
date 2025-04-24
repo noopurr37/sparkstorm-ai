@@ -100,7 +100,7 @@ const Services = () => {
     },
     {
       icon: <HeartPulse className="w-7 h-7 text-blue-600" />,
-      title: "Personal Health Vault",
+      title: "MediWallet",
       description: "Secure, HIPAA-compliant applications for storing and managing personal health records with advanced security features to protect sensitive information.",
       delay: 400,
     },

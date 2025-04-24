@@ -66,12 +66,12 @@ const Hero = () => {
                 <p className="text-sm text-gray-500">Custom conversational AI for your business</p>
               </div>
               
-              {/* Health App Card */}
+              {/* MediWallet Card */}
               <div className="glass-card absolute bottom-0 right-0 p-6 w-[200px] md:w-[260px] animate-float" style={{ animationDelay: "1.5s" }}>
                 <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
                   <HeartPulse className="w-6 h-6 text-purple-600" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">Health Vault</h3>
+                <h3 className="text-lg font-semibold mb-2">MediWallet</h3>
                 <p className="text-sm text-gray-500">Secure medical data at your fingertips</p>
               </div>
             </div>
