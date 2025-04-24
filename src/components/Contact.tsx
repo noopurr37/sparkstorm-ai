@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const [ref, inView] = useInView({
@@ -14,6 +15,7 @@ const Contact = () => {
   });
   
   const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   
   const [formData, setFormData] = useState({
@@ -39,7 +41,7 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Simple validation
@@ -51,21 +53,39 @@ const Contact = () => {
       });
       return;
     }
+
+    setIsSubmitting(true);
     
-    // Here you would typically send the form data to your backend
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your inquiry. We'll get back to you soon.",
-    });
-    
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([formData]);
+
+      if (error) throw error;
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for your inquiry. We'll get back to you soon.",
+      });
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: "There was an error sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -183,6 +203,7 @@ const Contact = () => {
                       onChange={handleChange}
                       className="w-full"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   
@@ -199,6 +220,7 @@ const Contact = () => {
                       onChange={handleChange}
                       className="w-full"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -215,6 +237,7 @@ const Contact = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full"
+                      disabled={isSubmitting}
                     />
                   </div>
                   
@@ -229,6 +252,7 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       className="w-full"
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
@@ -246,13 +270,14 @@ const Contact = () => {
                     onChange={handleChange}
                     className="w-full resize-none"
                     required
+                    disabled={isSubmitting}
                   />
                 </div>
                 
                 <div>
-                  <Button type="submit" className="btn-primary">
+                  <Button type="submit" className="btn-primary" disabled={isSubmitting}>
                     <MessageSquare className="mr-2 h-4 w-4" />
-                    Send Message
+                    {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
                 </div>
               </form>
