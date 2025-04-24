@@ -45,7 +45,7 @@ const Index = () => {
             <img 
               src="/lovable-uploads/29312d6b-5f6a-4a11-b1cc-4ab04284a888.png" 
               alt="SparkStorm AI Logo" 
-              className="h-10 mx-auto filter brightness-0 invert"
+              className="h-10 mx-auto filter brightness-100 contrast-100 saturate-150 hue-rotate-0"
             />
           </div>
           <p className="text-sm">© {new Date().getFullYear()} SparkStorm AI. All rights reserved.</p>
