@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Label } from "@/components/ui/label";
 import { ContactFormData } from "./types";
 import {
   Form,
@@ -47,9 +46,10 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
+      // Directly pass values object (not in an array)
       const { error } = await supabase
         .from('contact_submissions')
-        .insert([values]);
+        .insert(values);
 
       if (error) throw error;
 
