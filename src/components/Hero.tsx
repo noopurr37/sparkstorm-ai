@@ -31,11 +31,11 @@ const Hero = () => {
           {/* Hero Text Content */}
           <div className={`w-full lg:w-1/2 lg:pr-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
-              <span className="text-royal-blue">SparkStorm AI</span>
+              <span className="text-white drop-shadow-lg">SparkStorm AI</span>
             </h1>
             
             <div className="mb-4 text-right">
-              <p className="text-sm sm:text-base font-medium text-blue-600 inline-block">Intelligence as a Service</p>
+              <p className="text-sm sm:text-base font-medium text-white/80 drop-shadow-md">Intelligence as a Service</p>
             </div>
             
             <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
