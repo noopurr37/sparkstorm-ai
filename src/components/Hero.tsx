@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, HeartPulse, Calendar } from "lucide-react";
@@ -21,18 +22,23 @@ const Hero = () => {
     <section id="home" className="relative overflow-hidden pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-28 lg:pb-20">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        {/* Yellow Spark Background */}
-        <div className="absolute top-[5%] left-[50%] transform -translate-x-1/2 w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] opacity-10">
+        {/* Right Spark Background */}
+        <div className="absolute top-[10%] right-[15%] w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] opacity-10">
           <img
-            src="/lovable-uploads/91d3a56a-30e9-49bd-986e-0cacc710524d.png"
-            alt="Spark Background"
-            className="w-full h-full object-contain filter blur-[40px]"
+            src="/lovable-uploads/94b64c89-45a7-4586-8aba-88731112754b.png"
+            alt="Spark Background Right"
+            className="w-full h-full object-contain filter blur-[40px] animate-pulse-soft"
           />
         </div>
-        {/* Blue Blur */}
-        <div className="absolute top-[10%] right-[15%] w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] bg-blue-400 rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse-soft"></div>
-        {/* Purple Blur */}
-        <div className="absolute bottom-[20%] left-[10%] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] bg-purple-400 rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse-soft" style={{ animationDelay: "1s" }}></div>
+        {/* Left Spark Background */}
+        <div className="absolute bottom-[20%] left-[10%] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] opacity-10">
+          <img
+            src="/lovable-uploads/94b64c89-45a7-4586-8aba-88731112754b.png"
+            alt="Spark Background Left"
+            className="w-full h-full object-contain filter blur-[40px] animate-pulse-soft"
+            style={{ animationDelay: "1s" }}
+          />
+        </div>
       </div>
 
       <div className="relative z-10 section-container">
