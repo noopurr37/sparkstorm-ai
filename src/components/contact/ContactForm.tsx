@@ -46,7 +46,7 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Directly pass values object (not in an array)
+      // Ensure values is passed as a single object, not an array
       const { error } = await supabase
         .from('contact_submissions')
         .insert(values);
