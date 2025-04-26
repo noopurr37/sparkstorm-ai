@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { ContactFormData } from "./types";
 import {
   Form,
   FormControl,
@@ -27,11 +26,14 @@ const formSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
+// This type ensures our form values match what Supabase expects
+type FormValues = z.infer<typeof formSchema>;
+
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   
-  const form = useForm<z.infer<typeof formSchema>>({
+  const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -42,14 +44,20 @@ const ContactForm = () => {
     },
   });
 
-  const handleSubmit = async (values: z.infer<typeof formSchema>) => {
+  const handleSubmit = async (formData: FormValues) => {
     setIsSubmitting(true);
     
     try {
-      // Ensure values is passed as a single object, not an array
+      // Ensure we're passing values that match Supabase's requirements
       const { error } = await supabase
         .from('contact_submissions')
-        .insert(values);
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          subject: formData.subject || null,
+          message: formData.message
+        });
 
       if (error) throw error;
 
