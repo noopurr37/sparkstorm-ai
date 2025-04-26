@@ -23,23 +23,23 @@ const Header = () => {
                 alt="SparkStorm AI Logo"
                 className="h-10 w-auto"
               />
-              <span className="font-sans text-lg font-medium text-gray-800 hover:text-primary transition-colors">
+              <span className="font-sans text-base font-medium text-gray-800 hover:text-primary transition-colors">
                 Home
               </span>
             </a>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
-              <a href="#services" className="font-sans text-base text-gray-700 hover:text-primary transition-colors">
+              <a href="#services" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Services
               </a>
-              <a href="#team" className="font-sans text-base text-gray-700 hover:text-primary transition-colors">
+              <a href="#team" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Team
               </a>
-              <a href="#testimonials" className="font-sans text-base text-gray-700 hover:text-primary transition-colors">
+              <a href="#testimonials" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Testimonials
               </a>
-              <a href="#contact" className="font-sans text-base text-gray-700 hover:text-primary transition-colors">
+              <a href="#contact" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Contact
               </a>
             </div>
@@ -63,35 +63,35 @@ const Header = () => {
               <nav className="flex flex-col space-y-4">
                 <a 
                   href="#home" 
-                  className="font-sans text-base text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={toggleMenu}
                 >
                   Home
                 </a>
                 <a 
                   href="#services" 
-                  className="font-sans text-base text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={toggleMenu}
                 >
                   Services
                 </a>
                 <a 
                   href="#team" 
-                  className="font-sans text-base text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={toggleMenu}
                 >
                   Team
                 </a>
                 <a 
                   href="#testimonials" 
-                  className="font-sans text-base text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={toggleMenu}
                 >
                   Testimonials
                 </a>
                 <a 
                   href="#contact" 
-                  className="font-sans text-base text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={toggleMenu}
                 >
                   Contact
