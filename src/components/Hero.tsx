@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, HeartPulse, Calendar } from "lucide-react";
@@ -34,7 +35,7 @@ const Hero = () => {
             </h1>
             
             <div className="mb-4 text-right pr-1">
-              <p className="text-sm sm:text-base font-medium text-[#2f4ba6]/80 drop-shadow-md">Intelligence as a Service</p>
+              <p className="text-sm sm:text-base font-medium text-white drop-shadow-md">Intelligence as a Service</p>
             </div>
             
             <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
