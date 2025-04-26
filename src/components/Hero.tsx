@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, HeartPulse, Calendar } from "lucide-react";
@@ -48,9 +47,6 @@ const Hero = () => {
                   <Calendar size={16} /> Book Demo <ArrowRight size={16} />
                 </Button>
               </CalendlyEmbed>
-              <Button variant="outline" className="btn-secondary">
-                Request a Quote
-              </Button>
             </div>
           </div>
           
