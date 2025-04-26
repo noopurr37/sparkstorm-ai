@@ -34,7 +34,7 @@ const Hero = () => {
               <span className="text-white drop-shadow-lg">SparkStorm AI</span>
             </h1>
             
-            <div className="mb-4 text-left pl-1">
+            <div className="mb-4 text-right pr-1">
               <p className="text-sm sm:text-base font-medium text-white/80 drop-shadow-md">Intelligence as a Service</p>
             </div>
             
@@ -104,3 +104,4 @@ const Hero = () => {
 };
 
 export default Hero;
+
