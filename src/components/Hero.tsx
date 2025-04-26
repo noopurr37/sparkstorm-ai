@@ -34,8 +34,8 @@ const Hero = () => {
               <span className="text-royal-blue">SparkStorm AI</span>
             </h1>
             
-            <div className="mb-4">
-              <p className="text-sm sm:text-base font-medium text-blue-600">Intelligence as a Service</p>
+            <div className="mb-4 text-right">
+              <p className="text-sm sm:text-base font-medium text-blue-600 inline-block">Intelligence as a Service</p>
             </div>
             
             <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
