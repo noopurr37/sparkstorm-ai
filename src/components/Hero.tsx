@@ -30,13 +30,13 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row lg:items-center">
           {/* Hero Text Content */}
           <div className={`w-full lg:w-1/2 lg:pr-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
-              <p className="text-xs sm:text-sm font-medium text-blue-600">Intelligence as a Service</p>
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
               <span className="text-royal-blue">SparkStorm AI</span>
             </h1>
+            
+            <div className="mb-4">
+              <p className="text-sm sm:text-base font-medium text-blue-600">Intelligence as a Service</p>
+            </div>
             
             <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
               SparkStorm AI delivers cutting-edge conversational AI chatbots and secure healthcare applications to transform your business and empower your users.
