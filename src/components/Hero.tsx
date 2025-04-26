@@ -22,8 +22,8 @@ const Hero = () => {
     <section id="home" className="relative overflow-hidden pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-28 lg:pb-20">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        <div className="absolute top-[10%] right-[15%] w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] bg-emerald-green-400 rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse-soft"></div>
-        <div className="absolute bottom-[20%] left-[10%] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] bg-emerald-green-500 rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse-soft" style={{ animationDelay: "1s" }}></div>
+        <div className="absolute top-[10%] right-[15%] w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] bg-blue-400 rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse-soft"></div>
+        <div className="absolute bottom-[20%] left-[10%] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] bg-purple-400 rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse-soft" style={{ animationDelay: "1s" }}></div>
       </div>
 
       <div className="relative z-10 section-container">
