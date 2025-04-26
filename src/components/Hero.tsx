@@ -22,19 +22,19 @@ const Hero = () => {
     <section id="home" className="relative overflow-hidden pt-16 pb-12 sm:pt-20 sm:pb-16 lg:pt-28 lg:pb-20">
       {/* Background Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-        {/* Right Spark Background */}
-        <div className="absolute top-[10%] right-[15%] w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] opacity-10">
+        {/* Yellow Spark Background */}
+        <div className="absolute top-[10%] right-[15%] w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] opacity-30">
           <img
-            src="/lovable-uploads/94b64c89-45a7-4586-8aba-88731112754b.png"
-            alt="Spark Background Right"
+            src="/lovable-uploads/91d3a56a-30e9-49bd-986e-0cacc710524d.png"
+            alt="Yellow Spark Background"
             className="w-full h-full object-contain filter blur-[40px] animate-pulse-soft"
           />
         </div>
-        {/* Left Spark Background */}
-        <div className="absolute bottom-[20%] left-[10%] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] opacity-10">
+        {/* Blue Spark Background */}
+        <div className="absolute bottom-[20%] left-[10%] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] opacity-30">
           <img
-            src="/lovable-uploads/94b64c89-45a7-4586-8aba-88731112754b.png"
-            alt="Spark Background Left"
+            src="/lovable-uploads/8ef771d4-addc-488c-a4a2-394948b74e04.png"
+            alt="Blue Spark Background"
             className="w-full h-full object-contain filter blur-[40px] animate-pulse-soft"
             style={{ animationDelay: "1s" }}
           />
