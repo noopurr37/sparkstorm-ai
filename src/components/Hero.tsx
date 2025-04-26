@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, HeartPulse, Calendar } from "lucide-react";
@@ -38,7 +39,7 @@ const Hero = () => {
             </div>
             
             <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
-              SparkStorm AI delivers cutting-edge conversational AI chatbots and secure healthcare applications to transform your business and empower your users.
+              We ignite ideas into intelligent products — from custom chatbots to smart mobile apps
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4">
