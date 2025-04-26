@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, MessageCircle, HeartPulse, Calendar } from "lucide-react";
@@ -31,11 +30,11 @@ const Hero = () => {
           {/* Hero Text Content */}
           <div className={`w-full lg:w-1/2 lg:pr-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
-              <span className="text-white drop-shadow-lg">SparkStorm AI</span>
+              <span className="text-[#2f4ba6] drop-shadow-lg">SparkStorm AI</span>
             </h1>
             
             <div className="mb-4 text-right pr-1">
-              <p className="text-sm sm:text-base font-medium text-white/80 drop-shadow-md">Intelligence as a Service</p>
+              <p className="text-sm sm:text-base font-medium text-[#2f4ba6]/80 drop-shadow-md">Intelligence as a Service</p>
             </div>
             
             <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
@@ -104,4 +103,3 @@ const Hero = () => {
 };
 
 export default Hero;
-
