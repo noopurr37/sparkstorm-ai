@@ -30,7 +30,7 @@ const Hero = () => {
         <div className="flex flex-col lg:flex-row lg:items-center">
           {/* Hero Text Content */}
           <div className={`w-full lg:w-1/2 lg:pr-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-2 text-right">
               <span className="text-[#2f4ba6] drop-shadow-lg">SparkStorm AI</span>
             </h1>
             
@@ -38,11 +38,11 @@ const Hero = () => {
               <p className="text-sm sm:text-base font-medium text-white drop-shadow-md">Intelligence as a Service</p>
             </div>
             
-            <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl">
+            <p className="text-lg md:text-xl text-gray-600 mb-6 max-w-2xl text-right">
               We ignite ideas into intelligent products — from custom chatbots to smart mobile apps
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-end">
               <CalendlyEmbed url={calendlyUrl}>
                 <Button className="btn-primary inline-flex items-center gap-2">
                   <Calendar size={16} /> Book Demo <ArrowRight size={16} />
