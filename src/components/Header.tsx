@@ -19,7 +19,7 @@ const Header = () => {
             {/* Logo */}
             <a href="#home" className="flex items-center gap-3">
               <img
-                src="/lovable-uploads/7ba572ae-889a-4931-8912-e97b44970777.png"
+                src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png"
                 alt="SparkStorm AI Logo"
                 className="h-10 w-auto"
               />

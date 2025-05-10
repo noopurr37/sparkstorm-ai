@@ -21,7 +21,7 @@ const Index = () => {
     // Welcome toast when the page loads
     toast({
       title: "Welcome to SparkStorm AI",
-      description: "Discover our AI solutions and services",
+      description: "Intelligence as a Service",
       duration: 5000,
     });
   }, [toast]);
@@ -43,7 +43,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="mb-4">
             <img 
-              src="/lovable-uploads/7ba572ae-889a-4931-8912-e97b44970777.png" 
+              src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png" 
               alt="SparkStorm AI Logo" 
               className="h-10 mx-auto filter brightness-100 contrast-100 saturate-150 hue-rotate-0"
             />
