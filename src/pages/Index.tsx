@@ -43,7 +43,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="mb-4">
             <img 
-              src="/lovable-uploads/ce8dd0d2-b604-4195-bdf7-c3a2ba352eb4.png" 
+              src="/lovable-uploads/7ba572ae-889a-4931-8912-e97b44970777.png" 
               alt="SparkStorm AI Logo" 
               className="h-10 mx-auto filter brightness-100 contrast-100 saturate-150 hue-rotate-0"
             />
