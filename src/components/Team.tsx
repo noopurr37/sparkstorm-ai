@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
@@ -128,10 +127,18 @@ const Team = () => {
       email: "muzammil.iqbal@gmail.com",
     },
     {
+      name: "Rachel Pulice",
+      role: "UX Designer",
+      image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png",
+      delay: 300,
+      linkedinUrl: "https://www.linkedin.com/in/rachel-pulice/",
+      email: "rachel.t.pulice@gmail.com",
+    },
+    {
       name: "Aarnav Chandraganti",
       role: "AI Developer",
       image: "/lovable-uploads/cfacdfa5-065b-4b95-adf5-2c93abba0370.png",
-      delay: 300,
+      delay: 400,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
       instagramUrl: "https://www.instagram.com/aarnav_c_",
       email: "aarnav.chandraganti@gmail.com",
@@ -140,18 +147,10 @@ const Team = () => {
       name: "Shloak Gupta",
       role: "AI Developer",
       image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
-      delay: 400,
+      delay: 500,
       linkedinUrl: "https://www.linkedin.com/in/shloak-gupta-428412218/",
       instagramUrl: "https://www.instagram.com/shloakgupta",
       email: "shloakgupta09@gmail.com",
-    },
-    {
-      name: "Rachel Pulice",
-      role: "UX Designer",
-      image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png",
-      delay: 500,
-      linkedinUrl: "https://www.linkedin.com/in/rachel-pulice/",
-      email: "rachel.t.pulice@gmail.com",
     },
   ];
 
