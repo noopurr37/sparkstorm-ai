@@ -38,9 +38,9 @@ const Affiliations = () => {
         <div className={`grid grid-cols-1 md:grid-cols-2 gap-6 items-center transition-all duration-700 delay-300 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}>
-          {/* Google Cloud Startup - ENLARGED */}
+          {/* Google Cloud Startup - without grey background */}
           <div className="glass-card p-6 flex flex-col md:flex-row items-center justify-center md:justify-start gap-5">
-            <div className="w-24 h-24 rounded-full shadow-sm flex items-center justify-center overflow-hidden">
+            <div className="w-24 h-24 rounded-full flex items-center justify-center overflow-hidden">
               <img 
                 src="/lovable-uploads/d82666e1-31df-4e9f-b49e-3e49a9de7703.png" 
                 alt="Google Cloud" 
