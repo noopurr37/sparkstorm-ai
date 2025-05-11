@@ -9,9 +9,10 @@ interface TeamMemberProps {
   image: string;
   delay: number;
   linkedinUrl: string;
+  email: string;
 }
 
-const TeamMember = ({ name, role, image, delay, linkedinUrl }: TeamMemberProps) => {
+const TeamMember = ({ name, role, image, delay, linkedinUrl, email }: TeamMemberProps) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -68,7 +69,7 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl }: TeamMemberProps) 
               <Instagram size={18} />
             </a>
             <a
-              href={`mailto:${name.toLowerCase().replace(' ', '.')}@sparkstorm.ai`}
+              href={`mailto:${email}`}
               className="text-gray-400 hover:text-blue-500 transition-colors"
               aria-label={`Email ${name}`}
             >
@@ -106,6 +107,7 @@ const Team = () => {
       image: "/lovable-uploads/ae1d15ed-0b22-438d-aede-6554e09de8ed.png",
       delay: 100,
       linkedinUrl: "https://www.linkedin.com/in/noopurgupta01/",
+      email: "noopurgupta01@gmail.com",
     },
     {
       name: "Muzammil",
@@ -113,6 +115,7 @@ const Team = () => {
       image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png",
       delay: 200,
       linkedinUrl: "https://www.linkedin.com/in/muzammil-w-iqbal/",
+      email: "muzammil.iqbal@gmail.com",
     },
     {
       name: "Shloak Gupta",
@@ -120,6 +123,7 @@ const Team = () => {
       image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
       delay: 300,
       linkedinUrl: "https://www.linkedin.com/in/shloak-gupta-428412218/",
+      email: "shloakgupta09@gmail.com",
     },
     {
       name: "Aarnav Chandraganti",
@@ -127,6 +131,7 @@ const Team = () => {
       image: "/lovable-uploads/cfacdfa5-065b-4b95-adf5-2c93abba0370.png",
       delay: 400,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
+      email: "aarnav.chandraganti@gmail.com",
     },
     {
       name: "Rachel Pulice",
@@ -134,6 +139,7 @@ const Team = () => {
       image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png",
       delay: 500,
       linkedinUrl: "https://www.linkedin.com/in/rachel-pulice/",
+      email: "rachel.t.pulice@gmail.com",
     },
   ];
 
@@ -167,6 +173,7 @@ const Team = () => {
               image={member.image}
               delay={member.delay}
               linkedinUrl={member.linkedinUrl}
+              email={member.email}
             />
           ))}
         </div>
