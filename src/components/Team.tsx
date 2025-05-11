@@ -110,21 +110,21 @@ const Team = () => {
       delay: 200,
     },
     {
-      name: "Rachel Pulice",
-      role: "UX Designer",
-      image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png",
-      delay: 300,
-    },
-    {
       name: "Shloak Gupta",
       role: "AI Developer",
       image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
-      delay: 400,
+      delay: 300,
     },
     {
       name: "Aarnav Chandraganti",
       role: "AI Developer",
       image: "/lovable-uploads/cfacdfa5-065b-4b95-adf5-2c93abba0370.png",
+      delay: 400,
+    },
+    {
+      name: "Rachel Pulice",
+      role: "UX Designer",
+      image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png",
       delay: 500,
     },
   ];
