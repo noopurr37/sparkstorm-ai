@@ -121,6 +121,12 @@ const Team = () => {
       image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
       delay: 400,
     },
+    {
+      name: "Aarnav Chandraganti",
+      role: "AI Developer",
+      image: "/lovable-uploads/cfacdfa5-065b-4b95-adf5-2c93abba0370.png",
+      delay: 500,
+    },
   ];
 
   return (
