@@ -40,10 +40,12 @@ const Affiliations = () => {
         }`}>
           {/* Google Cloud Startup */}
           <div className="glass-card p-6 flex flex-col md:flex-row items-center justify-center md:justify-start gap-5">
-            <div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center">
-              <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm text-gray-500">
-                GC Logo
-              </div>
+            <div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center overflow-hidden">
+              <img 
+                src="/lovable-uploads/09da5943-baba-4522-9aae-0165669c8055.png" 
+                alt="Google Cloud" 
+                className="w-12 h-12 object-contain"
+              />
             </div>
             <div className="text-center md:text-left">
               <h3 className="text-xl font-semibold mb-1">Google Cloud Startup</h3>

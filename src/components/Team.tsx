@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { Linkedin, Twitter, Mail } from "lucide-react";
+import { Linkedin, Instagram, Mail } from "lucide-react";
 
 interface TeamMemberProps {
   name: string;
@@ -59,10 +59,10 @@ const TeamMember = ({ name, role, image, delay }: TeamMemberProps) => {
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-blue-400 transition-colors"
-              aria-label={`${name}'s Twitter`}
+              className="text-gray-400 hover:text-pink-500 transition-colors"
+              aria-label={`${name}'s Instagram`}
             >
-              <Twitter size={18} />
+              <Instagram size={18} />
             </a>
             <a
               href="#"
