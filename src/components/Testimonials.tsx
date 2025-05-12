@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 interface Testimonial {
   quote: string;
   author: string;
-  position: string;
 }
 
 const Testimonials = () => {
@@ -33,28 +32,23 @@ const Testimonials = () => {
   const testimonials: Testimonial[] = [
     {
       quote: "SparkStorm AI's chatbot solution revolutionized our customer service operations. We've seen a 40% reduction in response times and significantly improved customer satisfaction.",
-      author: "Alexandra Chen",
-      position: "CTO"
+      author: "Alexandra Chen"
     },
     {
       quote: "The MediWallet app has made managing my patients' medical records incredibly efficient. The secure access features give both my team and our patients peace of mind.",
-      author: "Dr. Michael Rodriguez",
-      position: "Medical Director"
+      author: "Dr. Michael Rodriguez"
     },
     {
       quote: "Working with SparkStorm AI has been a game-changer for our business. Their AI solutions streamlined our processes and helped us achieve remarkable growth in just six months.",
-      author: "Sarah Johnson",
-      position: "Operations Manager"
+      author: "Sarah Johnson"
     },
     {
       quote: "SparkStorm AI and MediWallet will be so much better than the \"CD\" my mom's doctor gave to her years ago. I have to scramble on my phone looking for what supplements and herbs she takes every time I take her to her appointments.",
-      author: "Sandra Gifford",
-      position: "Marketing Strategist"
+      author: "Sandra Gifford"
     },
     {
       quote: "This app is amazing. With as many times as we have moved, the MediWallet platform and SparkStorm AI would have been so, so important for us. It's clean, efficient, and remarkably easy to navigate.",
-      author: "Jacquie",
-      position: "Parent and Frequent Relocator"
+      author: "Jacquie"
     }
   ];
   
@@ -96,9 +90,9 @@ const Testimonials = () => {
   };
 
   return (
-    <section id="testimonials" className="py-16 bg-gray-50">
+    <section id="testimonials" className="py-10 bg-gray-50">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
             <p className="text-xs sm:text-sm font-medium text-blue-600">Testimonials</p>
           </div>

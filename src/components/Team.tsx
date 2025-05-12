@@ -42,18 +42,20 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
       }`}
     >
       <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 h-full">
-        <div className="overflow-hidden">
+        <div className="overflow-hidden bg-white">
           <AspectRatio ratio={3/4}>
             <img
               src={image}
               alt={name}
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
               loading="lazy"
+              style={{ backgroundColor: "white" }}
             />
           </AspectRatio>
         </div>
         <div className="p-6">
-          <h3 className="text-xl font-semibold mb-4">{name}</h3>
+          <h3 className="text-xl font-semibold mb-1">{name}</h3>
+          <p className="text-sm text-gray-500 mb-3">{role}</p>
           <div className="flex space-x-3">
             <a
               href={linkedinUrl}
@@ -155,9 +157,9 @@ const Team = () => {
   ];
 
   return (
-    <section id="team" className="py-16 bg-white">
+    <section id="team" className="py-10 bg-white">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-3xl mx-auto mb-10">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
             <p className="text-xs sm:text-sm font-medium text-blue-600">Our Team</p>
           </div>

@@ -25,6 +25,17 @@ const Index = () => {
       description: "Intelligence as a Service",
       duration: 5000,
     });
+
+    // Check if user has subscribed to newsletter previously
+    const subscribedEmail = localStorage.getItem("sparkstorm_newsletter_email");
+    if (subscribedEmail) {
+      // Show thank you message for previous subscribers
+      toast({
+        title: "Thank you for subscribing to our SparkStorm AI newsletter!",
+        description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
+        duration: 5000,
+      });
+    }
   }, [toast]);
 
   return (
@@ -33,10 +44,10 @@ const Index = () => {
       <main>
         <Hero />
         <Services />
-        <Team />
         <Testimonials />
-        <Affiliations />
+        <Team />
         <Partners />
+        <Affiliations />
         <Newsletter />
         <Contact />
       </main>

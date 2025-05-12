@@ -38,17 +38,24 @@ const Newsletter = () => {
       return;
     }
     
-    // Here you would typically send the email to your newsletter service
+    // Store email in localStorage for demonstration
+    localStorage.setItem("sparkstorm_newsletter_email", email);
+    
+    // Display success toast
     toast({
-      title: "Success!",
-      description: "Thank you for subscribing to our newsletter.",
+      title: "Thank you for subscribing!",
+      description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
+      duration: 5000,
     });
+    
+    // In a real application, you would send this to your backend
+    console.log("Newsletter subscription:", email);
     
     setEmail("");
   };
 
   return (
-    <section className="py-14 bg-gradient-primary text-white relative overflow-hidden">
+    <section className="py-10 bg-gradient-primary text-white relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-blue-400 rounded-full opacity-20 mix-blend-overlay filter blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-cyan-400 rounded-full opacity-20 mix-blend-overlay filter blur-3xl"></div>
