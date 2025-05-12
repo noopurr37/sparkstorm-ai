@@ -155,19 +155,38 @@ const Team = () => {
       email: "shloakgupta09@gmail.com",
     },
   ];
+  
+  const advisoryBoard = [
+    {
+      name: "Shiva",
+      role: "Advisory Board Member",
+      image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png", // Replace with actual image
+      delay: 600,
+      linkedinUrl: "https://www.linkedin.com/",
+      email: "shiva@example.com",
+    },
+    {
+      name: "Girija",
+      role: "Advisory Board Member",
+      image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png", // Replace with actual image
+      delay: 700,
+      linkedinUrl: "https://www.linkedin.com/",
+      email: "girija@example.com",
+    }
+  ];
 
   return (
     <section id="team" className="py-8 bg-white">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-3xl mx-auto mb-8">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
-            <p className="text-xs sm:text-sm font-medium text-blue-600">Advisory Board</p>
+            <p className="text-xs sm:text-sm font-medium text-blue-600">Meet Our Team</p>
           </div>
           
           <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}>
-            Meet the Minds Behind SparkStorm AI
+            The Minds Behind SparkStorm AI
           </h2>
           
           <p className={`text-lg text-gray-600 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
@@ -177,7 +196,7 @@ const Team = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
           {teamMembers.map((member, index) => (
             <TeamMember
               key={index}
@@ -187,6 +206,39 @@ const Team = () => {
               delay={member.delay}
               linkedinUrl={member.linkedinUrl}
               instagramUrl={member.instagramUrl}
+              email={member.email}
+            />
+          ))}
+        </div>
+
+        {/* Advisory Board Section */}
+        <div className="text-center max-w-3xl mx-auto mt-16 mb-8">
+          <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
+            <p className="text-xs sm:text-sm font-medium text-blue-600">Advisory Board</p>
+          </div>
+          
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}>
+            Strategic Guidance
+          </h2>
+          
+          <p className={`text-lg text-gray-600 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}>
+            Our advisory board provides expert guidance to help shape our vision and strategy.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          {advisoryBoard.map((member, index) => (
+            <TeamMember
+              key={`advisor-${index}`}
+              name={member.name}
+              role={member.role}
+              image={member.image}
+              delay={member.delay}
+              linkedinUrl={member.linkedinUrl}
               email={member.email}
             />
           ))}

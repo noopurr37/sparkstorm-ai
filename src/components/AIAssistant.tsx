@@ -133,7 +133,7 @@ const AIAssistant = () => {
     else if (lowerCaseMessage.includes('team') || lowerCaseMessage.includes('board') || lowerCaseMessage.includes('advisory')) {
       navigate('/#team');
       return { 
-        text: "Our advisory board consists of Noopur Gupta (Founder & CEO), Muzammil (Fractional COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer). Each member brings unique expertise to deliver exceptional AI solutions."
+        text: "Our team consists of Noopur Gupta (Founder & CEO), Muzammil (Fractional COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer). We also have an advisory board with Shiva and Girija who provide strategic guidance."
       };
     }
     
@@ -166,6 +166,13 @@ const AIAssistant = () => {
       navigate('/#newsletter');
       return { 
         text: "Our newsletter provides valuable insights into AI trends, case studies, and SparkStorm updates. You can subscribe to stay informed about the latest developments in AI technology and our new solutions."
+      };
+    }
+    
+    // ABOUT SPARKSTORM AI
+    else if (lowerCaseMessage.includes('about') || lowerCaseMessage.includes('sparkstorm')) {
+      return { 
+        text: "SparkStorm AI is a leading provider of artificial intelligence solutions founded by Noopur Gupta. We specialize in creating custom AI tools and services that help businesses automate processes, gain insights from their data, and enhance customer experiences. Our flagship product, MediWallet, is revolutionizing how medical records are managed.",
       };
     }
     
@@ -261,53 +268,6 @@ const AIAssistant = () => {
       };
     }
     
-    // AI TECHNOLOGY QUESTIONS
-    else if (lowerCaseMessage.includes('ai') || lowerCaseMessage.includes('artificial intelligence')) {
-      if (lowerCaseMessage.includes('benefit')) {
-        return { 
-          text: "SparkStorm AI solutions benefit businesses by automating repetitive tasks, providing data-driven insights, personalizing customer experiences, improving decision-making, and reducing operational costs. Our clients typically see efficiency improvements of 30-50% in their targeted processes."
-        };
-      }
-      else if (lowerCaseMessage.includes('future') || lowerCaseMessage.includes('trend')) {
-        return { 
-          text: "The future of AI is moving toward more personalized, context-aware systems that can understand and anticipate human needs. At SparkStorm AI, we're particularly focused on developing AI that's transparent, ethical, and aligned with human values. Key trends we're watching include multimodal AI, advancements in large language models, edge AI deployment, and AI-human collaboration frameworks."
-        };
-      }
-      else {
-        return { 
-          text: "Artificial Intelligence is our core expertise at SparkStorm. We develop custom AI solutions to help businesses automate tasks, gain insights, and create more personalized customer experiences. Our AI solutions are built with ethical considerations at the forefront, ensuring they remain transparent, fair, and aligned with your business values."
-        };
-      }
-    }
-    
-    else if (lowerCaseMessage.includes('machine learning') || lowerCaseMessage.includes('ml')) {
-      return { 
-        text: "Our machine learning solutions at SparkStorm AI help businesses identify patterns in data, make predictions, and optimize processes. We develop custom ML models tailored to your specific needs, whether that's for predictive analytics, recommendation systems, anomaly detection, or process automation. Our ML models are continuously trained and improved to ensure they deliver accurate, reliable results."
-      };
-    }
-    
-    else if (lowerCaseMessage.includes('nlp') || lowerCaseMessage.includes('natural language')) {
-      return { 
-        text: "Our Natural Language Processing (NLP) solutions help businesses understand and generate human language, enabling applications like chatbots, sentiment analysis, and automated content creation. We use advanced NLP techniques to ensure our solutions can understand context, detect sentiment, and respond naturally. This technology powers our conversational AI assistants, content analysis tools, and language translation systems."
-      };
-    }
-    
-    else if (lowerCaseMessage.includes('computer vision') || lowerCaseMessage.includes('image recognition')) {
-      return { 
-        text: "SparkStorm's computer vision solutions enable machines to interpret and understand visual information, powering applications like object detection, facial recognition, and automated inspection systems. Our computer vision technology is used in healthcare for medical imaging analysis, in manufacturing for quality control, and in retail for inventory management and customer behavior analysis."
-      };
-    }
-    
-    // PRICING INFORMATION
-    else if (lowerCaseMessage.includes('cost') || lowerCaseMessage.includes('pricing') || lowerCaseMessage.includes('price')) {
-      return { 
-        text: "Our pricing varies based on the scope and requirements of each project. We offer custom solutions tailored to your specific needs, with options ranging from project-based pricing to subscription models. For MediWallet, we have tiered pricing plans for individuals, families, and healthcare providers. Contact us for a personalized quote based on your organization's specific requirements.",
-        links: [
-          { text: "Contact for pricing", url: "/#contact" }
-        ]
-      };
-    }
-    
     // BOOKING INFORMATION
     else if (lowerCaseMessage.includes('book') || lowerCaseMessage.includes('demo') || lowerCaseMessage.includes('appointment') || lowerCaseMessage.includes('meeting')) {
       return { 
@@ -315,13 +275,6 @@ const AIAssistant = () => {
         links: [
           { text: "Book a demo", url: "https://calendly.com/noopurgupta01/1x1" }
         ]
-      };
-    }
-    
-    // CASE STUDIES
-    else if (lowerCaseMessage.includes('case') || lowerCaseMessage.includes('success') || lowerCaseMessage.includes('example')) {
-      return { 
-        text: "We've helped businesses across various industries implement AI solutions with impressive results. For example, we developed a predictive maintenance system for a manufacturing company that reduced downtime by 35%, a customer service AI for a retail business that improved response times by 60%, and a healthcare data analysis platform that increased diagnostic accuracy by 25%. These case studies demonstrate the tangible benefits our AI solutions can provide to your business."
       };
     }
     
@@ -335,49 +288,6 @@ const AIAssistant = () => {
     else if (lowerCaseMessage.includes('thank') || lowerCaseMessage.includes('thanks')) {
       return { 
         text: "You're welcome! I'm glad I could help. If you have any more questions about our services, MediWallet platform, or anything else, feel free to ask. We're committed to providing innovative AI solutions that make a real difference for our clients."
-      };
-    }
-    
-    // COMPANY INFORMATION
-    else if (lowerCaseMessage.includes('about') || lowerCaseMessage.includes('what is') || lowerCaseMessage.includes('sparkstorm')) {
-      return { 
-        text: "SparkStorm AI is a leading provider of artificial intelligence solutions founded by Noopur Gupta. We specialize in creating custom AI tools and services that help businesses automate processes, gain insights from their data, and enhance customer experiences. Our flagship product, MediWallet, is revolutionizing how medical records are managed. Our team of AI experts, designers, and developers works closely with clients to deliver solutions that address their specific challenges.",
-        links: [
-          { text: "Our Services", url: "/#services" },
-          { text: "Meet Our Team", url: "/#team" }
-        ]
-      };
-    }
-    
-    // LOCATION INFORMATION
-    else if (lowerCaseMessage.includes('location') || lowerCaseMessage.includes('where are you')) {
-      return { 
-        text: "Our headquarters is located in California, but we serve clients globally. Our remote-first approach allows us to collaborate with clients and partners around the world, providing AI solutions that meet international standards while addressing local needs."
-      };
-    }
-    
-    // ETHICAL AI
-    else if (lowerCaseMessage.includes('ethic') || lowerCaseMessage.includes('responsible') || lowerCaseMessage.includes('bias')) {
-      return { 
-        text: "At SparkStorm AI, ethical AI development is a core principle. We design our solutions with transparency, fairness, and accountability in mind. This includes rigorous testing for biases, clear explanations of how our AI makes decisions, and privacy-preserving technologies. We believe AI should enhance human capabilities while respecting human values and rights."
-      };
-    }
-    
-    // IMPLEMENTATION PROCESS
-    else if (lowerCaseMessage.includes('process') || lowerCaseMessage.includes('implement') || lowerCaseMessage.includes('how does it work')) {
-      return { 
-        text: "Our implementation process begins with a thorough assessment of your needs and goals. We then design a custom solution, develop and test it thoroughly, and provide comprehensive training and support during deployment. Throughout this process, we maintain clear communication and collaborate closely with your team to ensure the solution integrates seamlessly with your existing systems and processes. After implementation, we provide ongoing support and optimization to ensure continued success."
-      };
-    }
-    
-    // CUSTOM REQUEST
-    else if (lowerCaseMessage.includes('custom') || lowerCaseMessage.includes('specific need') || lowerCaseMessage.includes('unique')) {
-      return { 
-        text: "We specialize in developing custom AI solutions tailored to your specific needs. Our team of experts will work closely with you to understand your challenges, objectives, and requirements, then design and implement a solution that addresses them effectively. Whether you need a custom chatbot, a specialized data analysis tool, or an integrated AI system, we can help you bring your vision to life.",
-        links: [
-          { text: "Contact us", url: "/#contact" },
-          { text: "Book a consultation", url: "https://calendly.com/noopurgupta01/1x1" }
-        ]
       };
     }
     
@@ -480,7 +390,7 @@ const AIAssistant = () => {
                             <a 
                               key={idx}
                               href={link.url}
-                              target="_blank" 
+                              target="_blank"
                               rel="noopener noreferrer"
                               className="flex items-center gap-1 text-sm font-medium text-blue-500 hover:text-blue-700 transition-colors"
                               onClick={(e) => {
@@ -515,15 +425,43 @@ const AIAssistant = () => {
                 <div ref={messagesEndRef} />
               </div>
 
-              {/* Enhanced input form with suggestions */}
+              {/* Enhanced input form with updated suggestions */}
               <form onSubmit={handleSubmit} className="p-3 bg-white border-t border-gray-200">
-                <div className="flex gap-2 mb-2">
+                <div className="flex flex-wrap gap-2 mb-2">
+                  <button 
+                    type="button" 
+                    className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                    onClick={() => setInputValue("Tell me about SparkStorm AI")}
+                  >
+                    SparkStorm AI
+                  </button>
+                  <button 
+                    type="button" 
+                    className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                    onClick={() => setInputValue("Who is on your team?")}
+                  >
+                    Team
+                  </button>
+                  <button 
+                    type="button" 
+                    className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                    onClick={() => setInputValue("What services do you offer?")}
+                  >
+                    Services
+                  </button>
                   <button 
                     type="button" 
                     className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
                     onClick={() => setInputValue("Tell me about MediWallet")}
                   >
                     MediWallet
+                  </button>
+                  <button 
+                    type="button" 
+                    className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                    onClick={() => setInputValue("Contact information")}
+                  >
+                    Contact
                   </button>
                   <button 
                     type="button" 
@@ -535,9 +473,9 @@ const AIAssistant = () => {
                   <button 
                     type="button" 
                     className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
-                    onClick={() => setInputValue("Who is on your team?")}
+                    onClick={() => setInputValue("Subscribe to newsletter")}
                   >
-                    Team
+                    Newsletter
                   </button>
                 </div>
                 <div className="flex gap-2">

@@ -12,6 +12,7 @@ import Contact from "@/components/Contact";
 import AIAssistant from "@/components/AIAssistant";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet-async";
+import { Linkedin, Instagram } from "lucide-react";
 
 const Index = () => {
   const { toast } = useToast();
@@ -74,10 +75,16 @@ const Index = () => {
             />
           </div>
           <p className="text-sm">© {new Date().getFullYear()} SparkStorm AI. All rights reserved.</p>
-          <div className="mt-4 flex justify-center space-x-4">
+          <div className="mt-4 flex justify-center space-x-6">
+            <a href="https://www.linkedin.com/company/sparkstormai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition flex items-center">
+              <Linkedin size={18} className="mr-1" /> LinkedIn
+            </a>
+            <a href="https://www.instagram.com/sparkstormai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition flex items-center">
+              <Instagram size={18} className="mr-1" /> Instagram
+            </a>
             <a href="#" className="text-gray-400 hover:text-white transition">Privacy Policy</a>
             <a href="#" className="text-gray-400 hover:text-white transition">Terms of Service</a>
-            <a href="#" className="text-gray-400 hover:text-white transition">Contact Us</a>
+            <a href="#contact" className="text-gray-400 hover:text-white transition">Contact Us</a>
           </div>
         </div>
       </footer>
