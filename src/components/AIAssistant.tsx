@@ -1,6 +1,5 @@
-
 import React, { useState, useRef, useEffect } from 'react';
-import { X, Send } from 'lucide-react';
+import { X, Send, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
@@ -181,17 +180,13 @@ const AIAssistant = () => {
 
   return (
     <>
-      {/* Chat button with SparkStorm logo */}
+      {/* Updated chat button with cleaner icon */}
       <button
         onClick={toggleChat}
         className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg z-50 transition-all duration-300 hover:scale-110"
         aria-label="Chat with SparkStorm AI Assistant"
       >
-        <img 
-          src="/lovable-uploads/e82a7fa3-a351-4944-9c59-f357e283e95d.png" 
-          alt="SparkStorm AI"
-          className="h-6 w-6" 
-        />
+        <MessageSquare size={24} className="text-white" />
       </button>
 
       {/* Chat window */}
@@ -200,8 +195,8 @@ const AIAssistant = () => {
           {/* Header */}
           <div className="p-4 bg-blue-600 text-white flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <Avatar className="h-8 w-8 border-2 border-white bg-white">
-                <AvatarImage src="/lovable-uploads/e82a7fa3-a351-4944-9c59-f357e283e95d.png" alt="SparkStorm AI" />
+              <Avatar className="h-8 w-8 border-2 border-white bg-blue-600">
+                <AvatarImage src="/lovable-uploads/e82a7fa3-a351-4944-9c59-f357e283e95d.png" alt="SparkStorm AI" className="p-1" />
                 <AvatarFallback>AI</AvatarFallback>
               </Avatar>
               <div>
