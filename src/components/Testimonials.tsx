@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
@@ -151,7 +150,7 @@ const Testimonials = () => {
                           <div>
                             <p className="font-semibold text-gray-900">{testimonial.author}</p>
                             <p className="text-gray-500">
-                              {testimonial.position}{testimonial.company ? `, ${testimonial.company}` : ''}
+                              {testimonial.position}
                             </p>
                           </div>
                         </div>
