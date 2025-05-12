@@ -42,17 +42,13 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
       }`}
     >
       <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 h-full">
-        <div className="overflow-hidden bg-white">
-          <AspectRatio ratio={1/1}>
-            <div className="w-full h-full bg-white">
-              <img
-                src={image}
-                alt={name}
-                className="w-full h-full object-contain"
-                loading="lazy"
-              />
-            </div>
-          </AspectRatio>
+        <div className="overflow-hidden bg-white relative" style={{ height: "300px" }}>
+          <img
+            src={image}
+            alt={name}
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+          />
         </div>
         <div className="p-6">
           <h3 className="text-xl font-semibold mb-1">{name}</h3>
@@ -140,7 +136,7 @@ const Team = () => {
     {
       name: "Aarnav Chandraganti",
       role: "AI Developer",
-      image: "/lovable-uploads/a85e3137-96df-4cdb-be96-50311cb0c20f.png",
+      image: "/lovable-uploads/e7c668aa-10d3-4688-93eb-f9c2c4b685f9.png", // Updated to the new image
       delay: 400,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
       instagramUrl: "https://www.instagram.com/aarnav_c_",
