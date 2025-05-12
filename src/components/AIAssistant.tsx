@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { X, Send, MessageSquare } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -80,34 +81,52 @@ const AIAssistant = () => {
     const lowerCaseMessage = message.toLowerCase();
     let response = '';
 
-    // Navigation requests
+    // Navigation requests - navigate but don't mention scrolling in the responses
     if (lowerCaseMessage.includes('home') || lowerCaseMessage.includes('go to home')) {
       navigate('/');
-      response = "I've navigated you to our home page.";
+      response = "Here's our home page. Is there something specific you'd like to know about SparkStorm AI?";
     } 
     else if (lowerCaseMessage.includes('services') || lowerCaseMessage.includes('go to services')) {
       navigate('/#services');
-      response = "I've scrolled to our services section. We offer a range of AI solutions for businesses.";
+      response = "Our services include AI chatbots, MediWallet health records platform, NLP solutions, computer vision systems, and custom AI development. Each solution is tailored to meet your specific business needs.";
     }
     else if (lowerCaseMessage.includes('team') || lowerCaseMessage.includes('go to team')) {
       navigate('/#team');
-      response = "I've scrolled to our team section. Meet our talented team of experts!";
+      response = "Our team consists of Noopur Gupta (Founder & CEO), Muzammil (COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer). Each member brings unique expertise to deliver exceptional AI solutions.";
     }
     else if (lowerCaseMessage.includes('contact') || lowerCaseMessage.includes('go to contact')) {
       navigate('/#contact');
-      response = "I've scrolled to our contact section. Feel free to reach out to us!";
+      response = "You can reach our team by email at info@sparkstorm.ai, by phone at (555) 123-4567, or through our contact form. We're always happy to discuss how we can help with your AI needs.";
     }
     else if (lowerCaseMessage.includes('partners') || lowerCaseMessage.includes('go to partners')) {
       navigate('/#partners');
-      response = "I've scrolled to our partners section. See who we collaborate with!";
+      response = "SparkStorm AI partners with leading technology firms, healthcare providers, and research institutions to deliver cutting-edge AI solutions. Our partnerships enable us to offer comprehensive services to our clients.";
     }
     else if (lowerCaseMessage.includes('testimonials') || lowerCaseMessage.includes('go to testimonials')) {
       navigate('/#testimonials');
-      response = "I've scrolled to our testimonials section. See what our clients say about us!";
+      response = "Our clients have experienced significant improvements in their operations through our AI solutions. For example, RetailTech Inc. saw a 40% reduction in response times, and healthcare providers praise our MediWallet platform for its efficiency and security.";
     }
     else if (lowerCaseMessage.includes('newsletter') || lowerCaseMessage.includes('go to newsletter')) {
       navigate('/#newsletter');
-      response = "I've scrolled to our newsletter section. Subscribe to stay updated!";
+      response = "Our newsletter provides valuable insights into AI trends, case studies, and SparkStorm updates. You can subscribe to stay informed about the latest developments in AI technology and our new solutions.";
+    }
+    // Specific testimonial requests
+    else if (lowerCaseMessage.includes('testimonial')) {
+      if (lowerCaseMessage.includes('nitesh')) {
+        response = "Nitesh, a Web Developer at HealthTech Solutions, said: \"SparkStorm's end-to-end approach impressed me. Their custom chatbot handles questions instantly, while the MediWallet platform is clean, efficient, and remarkably easy to navigate – exactly the seamless experience patients need.\"";
+      } 
+      else if (lowerCaseMessage.includes('michael') || lowerCaseMessage.includes('rodriguez') || lowerCaseMessage.includes('doctor') || lowerCaseMessage.includes('mediwallet')) {
+        response = "Dr. Michael Rodriguez, Medical Director at Innovate Health, shared: \"The MediWallet app has made managing my patients' medical records incredibly efficient. The secure access features give both my team and our patients peace of mind.\"";
+      }
+      else if (lowerCaseMessage.includes('alexandra') || lowerCaseMessage.includes('chen') || lowerCaseMessage.includes('chatbot')) {
+        response = "Alexandra Chen, CTO of RetailTech Inc., reported: \"SparkStorm AI's chatbot solution revolutionized our customer service operations. We've seen a 40% reduction in response times and significantly improved customer satisfaction.\"";
+      }
+      else if (lowerCaseMessage.includes('sarah') || lowerCaseMessage.includes('johnson')) {
+        response = "Sarah Johnson, Operations Manager at Global Solutions, stated: \"Working with SparkStorm AI has been a game-changer for our business. Their AI solutions streamlined our processes and helped us achieve remarkable growth in just six months.\"";
+      }
+      else {
+        response = "Our clients have shared amazing feedback about our services. For example, Nitesh praised our MediWallet platform for its clean and efficient design, while Dr. Rodriguez highlighted how it improved his patient record management. Alexandra Chen saw a 40% reduction in response times with our chatbot solution.";
+      }
     }
     
     // Company information
@@ -123,18 +142,31 @@ const AIAssistant = () => {
     else if (lowerCaseMessage.includes('contact') || lowerCaseMessage.includes('reach') || lowerCaseMessage.includes('email')) {
       response = "You can contact us through our contact form on the website, or email us directly at info@sparkstorm.ai. We're always happy to answer your questions!";
     }
+    // Location information
     else if (lowerCaseMessage.includes('location') || lowerCaseMessage.includes('where are you')) {
       response = "Our headquarters is located in California, but we serve clients globally.";
     }
+    // Pricing information
     else if (lowerCaseMessage.includes('cost') || lowerCaseMessage.includes('pricing') || lowerCaseMessage.includes('price')) {
       response = "Our pricing varies based on the scope and requirements of each project. We offer custom solutions tailored to your specific needs. Contact us for a personalized quote!";
     }
+    // Team information
     else if (lowerCaseMessage.includes('team') || lowerCaseMessage.includes('who works')) {
       response = "Our team consists of experts in AI, data science, and software engineering. Our key members include Noopur Gupta (Founder & CEO), Muzammil (COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer).";
     }
+    // Booking information
     else if (lowerCaseMessage.includes('book') || lowerCaseMessage.includes('demo') || lowerCaseMessage.includes('appointment')) {
       response = "You can book a demo or consultation by clicking the 'Book Demo' button in the top right corner of our website, or by visiting calendly.com/noopurgupta01/1x1.";
     }
+    // MediWallet specific information
+    else if (lowerCaseMessage.includes('mediwallet') || lowerCaseMessage.includes('medi wallet') || lowerCaseMessage.includes('health vault') || lowerCaseMessage.includes('medical records')) {
+      response = "MediWallet is our secure personal health records platform that allows patients and healthcare providers to safely manage medical records. It features encrypted storage, easy access controls, and intuitive interfaces to simplify healthcare record management.";
+    }
+    // Affiliations information
+    else if (lowerCaseMessage.includes('affiliate') || lowerCaseMessage.includes('affiliation')) {
+      response = "SparkStorm AI has affiliations with leading technology institutes and research organizations. These collaborations help us stay at the forefront of AI innovation and development.";
+    }
+    // Greeting responses
     else if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi') || lowerCaseMessage.includes('hey')) {
       response = "Hello! Welcome to SparkStorm AI. How can I assist you today?";
     }

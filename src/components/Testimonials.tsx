@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
@@ -38,7 +39,7 @@ const Testimonials = () => {
       company: "RetailTech Inc."
     },
     {
-      quote: "The Personal Health Vault app has made managing my patients' medical records incredibly efficient. The secure access features give both my team and our patients peace of mind.",
+      quote: "The MediWallet app has made managing my patients' medical records incredibly efficient. The secure access features give both my team and our patients peace of mind.",
       author: "Dr. Michael Rodriguez",
       position: "Medical Director",
       company: "Innovate Health"
@@ -48,6 +49,12 @@ const Testimonials = () => {
       author: "Sarah Johnson",
       position: "Operations Manager",
       company: "Global Solutions"
+    },
+    {
+      quote: "SparkStorm's end-to-end approach impressed me. Their custom chatbot handles questions instantly, while the MediWallet platform is clean, efficient, and remarkably easy to navigate – exactly the seamless experience patients need.",
+      author: "Nitesh",
+      position: "Web Developer",
+      company: "HealthTech Solutions"
     }
   ];
   
