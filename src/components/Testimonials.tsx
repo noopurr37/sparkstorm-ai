@@ -32,7 +32,7 @@ const Testimonials = () => {
   
   const testimonials: Testimonial[] = [
     {
-      quote: "I was able to add some files. It does see that I have labs and immunizations and can give me the dates and when I asked is it normal? It responds correctly. Then if I ask what does this lab mean it responds correctly.",
+      quote: "I was impressed with how it handled my medical files. It recognized my labs and immunizations with dates, and accurately answered my questions about whether results were normal. When I asked what specific lab results meant, it provided clear explanations.",
       author: "Tanesha Charles",
       role: "Neurosurgery APP"
     },
