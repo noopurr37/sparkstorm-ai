@@ -35,7 +35,7 @@ const handler = async (req: Request): Promise<Response> => {
       console.log("Failed to ensure table exists, will try direct insert:", tableError);
     }
     
-    // Store email in database (now with proper RLS handling)
+    // Store email in database
     const { error: dbError } = await supabase
       .from('newsletter_subscribers')
       .insert({ email });

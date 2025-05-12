@@ -179,13 +179,14 @@ const Team = () => {
   return (
     <section id="team" className="py-8 bg-white">
       <div className="section-container" ref={ref}>
+        {/* Blue bubble box style for Our Team section - similar to Services section */}
         <div 
-          className={`mb-12 text-center transition-all duration-700 ${
+          className={`mb-12 text-center transition-all duration-700 bg-gradient-to-b from-blue-50 to-white rounded-2xl py-8 px-6 shadow-sm ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="section-title mb-4">Our Team</h2>
-          <p className="section-description max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">Our Team</h2>
+          <p className="section-description max-w-3xl mx-auto text-gray-600">
             We're a diverse team of experienced professionals passionate about creating 
             intelligent AI solutions that transform businesses.
           </p>
@@ -206,20 +207,20 @@ const Team = () => {
           ))}
         </div>
 
-        {/* Advisory Board Section with heading and description */}
+        {/* Advisory Board Section with blue bubble box style - similar to Services section */}
         <div 
-          className={`mt-20 mb-12 text-center transition-all duration-700 ${
+          className={`mt-20 mb-12 text-center transition-all duration-700 bg-gradient-to-b from-blue-50 to-white rounded-2xl py-8 px-6 shadow-sm ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="section-title mb-4">Advisory Board</h2>
-          <p className="section-description max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">Advisory Board</h2>
+          <p className="section-description max-w-3xl mx-auto text-gray-600">
             Our advisory board brings decades of industry experience and expertise to guide our strategic direction.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-          <div className="lg:col-span-1"></div>
+        {/* Repositioned advisory board members to center */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-3xl mx-auto">
           {advisoryBoard.map((member, index) => (
             <TeamMember
               key={`advisor-${index}`}
@@ -231,7 +232,6 @@ const Team = () => {
               email={member.email}
             />
           ))}
-          <div className="lg:col-span-1"></div>
         </div>
       </div>
     </section>
