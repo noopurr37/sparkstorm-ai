@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -19,8 +18,6 @@ const Index = () => {
   
   // Calendly URL (in case it's needed for other buttons later)
   const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
-  
-  // Welcome toast removed as requested
 
   return (
     <div className="min-h-screen bg-background">
