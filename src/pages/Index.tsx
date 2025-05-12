@@ -9,6 +9,7 @@ import Partners from "@/components/Partners";
 import Testimonials from "@/components/Testimonials";
 import Newsletter from "@/components/Newsletter";
 import Contact from "@/components/Contact";
+import AIAssistant from "@/components/AIAssistant";
 import { useToast } from "@/hooks/use-toast";
 
 const Index = () => {
@@ -56,6 +57,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
+      <AIAssistant />
     </div>
   );
 };

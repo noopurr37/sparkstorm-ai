@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
@@ -137,7 +138,7 @@ const Team = () => {
     {
       name: "Aarnav Chandraganti",
       role: "AI Developer",
-      image: "/lovable-uploads/cfacdfa5-065b-4b95-adf5-2c93abba0370.png",
+      image: "/lovable-uploads/9ad30802-e34a-45d6-93c4-c89bd479126a.png",
       delay: 400,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
       instagramUrl: "https://www.instagram.com/aarnav_c_",
