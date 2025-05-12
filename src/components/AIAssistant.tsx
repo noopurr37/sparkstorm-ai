@@ -70,7 +70,7 @@ const AIAssistant = () => {
     setInputValue('');
     setIsTyping(true);
 
-    // Simulate AI response after a short delay
+    // Process user message after a short delay to simulate AI thinking
     setTimeout(() => {
       processUserMessage(inputValue);
       setIsTyping(false);
@@ -98,6 +98,18 @@ const AIAssistant = () => {
       navigate('/#contact');
       response = "I've scrolled to our contact section. Feel free to reach out to us!";
     }
+    else if (lowerCaseMessage.includes('partners') || lowerCaseMessage.includes('go to partners')) {
+      navigate('/#partners');
+      response = "I've scrolled to our partners section. See who we collaborate with!";
+    }
+    else if (lowerCaseMessage.includes('testimonials') || lowerCaseMessage.includes('go to testimonials')) {
+      navigate('/#testimonials');
+      response = "I've scrolled to our testimonials section. See what our clients say about us!";
+    }
+    else if (lowerCaseMessage.includes('newsletter') || lowerCaseMessage.includes('go to newsletter')) {
+      navigate('/#newsletter');
+      response = "I've scrolled to our newsletter section. Subscribe to stay updated!";
+    }
     
     // Company information
     else if (lowerCaseMessage.includes('about') || lowerCaseMessage.includes('what is sparkstorm')) {
@@ -109,14 +121,26 @@ const AIAssistant = () => {
     else if (lowerCaseMessage.includes('service') || lowerCaseMessage.includes('what do you offer')) {
       response = "We offer a range of AI services including custom AI development, AI integration, machine learning models, natural language processing solutions, computer vision systems, and AI consulting.";
     }
-    else if (lowerCaseMessage.includes('contact') || lowerCaseMessage.includes('reach')) {
+    else if (lowerCaseMessage.includes('contact') || lowerCaseMessage.includes('reach') || lowerCaseMessage.includes('email')) {
       response = "You can contact us through our contact form on the website, or email us directly at info@sparkstorm.ai. We're always happy to answer your questions!";
     }
     else if (lowerCaseMessage.includes('location') || lowerCaseMessage.includes('where are you')) {
       response = "Our headquarters is located in California, but we serve clients globally.";
     }
-    else if (lowerCaseMessage.includes('cost') || lowerCaseMessage.includes('pricing')) {
+    else if (lowerCaseMessage.includes('cost') || lowerCaseMessage.includes('pricing') || lowerCaseMessage.includes('price')) {
       response = "Our pricing varies based on the scope and requirements of each project. We offer custom solutions tailored to your specific needs. Contact us for a personalized quote!";
+    }
+    else if (lowerCaseMessage.includes('team') || lowerCaseMessage.includes('who works')) {
+      response = "Our team consists of experts in AI, data science, and software engineering. Our key members include Noopur Gupta (Founder & CEO), Muzammil (COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer).";
+    }
+    else if (lowerCaseMessage.includes('book') || lowerCaseMessage.includes('demo') || lowerCaseMessage.includes('appointment')) {
+      response = "You can book a demo or consultation by clicking the 'Book Demo' button in the top right corner of our website, or by visiting calendly.com/noopurgupta01/1x1.";
+    }
+    else if (lowerCaseMessage.includes('hello') || lowerCaseMessage.includes('hi') || lowerCaseMessage.includes('hey')) {
+      response = "Hello! Welcome to SparkStorm AI. How can I assist you today?";
+    }
+    else if (lowerCaseMessage.includes('thank') || lowerCaseMessage.includes('thanks')) {
+      response = "You're welcome! If you have any more questions, feel free to ask.";
     }
     // Generic fallback
     else {
@@ -142,7 +166,12 @@ const AIAssistant = () => {
         className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg z-50 transition-all duration-300 hover:scale-110"
         aria-label="Chat with SparkStorm AI Assistant"
       >
-        <Bot size={24} />
+        {/* Use SparkStorm logo instead of Bot icon */}
+        <img 
+          src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png" 
+          alt="SparkStorm AI"
+          className="h-6 w-6 filter brightness-0 invert" // This makes the logo white
+        />
       </button>
 
       {/* Chat window */}
@@ -152,7 +181,7 @@ const AIAssistant = () => {
           <div className="p-4 bg-blue-600 text-white flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Avatar className="h-8 w-8 border-2 border-white">
-                <AvatarImage src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png" alt="SparkStorm AI" />
+                <AvatarImage src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png" alt="SparkStorm AI" className="filter brightness-0 invert" />
                 <AvatarFallback>AI</AvatarFallback>
               </Avatar>
               <div>

@@ -138,7 +138,7 @@ const Team = () => {
     {
       name: "Aarnav Chandraganti",
       role: "AI Developer",
-      image: "/lovable-uploads/9ad30802-e34a-45d6-93c4-c89bd479126a.png",
+      image: "/lovable-uploads/65ee5a53-727d-49ed-8146-843c3eb992cc.png", // Updated image with white background
       delay: 400,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
       instagramUrl: "https://www.instagram.com/aarnav_c_",
