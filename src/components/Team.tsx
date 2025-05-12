@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface TeamMemberProps {
   name: string;
@@ -49,7 +50,7 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
               alt={name}
               className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
               loading="lazy"
-              style={{ backgroundColor: "white" }}
+              style={{ backgroundColor: "#FFFFFF" }}
             />
           </AspectRatio>
         </div>
@@ -160,7 +161,7 @@ const Team = () => {
     {
       name: "Shiva",
       role: "Advisory Board Member",
-      image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png", // Replace with actual image
+      image: "/lovable-uploads/16c72fb9-4b68-4d2c-9837-ed5d77bdf7c7.png",
       delay: 600,
       linkedinUrl: "https://www.linkedin.com/",
       email: "shiva@example.com",
@@ -168,7 +169,7 @@ const Team = () => {
     {
       name: "Girija",
       role: "Advisory Board Member",
-      image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png", // Replace with actual image
+      image: "/lovable-uploads/ad32addd-6403-4a1a-a270-ec977eaacb5a.png",
       delay: 700,
       linkedinUrl: "https://www.linkedin.com/",
       email: "girija@example.com",
@@ -230,7 +231,7 @@ const Team = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {advisoryBoard.map((member, index) => (
             <TeamMember
               key={`advisor-${index}`}
