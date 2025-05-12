@@ -1,6 +1,5 @@
-
 import React, { useState, useRef, useEffect } from 'react';
-import { Bot, X, Send, User } from 'lucide-react';
+import { X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
@@ -160,13 +159,12 @@ const AIAssistant = () => {
 
   return (
     <>
-      {/* Chat button */}
+      {/* Chat button with SparkStorm logo */}
       <button
         onClick={toggleChat}
         className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg z-50 transition-all duration-300 hover:scale-110"
         aria-label="Chat with SparkStorm AI Assistant"
       >
-        {/* Use SparkStorm logo instead of Bot icon */}
         <img 
           src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png" 
           alt="SparkStorm AI"
