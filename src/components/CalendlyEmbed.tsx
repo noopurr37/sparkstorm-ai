@@ -16,16 +16,11 @@ const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({
   onClick,
   children
 }) => {
+  // This component now simply renders its children or a button
+  // No more calendly functionality
   return (
     <>
-      {children || (
-        <Button 
-          onClick={onClick} 
-          className={`bg-white text-primary hover:bg-gray-100 inline-flex items-center gap-2 ${buttonClassName}`}
-        >
-          {buttonText} <ArrowRight className="h-4 w-4" />
-        </Button>
-      )}
+      {children}
     </>
   );
 };
