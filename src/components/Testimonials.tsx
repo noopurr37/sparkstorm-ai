@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 interface Testimonial {
   quote: string;
   author: string;
+  role?: string;
 }
 
 const Testimonials = () => {
@@ -31,6 +32,11 @@ const Testimonials = () => {
   
   const testimonials: Testimonial[] = [
     {
+      quote: "I was able to add some files. It does see that I have labs and immunizations and can give me the dates and when I asked is it normal? It responds correctly. Then if I ask what does this lab mean it responds correctly.",
+      author: "Tanesha Charles",
+      role: "Neurosurgery APP"
+    },
+    {
       quote: "SparkStorm AI's chatbot solution revolutionized our customer service operations. We've seen a 40% reduction in response times and significantly improved customer satisfaction.",
       author: "Alexandra Chen"
     },
@@ -45,10 +51,6 @@ const Testimonials = () => {
     {
       quote: "SparkStorm AI and MediWallet will be so much better than the \"CD\" my mom's doctor gave to her years ago. I have to scramble on my phone looking for what supplements and herbs she takes every time I take her to her appointments.",
       author: "Sandra Gifford"
-    },
-    {
-      quote: "This app is amazing. With as many times as we have moved, the MediWallet platform and SparkStorm AI would have been so, so important for us. It's clean, efficient, and remarkably easy to navigate.",
-      author: "Jacquie"
     }
   ];
   
@@ -140,6 +142,9 @@ const Testimonials = () => {
                           </div>
                           <div>
                             <p className="font-semibold text-gray-900">{testimonial.author}</p>
+                            {testimonial.role && (
+                              <p className="text-sm text-gray-600">{testimonial.role}</p>
+                            )}
                           </div>
                         </div>
                       </footer>
