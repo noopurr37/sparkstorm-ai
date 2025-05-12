@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X, User, LogOut } from "lucide-react";
+import { Menu, X, User, LogOut, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -78,6 +78,7 @@ const Header = () => {
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => navigate("/mediwallet")}>
+              <Wallet className="mr-2 h-4 w-4" />
               MediWallet Dashboard
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => navigate("/profile")}>
@@ -136,18 +137,27 @@ const Header = () => {
               <a href="/#contact" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Contact
               </a>
-              {user && (
-                <a 
-                  href="/mediwallet" 
-                  className={`font-sans text-base font-medium transition-colors ${
-                    location.pathname === '/mediwallet' 
-                      ? 'text-primary' 
-                      : 'text-gray-700 hover:text-primary'
-                  }`}
-                >
-                  MediWallet
-                </a>
-              )}
+              <a 
+                href="/mediwallet" 
+                className={`font-sans text-base font-medium transition-colors ${
+                  location.pathname === '/mediwallet' 
+                    ? 'text-primary' 
+                    : 'text-gray-700 hover:text-primary'
+                }`}
+                onClick={(e) => {
+                  if (!user) {
+                    e.preventDefault();
+                    navigate("/auth", { 
+                      state: { 
+                        redirectTo: "/mediwallet",
+                        message: "Please sign in or create an account to access MediWallet" 
+                      } 
+                    });
+                  }
+                }}
+              >
+                MediWallet
+              </a>
             </div>
           </div>
 
@@ -212,15 +222,24 @@ const Header = () => {
                 >
                   Contact
                 </a>
-                {user && (
-                  <a 
-                    href="/mediwallet" 
-                    className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                    onClick={closeMenu}
-                  >
-                    MediWallet
-                  </a>
-                )}
+                <a 
+                  href="/mediwallet" 
+                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    closeMenu();
+                    if (!user) {
+                      e.preventDefault();
+                      navigate("/auth", { 
+                        state: { 
+                          redirectTo: "/mediwallet",
+                          message: "Please sign in or create an account to access MediWallet" 
+                        } 
+                      });
+                    }
+                  }}
+                >
+                  MediWallet
+                </a>
                 {user && (
                   <a 
                     href="/profile" 

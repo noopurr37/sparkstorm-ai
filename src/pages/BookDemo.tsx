@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import { CalendarIcon, Loader2 } from "lucide-react";
+import { CalendarIcon, Loader2, ArrowLeft } from "lucide-react";
 import { Label } from "@/components/ui/label";
 
 const BookDemo = () => {
@@ -67,7 +67,12 @@ const BookDemo = () => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (event === 'SIGNED_OUT') {
-          navigate("/auth");
+          navigate("/auth", { 
+            state: { 
+              redirectTo: "/book-demo",
+              message: "Please sign in or create an account to book a demo" 
+            } 
+          });
         }
         setUser(session?.user || null);
       }
@@ -130,6 +135,17 @@ const BookDemo = () => {
       <Header />
 
       <main className="container mx-auto px-4 py-12">
+        <div className="flex items-center mb-4">
+          <Button 
+            variant="ghost" 
+            onClick={() => navigate("/mediwallet")}
+            className="flex items-center"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to MediWallet
+          </Button>
+        </div>
+
         <div className="mb-8 text-center">
           <h1 className="mb-2 text-3xl font-bold md:text-4xl">Book a Demo</h1>
           <p className="text-lg text-gray-600">

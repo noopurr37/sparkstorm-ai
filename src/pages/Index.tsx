@@ -15,9 +15,6 @@ import { Linkedin, Instagram } from "lucide-react";
 
 const Index = () => {
   const { toast } = useToast();
-  
-  // Calendly URL (in case it's needed for other buttons later)
-  const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
 
   return (
     <div className="min-h-screen bg-background">

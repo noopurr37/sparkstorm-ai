@@ -3,21 +3,27 @@ import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { MessageSquare, Globe, Smartphone, HeartPulse } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
 interface ServiceCardProps {
   icon: React.ReactNode;
   title: string;
   description: string;
   delay: number;
+  linkTo?: string;
+  requiresAuth?: boolean;
 }
 
-const ServiceCard = ({ icon, title, description, delay }: ServiceCardProps) => {
+const ServiceCard = ({ icon, title, description, delay, linkTo, requiresAuth }: ServiceCardProps) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
   });
   
   const [isVisible, setIsVisible] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
   
   useEffect(() => {
     if (inView) {
@@ -28,7 +34,33 @@ const ServiceCard = ({ icon, title, description, delay }: ServiceCardProps) => {
       return () => clearTimeout(timer);
     }
   }, [inView, delay]);
+
+  useEffect(() => {
+    // Get user status if we need it for navigation
+    if (requiresAuth) {
+      const getUser = async () => {
+        const { data: { session } } = await supabase.auth.getSession();
+        setUser(session?.user || null);
+      };
+      getUser();
+    }
+  }, [requiresAuth]);
   
+  const handleClick = () => {
+    if (linkTo) {
+      if (requiresAuth && !user) {
+        navigate("/auth", { 
+          state: { 
+            redirectTo: linkTo,
+            message: "Please sign in or create an account to access MediWallet" 
+          } 
+        });
+      } else {
+        navigate(linkTo);
+      }
+    }
+  };
+
   return (
     <div 
       ref={ref}
@@ -36,9 +68,10 @@ const ServiceCard = ({ icon, title, description, delay }: ServiceCardProps) => {
         isVisible 
           ? "opacity-100 translate-y-0" 
           : "opacity-0 translate-y-12"
-      }`}
+      } ${linkTo ? "cursor-pointer" : ""}`}
+      onClick={handleClick}
     >
-      <Card className="h-full border border-gray-200 bg-white/50 backdrop-blur-sm">
+      <Card className="h-full border border-gray-200 bg-white/50 backdrop-blur-sm hover:shadow-md transition-shadow">
         <CardHeader>
           <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4">
             {icon}
@@ -97,6 +130,8 @@ const Services = () => {
       title: "MediWallet",
       description: "Secure, HIPAA-compliant applications for storing and managing personal health records with advanced security features to protect sensitive information.",
       delay: 400,
+      linkTo: "/mediwallet",
+      requiresAuth: true,
     },
   ];
 
@@ -131,6 +166,8 @@ const Services = () => {
               title={service.title}
               description={service.description}
               delay={service.delay}
+              linkTo={service.linkTo}
+              requiresAuth={service.requiresAuth}
             />
           ))}
         </div>
