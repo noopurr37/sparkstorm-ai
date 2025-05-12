@@ -290,38 +290,25 @@ const Team = () => {
           ))}
         </div>
 
-        {/* Advisory Board Section */}
-        <div className="text-center max-w-3xl mx-auto mt-16 mb-8">
+        {/* Advisory Board Section - Repositioned to be centered */}
+        <div className="text-center max-w-3xl mx-auto mb-6">
           <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
             <p className="text-xs sm:text-sm font-medium text-blue-600">Advisory Board</p>
           </div>
-          
-          <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}>
-            Strategic Guidance
-          </h2>
-          
-          <p className={`text-lg text-gray-600 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}>
-            Our advisory board provides expert guidance to help shape our vision and strategy.
-          </p>
         </div>
         
-        {/* Changed to max-w-4xl to allow a bit more space for consistent sizing */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+        {/* Advisory members in centered layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">
           {advisoryBoard.map((member, index) => (
-            <div key={`advisor-${index}`} className="col-span-1 sm:col-span-1">
-              <AdvisoryMember
-                name={member.name}
-                role={member.role}
-                image={member.image}
-                delay={member.delay}
-                linkedinUrl={member.linkedinUrl}
-                email={member.email}
-              />
-            </div>
+            <AdvisoryMember
+              key={`advisor-${index}`}
+              name={member.name}
+              role={member.role}
+              image={member.image}
+              delay={member.delay}
+              linkedinUrl={member.linkedinUrl}
+              email={member.email}
+            />
           ))}
         </div>
       </div>
