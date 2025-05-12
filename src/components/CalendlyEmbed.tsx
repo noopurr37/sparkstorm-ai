@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 
 interface CalendlyEmbedProps {
-  url?: string;
   buttonText?: string;
   buttonClassName?: string;
   children?: React.ReactNode;
