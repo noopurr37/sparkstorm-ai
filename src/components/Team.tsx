@@ -44,7 +44,7 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
     >
       <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 h-full">
         <div className="overflow-hidden bg-white">
-          <AspectRatio ratio={3/4}>
+          <AspectRatio ratio={1/1}>
             <img
               src={image}
               alt={name}
@@ -84,6 +84,84 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
               aria-label={`Email ${name}`}
             >
               <Mail size={18} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AdvisoryMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email }: TeamMemberProps) => {
+  // This component is similar to TeamMember but with a more compact design for advisory board
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+  
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    if (inView) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, delay);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [inView, delay]);
+  
+  return (
+    <div 
+      ref={ref}
+      className={`card-hover transition-all duration-700 ease-out ${
+        isVisible 
+          ? "opacity-100 translate-y-0" 
+          : "opacity-0 translate-y-12"
+      }`}
+    >
+      <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 h-full">
+        <div className="overflow-hidden bg-white">
+          <AspectRatio ratio={1/1}>
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+              loading="lazy"
+              style={{ backgroundColor: "#FFFFFF" }}
+            />
+          </AspectRatio>
+        </div>
+        <div className="p-4">
+          <h3 className="text-lg font-semibold mb-1">{name}</h3>
+          <p className="text-sm text-gray-500 mb-2">{role}</p>
+          <div className="flex space-x-3">
+            <a
+              href={linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-blue-600 transition-colors"
+              aria-label={`${name}'s LinkedIn`}
+            >
+              <Linkedin size={16} />
+            </a>
+            {instagramUrl && (
+              <a
+                href={instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-pink-500 transition-colors"
+                aria-label={`${name}'s Instagram`}
+              >
+                <Instagram size={16} />
+              </a>
+            )}
+            <a
+              href={`mailto:${email}`}
+              className="text-gray-400 hover:text-blue-500 transition-colors"
+              aria-label={`Email ${name}`}
+            >
+              <Mail size={16} />
             </a>
           </div>
         </div>
@@ -159,17 +237,17 @@ const Team = () => {
   
   const advisoryBoard = [
     {
-      name: "Shiva",
+      name: "Siva",
       role: "Advisory Board Member",
       image: "/lovable-uploads/16c72fb9-4b68-4d2c-9837-ed5d77bdf7c7.png",
       delay: 600,
       linkedinUrl: "https://www.linkedin.com/",
-      email: "shiva@example.com",
+      email: "siva@example.com",
     },
     {
       name: "Girija",
       role: "Advisory Board Member",
-      image: "/lovable-uploads/ad32addd-6403-4a1a-a270-ec977eaacb5a.png",
+      image: "/lovable-uploads/e799f8e7-efe8-421a-8904-fb3bc81e1aae.png",
       delay: 700,
       linkedinUrl: "https://www.linkedin.com/",
       email: "girija@example.com",
@@ -231,17 +309,19 @@ const Team = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        {/* Changed to max-w-4xl to allow a bit more space for consistent sizing */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
           {advisoryBoard.map((member, index) => (
-            <TeamMember
-              key={`advisor-${index}`}
-              name={member.name}
-              role={member.role}
-              image={member.image}
-              delay={member.delay}
-              linkedinUrl={member.linkedinUrl}
-              email={member.email}
-            />
+            <div key={`advisor-${index}`} className="col-span-1 sm:col-span-1">
+              <AdvisoryMember
+                name={member.name}
+                role={member.role}
+                image={member.image}
+                delay={member.delay}
+                linkedinUrl={member.linkedinUrl}
+                email={member.email}
+              />
+            </div>
           ))}
         </div>
       </div>

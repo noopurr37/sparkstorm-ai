@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Send } from "lucide-react";
@@ -55,8 +54,7 @@ const Newsletter = () => {
       // Store email in localStorage
       localStorage.setItem("sparkstorm_newsletter_email", email);
       
-      // Instead of trying to directly insert to a table that doesn't exist in our types,
-      // we'll call the newsletter-confirmation function directly
+      // Call the newsletter-confirmation function directly
       const response = await supabase.functions.invoke('newsletter-confirmation', {
         body: { email }
       });
