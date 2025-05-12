@@ -38,24 +38,43 @@ const Newsletter = () => {
       return;
     }
     
+    if (!isValidEmail(email)) {
+      toast({
+        title: "Error",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
     // Store email in localStorage for demonstration
     localStorage.setItem("sparkstorm_newsletter_email", email);
     
-    // Display success toast
+    // Display success toast with more detailed information
     toast({
-      title: "Thank you for subscribing!",
-      description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
-      duration: 5000,
+      title: "Thank you for subscribing to our SparkStorm AI newsletter!",
+      description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts. Check your inbox for a confirmation email.",
+      duration: 6000,
     });
     
     // In a real application, you would send this to your backend
     console.log("Newsletter subscription:", email);
     
+    // Simulate sending a confirmation email (in a real app, this would be done by the backend)
+    setTimeout(() => {
+      console.log(`Confirmation email sent to ${email}`);
+    }, 1000);
+    
     setEmail("");
+  };
+  
+  const isValidEmail = (email: string) => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
   };
 
   return (
-    <section className="py-10 bg-gradient-primary text-white relative overflow-hidden">
+    <section className="py-8 bg-gradient-primary text-white relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-blue-400 rounded-full opacity-20 mix-blend-overlay filter blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-72 h-72 bg-cyan-400 rounded-full opacity-20 mix-blend-overlay filter blur-3xl"></div>

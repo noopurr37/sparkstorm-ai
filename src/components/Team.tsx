@@ -157,11 +157,11 @@ const Team = () => {
   ];
 
   return (
-    <section id="team" className="py-10 bg-white">
+    <section id="team" className="py-8 bg-white">
       <div className="section-container" ref={ref}>
         <div className="text-center max-w-3xl mx-auto mb-8">
           <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
-            <p className="text-xs sm:text-sm font-medium text-blue-600">Our Team</p>
+            <p className="text-xs sm:text-sm font-medium text-blue-600">Advisory Board</p>
           </div>
           
           <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${

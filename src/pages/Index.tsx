@@ -41,12 +41,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
+      <main className="space-y-0">
         <Hero />
         <Services />
-        <Testimonials />
         <Team />
         <Partners />
+        <Testimonials />
         <Affiliations />
         <Newsletter />
         <Contact />
