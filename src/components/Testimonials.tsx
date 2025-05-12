@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
@@ -7,7 +8,6 @@ interface Testimonial {
   quote: string;
   author: string;
   position: string;
-  company?: string;
 }
 
 const Testimonials = () => {
@@ -34,20 +34,17 @@ const Testimonials = () => {
     {
       quote: "SparkStorm AI's chatbot solution revolutionized our customer service operations. We've seen a 40% reduction in response times and significantly improved customer satisfaction.",
       author: "Alexandra Chen",
-      position: "CTO",
-      company: "RetailTech Inc."
+      position: "CTO"
     },
     {
       quote: "The MediWallet app has made managing my patients' medical records incredibly efficient. The secure access features give both my team and our patients peace of mind.",
       author: "Dr. Michael Rodriguez",
-      position: "Medical Director",
-      company: "Innovate Health"
+      position: "Medical Director"
     },
     {
       quote: "Working with SparkStorm AI has been a game-changer for our business. Their AI solutions streamlined our processes and helped us achieve remarkable growth in just six months.",
       author: "Sarah Johnson",
-      position: "Operations Manager",
-      company: "Global Solutions"
+      position: "Operations Manager"
     },
     {
       quote: "SparkStorm AI and MediWallet will be so much better than the \"CD\" my mom's doctor gave to her years ago. I have to scramble on my phone looking for what supplements and herbs she takes every time I take her to her appointments.",
@@ -149,9 +146,6 @@ const Testimonials = () => {
                           </div>
                           <div>
                             <p className="font-semibold text-gray-900">{testimonial.author}</p>
-                            <p className="text-gray-500">
-                              {testimonial.position}
-                            </p>
                           </div>
                         </div>
                       </footer>

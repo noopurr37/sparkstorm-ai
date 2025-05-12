@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
@@ -52,8 +53,7 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
           </AspectRatio>
         </div>
         <div className="p-6">
-          <h3 className="text-xl font-semibold mb-1">{name}</h3>
-          <p className="text-gray-500 mb-4">{role}</p>
+          <h3 className="text-xl font-semibold mb-4">{name}</h3>
           <div className="flex space-x-3">
             <a
               href={linkedinUrl}
@@ -119,7 +119,7 @@ const Team = () => {
     },
     {
       name: "Muzammil",
-      role: "COO",
+      role: "Fractional COO",
       image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png",
       delay: 200,
       linkedinUrl: "https://www.linkedin.com/in/muzammil-w-iqbal/",

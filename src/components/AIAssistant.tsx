@@ -81,7 +81,7 @@ const AIAssistant = () => {
     const lowerCaseMessage = message.toLowerCase();
     let response = '';
 
-    // Navigation requests - navigate but don't mention scrolling in the responses
+    // Navigation requests - navigate to sections without mentioning scrolling
     if (lowerCaseMessage.includes('home') || lowerCaseMessage.includes('go to home')) {
       navigate('/');
       response = "Here's our home page. Is there something specific you'd like to know about SparkStorm AI?";
@@ -92,7 +92,7 @@ const AIAssistant = () => {
     }
     else if (lowerCaseMessage.includes('team') || lowerCaseMessage.includes('go to team')) {
       navigate('/#team');
-      response = "Our team consists of Noopur Gupta (Founder & CEO), Muzammil (COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer). Each member brings unique expertise to deliver exceptional AI solutions.";
+      response = "Our team consists of Noopur Gupta (Founder & CEO), Muzammil (Fractional COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer). Each member brings unique expertise to deliver exceptional AI solutions.";
     }
     else if (lowerCaseMessage.includes('contact') || lowerCaseMessage.includes('go to contact')) {
       navigate('/#contact');
@@ -100,11 +100,11 @@ const AIAssistant = () => {
     }
     else if (lowerCaseMessage.includes('partners') || lowerCaseMessage.includes('go to partners')) {
       navigate('/#partners');
-      response = "SparkStorm AI partners with leading technology firms, healthcare providers, and research institutions to deliver cutting-edge AI solutions. Our partnerships enable us to offer comprehensive services to our clients.";
+      response = "SparkStorm AI partners with leading technology firms, healthcare providers, and research institutions to deliver cutting-edge AI solutions. Our key team members include Siva and Girija.";
     }
     else if (lowerCaseMessage.includes('testimonials') || lowerCaseMessage.includes('go to testimonials')) {
       navigate('/#testimonials');
-      response = "Our clients have experienced significant improvements in their operations through our AI solutions. We have testimonials from business leaders like Alexandra Chen and Sarah Johnson, healthcare professionals like Dr. Rodriguez, and everyday users like Sandra Gifford and Jacquie who have benefited from our MediWallet platform.";
+      response = "Our clients have experienced significant improvements in their operations through our AI solutions. We have testimonials from business leaders like Alexandra Chen and Sarah Johnson, healthcare professionals like Dr. Rodriguez, and users like Sandra Gifford and Jacquie who have benefited from our MediWallet platform.";
     }
     else if (lowerCaseMessage.includes('newsletter') || lowerCaseMessage.includes('go to newsletter')) {
       navigate('/#newsletter');
@@ -113,25 +113,29 @@ const AIAssistant = () => {
     // Specific testimonial requests
     else if (lowerCaseMessage.includes('testimonial')) {
       if (lowerCaseMessage.includes('sandra') || lowerCaseMessage.includes('gifford')) {
-        response = "Sandra Gifford, a Marketing Strategist, shared: \"SparkStorm AI and MediWallet will be so much better than the 'CD' my mom's doctor gave to her years ago. I have to scramble on my phone looking for what supplements and herbs she takes every time I take her to her appointments.\"";
+        response = "Sandra Gifford shared: \"SparkStorm AI and MediWallet will be so much better than the 'CD' my mom's doctor gave to her years ago. I have to scramble on my phone looking for what supplements and herbs she takes every time I take her to her appointments.\"";
       }
       else if (lowerCaseMessage.includes('jacquie')) {
-        response = "Jacquie, a Parent and Frequent Relocator, said: \"This app is amazing. With as many times as we have moved, the MediWallet platform and SparkStorm AI would have been so, so important for us. It's clean, efficient, and remarkably easy to navigate.\"";
+        response = "Jacquie said: \"This app is amazing. With as many times as we have moved, the MediWallet platform and SparkStorm AI would have been so, so important for us. It's clean, efficient, and remarkably easy to navigate.\"";
       }
-      else if (lowerCaseMessage.includes('michael') || lowerCaseMessage.includes('rodriguez') || lowerCaseMessage.includes('doctor') || lowerCaseMessage.includes('mediwallet')) {
-        response = "Dr. Michael Rodriguez, Medical Director at Innovate Health, shared: \"The MediWallet app has made managing my patients' medical records incredibly efficient. The secure access features give both my team and our patients peace of mind.\"";
+      else if (lowerCaseMessage.includes('michael') || lowerCaseMessage.includes('rodriguez') || lowerCaseMessage.includes('doctor')) {
+        response = "Dr. Michael Rodriguez shared: \"The MediWallet app has made managing my patients' medical records incredibly efficient. The secure access features give both my team and our patients peace of mind.\"";
       }
       else if (lowerCaseMessage.includes('alexandra') || lowerCaseMessage.includes('chen') || lowerCaseMessage.includes('chatbot')) {
-        response = "Alexandra Chen, CTO of RetailTech Inc., reported: \"SparkStorm AI's chatbot solution revolutionized our customer service operations. We've seen a 40% reduction in response times and significantly improved customer satisfaction.\"";
+        response = "Alexandra Chen reported: \"SparkStorm AI's chatbot solution revolutionized our customer service operations. We've seen a 40% reduction in response times and significantly improved customer satisfaction.\"";
       }
       else if (lowerCaseMessage.includes('sarah') || lowerCaseMessage.includes('johnson')) {
-        response = "Sarah Johnson, Operations Manager at Global Solutions, stated: \"Working with SparkStorm AI has been a game-changer for our business. Their AI solutions streamlined our processes and helped us achieve remarkable growth in just six months.\"";
+        response = "Sarah Johnson stated: \"Working with SparkStorm AI has been a game-changer for our business. Their AI solutions streamlined our processes and helped us achieve remarkable growth in just six months.\"";
       }
       else {
-        response = "Our clients have shared amazing feedback about our services. For example, Sandra Gifford mentioned how MediWallet would help her manage her mother's medical information, while Jacquie highlighted how useful it would have been during her family's frequent moves. Dr. Rodriguez praised the efficiency of our platform, and Alexandra Chen saw a 40% reduction in response times with our chatbot solution.";
+        response = "Our clients have shared amazing feedback about our services. Sandra Gifford mentioned how MediWallet would help her manage her mother's medical information, while Jacquie highlighted how clean, efficient, and easy to navigate the platform is. Dr. Rodriguez praised the efficiency of our platform, and Alexandra Chen saw a 40% reduction in response times with our chatbot solution.";
       }
     }
     
+    // MediWallet specific information
+    else if (lowerCaseMessage.includes('mediwallet') || lowerCaseMessage.includes('medi wallet') || lowerCaseMessage.includes('health records') || lowerCaseMessage.includes('medical records')) {
+      response = "MediWallet is our secure personal health records platform that allows patients and healthcare providers to safely manage medical records. It features encrypted storage, easy access controls, and intuitive interfaces to simplify healthcare record management. It's particularly helpful for people like Sandra who need to track family members' medical information, and for families like Jacquie's who move frequently.";
+    }
     // Company information
     else if (lowerCaseMessage.includes('about') || lowerCaseMessage.includes('what is sparkstorm')) {
       response = "SparkStorm AI is a leading provider of artificial intelligence solutions. We specialize in creating custom AI tools and services that help businesses automate processes, gain insights from their data, and enhance customer experiences.";
@@ -155,15 +159,11 @@ const AIAssistant = () => {
     }
     // Team information
     else if (lowerCaseMessage.includes('team') || lowerCaseMessage.includes('who works')) {
-      response = "Our team consists of experts in AI, data science, and software engineering. Our key members include Noopur Gupta (Founder & CEO), Muzammil (COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer).";
+      response = "Our team consists of experts in AI, data science, and software engineering. Our key members include Noopur Gupta (Founder & CEO), Muzammil (Fractional COO), Rachel Pulice (UX Designer), Aarnav Chandraganti (AI Developer), and Shloak Gupta (AI Developer).";
     }
     // Booking information
     else if (lowerCaseMessage.includes('book') || lowerCaseMessage.includes('demo') || lowerCaseMessage.includes('appointment')) {
       response = "You can book a demo or consultation by clicking the 'Book Demo' button in the top right corner of our website, or by visiting calendly.com/noopurgupta01/1x1.";
-    }
-    // MediWallet specific information
-    else if (lowerCaseMessage.includes('mediwallet') || lowerCaseMessage.includes('medi wallet') || lowerCaseMessage.includes('health vault') || lowerCaseMessage.includes('medical records')) {
-      response = "MediWallet is our secure personal health records platform that allows patients and healthcare providers to safely manage medical records. It features encrypted storage, easy access controls, and intuitive interfaces to simplify healthcare record management. It's particularly helpful for people like Sandra who need to keep track of family members' medical information, and for families like Jacquie's who move frequently.";
     }
     // Affiliations information
     else if (lowerCaseMessage.includes('affiliate') || lowerCaseMessage.includes('affiliation')) {
@@ -230,7 +230,7 @@ const AIAssistant = () => {
           {/* Header */}
           <div className="p-4 bg-blue-600 text-white flex justify-between items-center">
             <div className="flex items-center gap-2">
-              <Avatar className="h-8 w-8 border-2 border-white bg-blue-600">
+              <Avatar className="h-8 w-8 border-2 border-white bg-white">
                 <AvatarImage src="/lovable-uploads/e82a7fa3-a351-4944-9c59-f357e283e95d.png" alt="SparkStorm AI" className="p-1" />
                 <AvatarFallback>AI</AvatarFallback>
               </Avatar>
