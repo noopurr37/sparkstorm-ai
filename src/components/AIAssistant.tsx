@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect } from 'react';
 import { X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -141,9 +142,30 @@ const AIAssistant = () => {
     else if (lowerCaseMessage.includes('thank') || lowerCaseMessage.includes('thanks')) {
       response = "You're welcome! If you have any more questions, feel free to ask.";
     }
+    // AI technology questions
+    else if (lowerCaseMessage.includes('ai') || lowerCaseMessage.includes('artificial intelligence')) {
+      response = "Artificial Intelligence is our core expertise at SparkStorm. We develop custom AI solutions to help businesses automate tasks, gain insights, and create more personalized customer experiences.";
+    }
+    else if (lowerCaseMessage.includes('machine learning') || lowerCaseMessage.includes('ml')) {
+      response = "Our machine learning solutions at SparkStorm AI help businesses identify patterns in data, make predictions, and optimize processes. We develop custom ML models tailored to your specific needs.";
+    }
+    else if (lowerCaseMessage.includes('nlp') || lowerCaseMessage.includes('natural language')) {
+      response = "Our Natural Language Processing (NLP) solutions help businesses understand and generate human language, enabling applications like chatbots, sentiment analysis, and automated content creation.";
+    }
+    else if (lowerCaseMessage.includes('computer vision') || lowerCaseMessage.includes('image recognition')) {
+      response = "SparkStorm's computer vision solutions enable machines to interpret and understand visual information from the world, powering applications like object detection, facial recognition, and automated inspection systems.";
+    }
+    // Product questions
+    else if (lowerCaseMessage.includes('product') || lowerCaseMessage.includes('solution')) {
+      response = "SparkStorm offers various AI products and solutions including custom AI development, AI integration with existing systems, predictive analytics, intelligent automation, and AI consulting services.";
+    }
+    // Case studies
+    else if (lowerCaseMessage.includes('case') || lowerCaseMessage.includes('success') || lowerCaseMessage.includes('example')) {
+      response = "We've helped businesses across various industries implement AI solutions. For example, we developed a predictive maintenance system for a manufacturing company that reduced downtime by 35%, and a customer service AI for a retail business that improved response times by 60%.";
+    }
     // Generic fallback
     else {
-      response = "Thank you for your message! I'm still learning and may not have all the answers. For specific information about our services or to discuss how we can help your business, please contact our team through the contact form or email info@sparkstorm.ai.";
+      response = "Thank you for your question! As SparkStorm's AI assistant, I can help with information about our company, services, team, and AI technology. If I couldn't answer your specific question, please contact our team through the contact form or email info@sparkstorm.ai for more specialized assistance.";
     }
 
     // Add bot response
