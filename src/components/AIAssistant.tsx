@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { X, Send, MessageSquare, ExternalLink, ChevronsUp, ChevronsDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -62,13 +61,6 @@ const AIAssistant = () => {
   const toggleChat = () => {
     setIsOpen(!isOpen);
     setIsMinimized(false);
-    if (!isOpen) {
-      toast({
-        title: "SparkStorm AI Assistant",
-        description: "How can I help you today?",
-        duration: 3000,
-      });
-    }
   };
   
   const toggleMinimize = () => {
