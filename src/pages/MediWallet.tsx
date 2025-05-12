@@ -82,7 +82,7 @@ const MediWallet = () => {
           </p>
         </div>
 
-        {/* Hero Section with Graphic */}
+        {/* Hero Section with Graphic - This is the ONLY Book Demo button that should remain */}
         <div className="mb-16 flex flex-col items-center rounded-2xl bg-gradient-primary p-8 text-white shadow-lg md:flex-row">
           <div className="md:w-1/2">
             <h2 className="mb-4 text-3xl font-bold">Secure Medical Data at Your Fingertips</h2>
