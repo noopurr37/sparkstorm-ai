@@ -39,7 +39,12 @@ const BookDemo = () => {
           description: "Please sign in to book a demo",
           variant: "destructive",
         });
-        navigate("/auth");
+        navigate("/auth", { 
+          state: { 
+            redirectTo: "/book-demo",
+            message: "Please sign in or create an account to book a demo" 
+          } 
+        });
         return;
       }
       

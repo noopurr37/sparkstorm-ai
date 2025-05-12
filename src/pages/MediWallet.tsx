@@ -133,6 +133,38 @@ const MediWallet = () => {
           </div>
         </section>
 
+        {/* New Mobile Features Section */}
+        <section className="mb-16">
+          <h2 className="mb-6 text-center text-3xl font-bold">Mobile Features</h2>
+          
+          <div className="grid gap-8 md:grid-cols-4">
+            <MediFeature
+              title="Mobile App"
+              description="User-friendly mobile application accessible for everyone, ensuring healthcare data is always at your fingertips."
+              icon="📱"
+              iconBg="bg-blue-100"
+            />
+            <MediFeature
+              title="Local LLM Integration"
+              description="On-device AI processing for remote areas with limited connectivity, ensuring healthcare access anywhere."
+              icon="🧠"
+              iconBg="bg-purple-100"
+            />
+            <MediFeature
+              title="Family Tree & Provider Access"
+              description="Share medical records securely with family members and healthcare providers via QR codes."
+              icon="👪"
+              iconBg="bg-green-100"
+            />
+            <MediFeature
+              title="Multi-Language Support"
+              description="Voice and text support in multiple languages, breaking down communication barriers in healthcare."
+              icon="🌐"
+              iconBg="bg-orange-100"
+            />
+          </div>
+        </section>
+
         {/* Technology Section */}
         <section className="mb-16 rounded-xl bg-gray-50 p-8">
           <h2 className="mb-6 text-center text-3xl font-bold">Powered by Advanced Technology</h2>
@@ -195,6 +227,48 @@ const MediWallet = () => {
                   Low-income travelers and underserved communities face disproportionate risks 
                   when data is unavailable at the point of care.
                 </p>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+
+        {/* Healthcare Impact Section */}
+        <section className="mb-16 rounded-xl bg-blue-50 p-8">
+          <h2 className="mb-6 text-center text-3xl font-bold">Impact on Healthcare</h2>
+          
+          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-5">
+            <Card>
+              <CardContent className="flex flex-col h-full items-center justify-center p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">Global Access</h3>
+                <p>Centralizing health data for anytime, anywhere access.</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="flex flex-col h-full items-center justify-center p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">Lifetime Records</h3>
+                <p>Decades of health data, securely stored and always available.</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="flex flex-col h-full items-center justify-center p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">Patient Empowerment</h3>
+                <p>Instant insights and actions from your phone.</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="flex flex-col h-full items-center justify-center p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">Seamless Care</h3>
+                <p>Portable records for consistent healthcare across providers.</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="flex flex-col h-full items-center justify-center p-6 text-center">
+                <h3 className="text-xl font-semibold mb-2">Privacy First</h3>
+                <p>Anonymized data with UUID security and patient-controlled access.</p>
               </CardContent>
             </Card>
           </div>
@@ -275,6 +349,20 @@ const MediWallet = () => {
                 </p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Memorial Section */}
+        <section className="mb-16 p-8 bg-gray-100 rounded-xl border border-gray-200 text-center">
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold italic mb-6">
+              "In loving memory of My Father whose heart was my home"
+            </h3>
+            <p className="text-lg text-gray-700">
+              This app is dedicated to my father, whom I lost this year. 
+              His passing was deeply impacted by the lack of access to comprehensive 
+              healthcare data and the challenge of finding a treatment that his body could tolerate.
+            </p>
           </div>
         </section>
 

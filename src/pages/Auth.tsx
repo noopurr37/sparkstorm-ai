@@ -5,10 +5,16 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Helmet } from "react-helmet-async";
-import { Mail, Lock, User, ArrowRight, Github, Loader2 } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Github, Loader2, AlertCircle } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+interface LocationState {
+  redirectTo?: string;
+  message?: string;
+}
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -18,12 +24,18 @@ const Auth = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const [session, setSession] = useState(null);
+  const location = useLocation();
+
+  // Access the state if it exists
+  const locationState = location.state as LocationState | null;
+  const redirectPath = locationState?.redirectTo || "/mediwallet";
+  const authMessage = locationState?.message;
 
   useEffect(() => {
     // Check if user is already logged in
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (session) {
-        navigate("/mediwallet");
+        navigate(redirectPath);
       }
     });
 
@@ -31,13 +43,13 @@ const Auth = () => {
       (_event, session) => {
         setSession(session);
         if (session) {
-          navigate("/mediwallet");
+          navigate(redirectPath);
         }
       }
     );
 
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, redirectPath]);
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -132,6 +144,16 @@ const Auth = () => {
             Secure medical data at your fingertips
           </p>
         </div>
+
+        {authMessage && (
+          <Alert className="mb-6">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Authentication Required</AlertTitle>
+            <AlertDescription>
+              {authMessage}
+            </AlertDescription>
+          </Alert>
+        )}
 
         <Card>
           <Tabs defaultValue="signin" className="w-full">
