@@ -90,13 +90,6 @@ const MediWallet = () => {
               Our platform aggregates, organizes, and interprets medical data across borders, 
               giving travelers, caregivers, and clinicians instant clarity over complete medical histories.
             </p>
-            <Button 
-              onClick={handleBookDemo} 
-              size="lg" 
-              className="bg-white text-primary hover:bg-gray-100"
-            >
-              Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
           </div>
           <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
             <img 
@@ -105,6 +98,17 @@ const MediWallet = () => {
               className="max-h-64 w-auto rounded-lg shadow-xl" 
             />
           </div>
+        </div>
+        
+        {/* Book Demo Button positioned separately so it doesn't block other UI elements */}
+        <div className="flex justify-center mb-12">
+          <Button 
+            onClick={handleBookDemo} 
+            size="lg" 
+            className="bg-primary text-white hover:bg-primary/90"
+          >
+            Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
         </div>
 
         {/* Features Section */}
@@ -366,7 +370,7 @@ const MediWallet = () => {
           </div>
         </section>
 
-        {/* Call to Action */}
+        {/* Call to Action - Moved to bottom so it doesn't block UI elements */}
         <section className="rounded-xl bg-gradient-primary p-8 text-center text-white">
           <h2 className="mb-4 text-3xl font-bold">Transform Your Medical Data Experience</h2>
           <p className="mb-6 text-lg">

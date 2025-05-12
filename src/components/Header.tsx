@@ -231,17 +231,7 @@ const Header = () => {
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={(e) => {
                     closeMenu();
-                    if (!user) {
-                      e.preventDefault();
-                      navigate("/auth", { 
-                        state: { 
-                          redirectTo: "/mediwallet",
-                          message: "Please sign in or create an account to access MediWallet" 
-                        } 
-                      });
-                    } else {
-                      navigate("/mediwallet");
-                    }
+                    handleMediWalletClick(e);
                   }}
                 >
                   MediWallet
