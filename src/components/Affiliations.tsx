@@ -21,7 +21,7 @@ const Affiliations = () => {
   }, [inView]);
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-16 bg-gray-50">
       <div className="section-container" ref={ref}>
         <div className="text-center mb-8">
           <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">

@@ -1,10 +1,10 @@
+
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Team from "@/components/Team";
 import Services from "@/components/Services";
 import Affiliations from "@/components/Affiliations";
-import Partners from "@/components/Partners";
 import Testimonials from "@/components/Testimonials";
 import Newsletter from "@/components/Newsletter";
 import Contact from "@/components/Contact";
@@ -35,10 +35,9 @@ const Index = () => {
         <div className="bg-gradient-to-b from-white to-gray-50">
           <Services />
           <Team />
-        </div>
-        <Partners />
-        <div className="bg-gradient-to-b from-white to-gray-50 py-4">
           <Testimonials />
+        </div>
+        <div className="bg-gradient-to-b from-white to-gray-50 py-4">
           <Affiliations />
         </div>
         <Newsletter />
