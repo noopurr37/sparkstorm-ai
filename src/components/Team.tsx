@@ -136,7 +136,7 @@ const Team = () => {
     {
       name: "Aarnav Chandraganti",
       role: "AI Developer",
-      image: "/lovable-uploads/e7c668aa-10d3-4688-93eb-f9c2c4b685f9.png", // Updated to the new image
+      image: "/lovable-uploads/e7c668aa-10d3-4688-93eb-f9c2c4b685f9.png",
       delay: 400,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
       instagramUrl: "https://www.instagram.com/aarnav_c_",
@@ -159,7 +159,7 @@ const Team = () => {
       role: "Advisory Board Member",
       image: "/lovable-uploads/16c72fb9-4b68-4d2c-9837-ed5d77bdf7c7.png",
       delay: 600,
-      linkedinUrl: "https://www.linkedin.com/",
+      linkedinUrl: "https://www.linkedin.com/in/sivapunniyamdakshinamurthy",
       email: "siva@example.com",
     },
     {
