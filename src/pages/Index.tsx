@@ -23,10 +23,10 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Helmet>
         <title>SparkStorm AI | Intelligence as a Service</title>
-        <meta name="description" content="SparkStorm AI provides cutting-edge AI solutions led by Noopur Gupta, CEO and Founder" />
-        <meta property="og:title" content="Schedule Time with SparkStorm AI | Intelligence as a Service" />
-        <meta property="og:description" content="Led by Noopur Gupta, CEO and Founder, with Muzammil Sheikh, COO, Rachel Pulice, UX Designer, Aarnav Chandraganti and Shloak, AI Developers" />
-        <meta name="keywords" content="SparkStorm AI, Noopur Gupta, AI solutions, Intelligence as a Service, Muzammil Sheikh, Rachel Pulice, Aarnav Chandraganti, Shloak" />
+        <meta name="description" content="Intelligence as a Service - SparkStorm AI provides cutting-edge AI solutions led by Noopur Gupta, CEO and Founder" />
+        <meta property="og:title" content="SparkStorm AI | Intelligence as a Service" />
+        <meta property="og:description" content="Intelligence as a Service - We ignite ideas into intelligent products with customized AI solutions for your business needs." />
+        <meta name="keywords" content="SparkStorm AI, Intelligence as a Service, Noopur Gupta, AI solutions" />
       </Helmet>
       
       <Header />
