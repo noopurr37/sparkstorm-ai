@@ -366,21 +366,7 @@ const MediWallet = () => {
           </div>
         </section>
 
-        {/* Call to Action - Moved to bottom so it doesn't block UI elements */}
-        <section className="rounded-xl bg-gradient-primary p-8 text-center text-white">
-          <h2 className="mb-4 text-3xl font-bold">Transform Your Medical Data Experience</h2>
-          <p className="mb-6 text-lg">
-            Ready to get started with MediWallet? Book a demo today to see how it can work for you.
-          </p>
-          <Button 
-            onClick={handleBookDemo} 
-            size="lg" 
-            variant="outline"
-            className="bg-white text-primary hover:bg-gray-100"
-          >
-            Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </section>
+        {/* Memorial Section is kept, Call to Action is removed */}
       </main>
     </div>
   );
