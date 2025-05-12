@@ -47,7 +47,7 @@ const Index = () => {
         <Newsletter />
         <Contact />
       </main>
-      <footer className="bg-gray-900 text-white py-8 text-center">
+      <footer className="bg-navy-blue text-white py-8 text-center">
         <div className="container mx-auto px-4">
           <div className="mb-4">
             <img 
