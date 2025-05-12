@@ -35,6 +35,7 @@ const Newsletter = () => {
         title: "Error",
         description: "Please enter your email address.",
         variant: "destructive",
+        duration: 2000,
       });
       return;
     }
@@ -44,6 +45,7 @@ const Newsletter = () => {
         title: "Error",
         description: "Please enter a valid email address.",
         variant: "destructive",
+        duration: 2000,
       });
       return;
     }
@@ -66,8 +68,8 @@ const Newsletter = () => {
       // Display success toast
       toast({
         title: "Thank you for subscribing to our SparkStorm AI newsletter!",
-        description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts. Check your inbox for a confirmation email.",
-        duration: 6000,
+        description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
+        duration: 2000, // Changed to 2 seconds
       });
       
       console.log("Newsletter subscription successful:", email);
@@ -80,6 +82,7 @@ const Newsletter = () => {
         title: "Subscription Error",
         description: "There was an issue with your subscription. Please try again later.",
         variant: "destructive",
+        duration: 2000, // Changed to 2 seconds
       });
     } finally {
       setIsSubmitting(false);

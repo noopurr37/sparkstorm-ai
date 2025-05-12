@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 
 interface TeamMemberProps {
   name: string;
@@ -49,7 +48,7 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
               <img
                 src={image}
                 alt={name}
-                className="w-full h-full object-contain"
+                className="w-full h-full object-cover"
                 loading="lazy"
               />
             </div>
@@ -93,7 +92,6 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
   );
 };
 
-// Use the same component for Advisory members to maintain consistent sizing and styling
 const Team = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -181,25 +179,7 @@ const Team = () => {
   return (
     <section id="team" className="py-8 bg-white">
       <div className="section-container" ref={ref}>
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
-            <p className="text-xs sm:text-sm font-medium text-blue-600">Meet Our Team</p>
-          </div>
-          
-          <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}>
-            The Minds Behind SparkStorm AI
-          </h2>
-          
-          <p className={`text-lg text-gray-600 max-w-2xl mx-auto transition-all duration-700 delay-100 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}>
-            Our diverse team of experts is passionate about creating AI solutions that make a difference in people's lives.
-          </p>
-        </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {teamMembers.map((member, index) => (
             <TeamMember
               key={index}
@@ -214,26 +194,21 @@ const Team = () => {
           ))}
         </div>
 
-        {/* Advisory Board Section - Repositioned to be centered */}
-        <div className="text-center max-w-3xl mx-auto mb-6">
-          <div className="inline-block mb-3 px-4 py-1.5 bg-blue-50 rounded-full">
-            <p className="text-xs sm:text-sm font-medium text-blue-600">Advisory Board</p>
+        {/* Advisory Board Section - Centered with same card size */}
+        <div className="flex justify-center mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-md mx-auto">
+            {advisoryBoard.map((member, index) => (
+              <TeamMember
+                key={`advisor-${index}`}
+                name={member.name}
+                role={member.role}
+                image={member.image}
+                delay={member.delay}
+                linkedinUrl={member.linkedinUrl}
+                email={member.email}
+              />
+            ))}
           </div>
-        </div>
-        
-        {/* Advisory members in centered layout using the same TeamMember component for consistent sizing */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-lg mx-auto">
-          {advisoryBoard.map((member, index) => (
-            <TeamMember
-              key={`advisor-${index}`}
-              name={member.name}
-              role={member.role}
-              image={member.image}
-              delay={member.delay}
-              linkedinUrl={member.linkedinUrl}
-              email={member.email}
-            />
-          ))}
         </div>
       </div>
     </section>

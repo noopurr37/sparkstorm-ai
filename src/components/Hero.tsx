@@ -1,13 +1,9 @@
+
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, MessageCircle, HeartPulse, Calendar } from "lucide-react";
-import CalendlyEmbed from "./CalendlyEmbed";
+import { MessageCircle, HeartPulse } from "lucide-react";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
-  
-  // Calendly URL
-  const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -40,21 +36,13 @@ const Hero = () => {
             <p className="text-lg md:text-xl text-[#2f4ba6] mb-6 max-w-2xl text-right">
               We ignite ideas into intelligent products — from custom chatbots to smart mobile apps
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-end">
-              <CalendlyEmbed url={calendlyUrl}>
-                <Button className="btn-primary inline-flex items-center gap-2">
-                  <Calendar size={16} /> Book Demo <ArrowRight size={16} />
-                </Button>
-              </CalendlyEmbed>
-            </div>
           </div>
           
           {/* Hero Visual Content - Now with feature cards only */}
           <div className={`w-full lg:w-1/2 mt-10 lg:mt-0 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <div className="relative h-[260px] md:h-[360px]">
               {/* Chatbot Card */}
-              <div className="glass-card absolute top-0 left-0 p-6 w-[200px] md:w-[260px] animate-float">
+              <div className="glass-card absolute top-0 left-0 p-6 w-[240px] md:w-[300px] animate-float">
                 <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
                   <MessageCircle className="w-6 h-6 text-blue-600" />
                 </div>
@@ -63,7 +51,7 @@ const Hero = () => {
               </div>
               
               {/* MediWallet Card */}
-              <div className="glass-card absolute bottom-0 right-0 p-6 w-[200px] md:w-[260px] animate-float" style={{ animationDelay: "1.5s" }}>
+              <div className="glass-card absolute bottom-0 right-0 p-6 w-[240px] md:w-[300px] animate-float" style={{ animationDelay: "1.5s" }}>
                 <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
                   <HeartPulse className="w-6 h-6 text-purple-600" />
                 </div>

@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -19,18 +20,7 @@ const Index = () => {
   // Calendly URL (in case it's needed for other buttons later)
   const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
   
-  useEffect(() => {
-    // Only show subscription confirmation toast if the user has previously subscribed
-    const subscribedEmail = localStorage.getItem("sparkstorm_newsletter_email");
-    if (subscribedEmail) {
-      // Show thank you message for previous subscribers
-      toast({
-        title: "Thank you for subscribing to our SparkStorm AI newsletter!",
-        description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
-        duration: 5000,
-      });
-    }
-  }, [toast]);
+  // Removed the welcome toast notification
 
   return (
     <div className="min-h-screen bg-background">
