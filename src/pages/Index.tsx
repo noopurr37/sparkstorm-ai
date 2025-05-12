@@ -11,6 +11,7 @@ import Newsletter from "@/components/Newsletter";
 import Contact from "@/components/Contact";
 import AIAssistant from "@/components/AIAssistant";
 import { useToast } from "@/hooks/use-toast";
+import { Helmet } from "react-helmet-async";
 
 const Index = () => {
   const { toast } = useToast();
@@ -40,14 +41,26 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>SparkStorm AI | Intelligence as a Service</title>
+        <meta name="description" content="SparkStorm AI provides cutting-edge AI solutions led by Noopur Gupta, CEO and Founder" />
+        <meta property="og:title" content="Schedule Time with SparkStorm AI | Intelligence as a Service" />
+        <meta property="og:description" content="Led by Noopur Gupta, CEO and Founder, with Muzammil Sheikh, COO, Rachel Pulice, UX Designer, Aarnav Chandraganti and Shloak, AI Developers" />
+        <meta name="keywords" content="SparkStorm AI, Noopur Gupta, AI solutions, Intelligence as a Service, Muzammil Sheikh, Rachel Pulice, Aarnav Chandraganti, Shloak" />
+      </Helmet>
+      
       <Header />
       <main className="space-y-0">
         <Hero />
-        <Services />
-        <Team />
+        <div className="bg-gradient-to-b from-white to-gray-50">
+          <Services />
+          <Team />
+        </div>
         <Partners />
-        <Testimonials />
-        <Affiliations />
+        <div className="bg-gradient-to-b from-white to-gray-50 py-4">
+          <Testimonials />
+          <Affiliations />
+        </div>
         <Newsletter />
         <Contact />
       </main>

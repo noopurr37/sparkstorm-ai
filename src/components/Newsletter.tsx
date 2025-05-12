@@ -4,7 +4,8 @@ import { useInView } from "react-intersection-observer";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Newsletter = () => {
   const [ref, inView] = useInView({
@@ -14,6 +15,7 @@ const Newsletter = () => {
   
   const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   
   useEffect(() => {
@@ -26,7 +28,7 @@ const Newsletter = () => {
     }
   }, [inView]);
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!email) {
@@ -47,25 +49,53 @@ const Newsletter = () => {
       return;
     }
     
-    // Store email in localStorage for demonstration
-    localStorage.setItem("sparkstorm_newsletter_email", email);
+    setIsSubmitting(true);
     
-    // Display success toast with more detailed information
-    toast({
-      title: "Thank you for subscribing to our SparkStorm AI newsletter!",
-      description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts. Check your inbox for a confirmation email.",
-      duration: 6000,
-    });
-    
-    // In a real application, you would send this to your backend
-    console.log("Newsletter subscription:", email);
-    
-    // Simulate sending a confirmation email (in a real app, this would be done by the backend)
-    setTimeout(() => {
-      console.log(`Confirmation email sent to ${email}`);
-    }, 1000);
-    
-    setEmail("");
+    try {
+      // Store email in localStorage
+      localStorage.setItem("sparkstorm_newsletter_email", email);
+      
+      // Store in database (if applicable)
+      const { error: dbError } = await supabase
+        .from('newsletter_subscribers')
+        .insert([{ email }])
+        .select()
+        .maybeSingle();
+        
+      if (dbError && !dbError.message.includes('duplicate')) {
+        throw dbError;
+      }
+      
+      // Call the newsletter confirmation function
+      const response = await supabase.functions.invoke('newsletter-confirmation', {
+        body: { email }
+      });
+      
+      if (response.error) {
+        throw new Error(response.error.message);
+      }
+      
+      // Display success toast
+      toast({
+        title: "Thank you for subscribing to our SparkStorm AI newsletter!",
+        description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts. Check your inbox for a confirmation email.",
+        duration: 6000,
+      });
+      
+      console.log("Newsletter subscription successful:", email);
+      
+      setEmail("");
+    } catch (error) {
+      console.error("Newsletter subscription error:", error);
+      
+      toast({
+        title: "Subscription Error",
+        description: "There was an issue with your subscription. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   
   const isValidEmail = (email: string) => {
@@ -106,12 +136,14 @@ const Newsletter = () => {
               className="h-12 rounded-full bg-white/10 backdrop-blur-md border-white/20 text-white placeholder:text-white/70 flex-grow"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              disabled={isSubmitting}
             />
             <Button 
               type="submit" 
               className="h-12 px-8 rounded-full bg-white text-blue-600 hover:bg-white/90 hover:text-blue-700 transition-all duration-300"
+              disabled={isSubmitting}
             >
-              Subscribe <Send className="ml-2 h-4 w-4" />
+              {isSubmitting ? "Subscribing..." : "Subscribe"} {!isSubmitting && <Send className="ml-2 h-4 w-4" />}
             </Button>
           </form>
           
