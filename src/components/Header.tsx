@@ -48,6 +48,20 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const handleMediWalletClick = (e) => {
+    e.preventDefault();
+    if (!user) {
+      navigate("/auth", { 
+        state: { 
+          redirectTo: "/mediwallet",
+          message: "Please sign in or create an account to access MediWallet" 
+        }
+      });
+    } else {
+      navigate("/mediwallet");
+    }
+  };
+
   const signOut = async () => {
     await supabase.auth.signOut();
     toast({
@@ -144,17 +158,7 @@ const Header = () => {
                     ? 'text-primary' 
                     : 'text-gray-700 hover:text-primary'
                 }`}
-                onClick={(e) => {
-                  if (!user) {
-                    e.preventDefault();
-                    navigate("/auth", { 
-                      state: { 
-                        redirectTo: "/mediwallet",
-                        message: "Please sign in or create an account to access MediWallet" 
-                      } 
-                    });
-                  }
-                }}
+                onClick={handleMediWalletClick}
               >
                 MediWallet
               </a>
@@ -235,6 +239,8 @@ const Header = () => {
                           message: "Please sign in or create an account to access MediWallet" 
                         } 
                       });
+                    } else {
+                      navigate("/mediwallet");
                     }
                   }}
                 >
