@@ -55,18 +55,8 @@ const Newsletter = () => {
       // Store email in localStorage
       localStorage.setItem("sparkstorm_newsletter_email", email);
       
-      // Store in database (if applicable)
-      const { error: dbError } = await supabase
-        .from('newsletter_subscribers')
-        .insert([{ email }])
-        .select()
-        .maybeSingle();
-        
-      if (dbError && !dbError.message.includes('duplicate')) {
-        throw dbError;
-      }
-      
-      // Call the newsletter confirmation function
+      // Instead of trying to directly insert to a table that doesn't exist in our types,
+      // we'll call the newsletter-confirmation function directly
       const response = await supabase.functions.invoke('newsletter-confirmation', {
         body: { email }
       });
