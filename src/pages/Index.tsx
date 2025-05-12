@@ -20,7 +20,7 @@ const Index = () => {
   // Calendly URL (in case it's needed for other buttons later)
   const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
   
-  // Removed the welcome toast notification
+  // Welcome toast removed as requested
 
   return (
     <div className="min-h-screen bg-background">

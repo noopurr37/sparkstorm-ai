@@ -48,7 +48,7 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
               <img
                 src={image}
                 alt={name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 loading="lazy"
               />
             </div>
@@ -179,6 +179,18 @@ const Team = () => {
   return (
     <section id="team" className="py-8 bg-white">
       <div className="section-container" ref={ref}>
+        <div 
+          className={`mb-12 text-center transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <h2 className="section-title mb-4">Our Team</h2>
+          <p className="section-description max-w-3xl mx-auto">
+            We're a diverse team of experienced professionals passionate about creating 
+            intelligent AI solutions that transform businesses.
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
           {teamMembers.map((member, index) => (
             <TeamMember
@@ -194,21 +206,32 @@ const Team = () => {
           ))}
         </div>
 
-        {/* Advisory Board Section - Centered with same card size */}
-        <div className="flex justify-center mt-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-md mx-auto">
-            {advisoryBoard.map((member, index) => (
-              <TeamMember
-                key={`advisor-${index}`}
-                name={member.name}
-                role={member.role}
-                image={member.image}
-                delay={member.delay}
-                linkedinUrl={member.linkedinUrl}
-                email={member.email}
-              />
-            ))}
-          </div>
+        {/* Advisory Board Section with heading and description */}
+        <div 
+          className={`mt-20 mb-12 text-center transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+        >
+          <h2 className="section-title mb-4">Advisory Board</h2>
+          <p className="section-description max-w-3xl mx-auto">
+            Our advisory board brings decades of industry experience and expertise to guide our strategic direction.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+          <div className="lg:col-span-1"></div>
+          {advisoryBoard.map((member, index) => (
+            <TeamMember
+              key={`advisor-${index}`}
+              name={member.name}
+              role={member.role}
+              image={member.image}
+              delay={member.delay}
+              linkedinUrl={member.linkedinUrl}
+              email={member.email}
+            />
+          ))}
+          <div className="lg:col-span-1"></div>
         </div>
       </div>
     </section>
