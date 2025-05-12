@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
@@ -21,14 +20,7 @@ const Index = () => {
   const calendlyUrl = "https://calendly.com/noopurgupta01/1x1";
   
   useEffect(() => {
-    // Welcome toast when the page loads
-    toast({
-      title: "Welcome to SparkStorm AI",
-      description: "Intelligence as a Service",
-      duration: 5000,
-    });
-
-    // Check if user has subscribed to newsletter previously
+    // Only show subscription confirmation toast if the user has previously subscribed
     const subscribedEmail = localStorage.getItem("sparkstorm_newsletter_email");
     if (subscribedEmail) {
       // Show thank you message for previous subscribers

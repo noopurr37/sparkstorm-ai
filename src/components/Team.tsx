@@ -45,13 +45,14 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
       <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 h-full">
         <div className="overflow-hidden bg-white">
           <AspectRatio ratio={1/1}>
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-              loading="lazy"
-              style={{ backgroundColor: "#FFFFFF" }}
-            />
+            <div className="w-full h-full bg-white">
+              <img
+                src={image}
+                alt={name}
+                className="w-full h-full object-contain"
+                loading="lazy"
+              />
+            </div>
           </AspectRatio>
         </div>
         <div className="p-6">
@@ -92,84 +93,7 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
   );
 };
 
-const AdvisoryMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email }: TeamMemberProps) => {
-  // This component is similar to TeamMember but with a more compact design for advisory board
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-  
-  const [isVisible, setIsVisible] = useState(false);
-  
-  useEffect(() => {
-    if (inView) {
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, delay);
-      
-      return () => clearTimeout(timer);
-    }
-  }, [inView, delay]);
-  
-  return (
-    <div 
-      ref={ref}
-      className={`card-hover transition-all duration-700 ease-out ${
-        isVisible 
-          ? "opacity-100 translate-y-0" 
-          : "opacity-0 translate-y-12"
-      }`}
-    >
-      <div className="bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100 h-full">
-        <div className="overflow-hidden bg-white">
-          <AspectRatio ratio={1/1}>
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-              loading="lazy"
-              style={{ backgroundColor: "#FFFFFF" }}
-            />
-          </AspectRatio>
-        </div>
-        <div className="p-4">
-          <h3 className="text-lg font-semibold mb-1">{name}</h3>
-          <p className="text-sm text-gray-500 mb-2">{role}</p>
-          <div className="flex space-x-3">
-            <a
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-blue-600 transition-colors"
-              aria-label={`${name}'s LinkedIn`}
-            >
-              <Linkedin size={16} />
-            </a>
-            {instagramUrl && (
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-pink-500 transition-colors"
-                aria-label={`${name}'s Instagram`}
-              >
-                <Instagram size={16} />
-              </a>
-            )}
-            <a
-              href={`mailto:${email}`}
-              className="text-gray-400 hover:text-blue-500 transition-colors"
-              aria-label={`Email ${name}`}
-            >
-              <Mail size={16} />
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
+// Use the same component for Advisory members to maintain consistent sizing and styling
 const Team = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -297,10 +221,10 @@ const Team = () => {
           </div>
         </div>
         
-        {/* Advisory members in centered layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-xl mx-auto">
+        {/* Advisory members in centered layout using the same TeamMember component for consistent sizing */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-lg mx-auto">
           {advisoryBoard.map((member, index) => (
-            <AdvisoryMember
+            <TeamMember
               key={`advisor-${index}`}
               name={member.name}
               role={member.role}
