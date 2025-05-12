@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { X, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -188,7 +187,7 @@ const AIAssistant = () => {
         aria-label="Chat with SparkStorm AI Assistant"
       >
         <img 
-          src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png" 
+          src="/lovable-uploads/2e4ba82a-5e26-4ff2-9fd1-1617f0868328.png" 
           alt="SparkStorm AI"
           className="h-6 w-6 filter brightness-0 invert" // This makes the logo white
         />
@@ -201,7 +200,7 @@ const AIAssistant = () => {
           <div className="p-4 bg-blue-600 text-white flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Avatar className="h-8 w-8 border-2 border-white">
-                <AvatarImage src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png" alt="SparkStorm AI" className="filter brightness-0 invert" />
+                <AvatarImage src="/lovable-uploads/2e4ba82a-5e26-4ff2-9fd1-1617f0868328.png" alt="SparkStorm AI" className="filter brightness-0 invert" />
                 <AvatarFallback>AI</AvatarFallback>
               </Avatar>
               <div>
