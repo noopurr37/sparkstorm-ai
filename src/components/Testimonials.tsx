@@ -8,7 +8,7 @@ interface Testimonial {
   quote: string;
   author: string;
   position: string;
-  company: string;
+  company?: string;
 }
 
 const Testimonials = () => {
@@ -51,10 +51,14 @@ const Testimonials = () => {
       company: "Global Solutions"
     },
     {
-      quote: "SparkStorm's end-to-end approach impressed me. Their custom chatbot handles questions instantly, while the MediWallet platform is clean, efficient, and remarkably easy to navigate – exactly the seamless experience patients need.",
-      author: "Nitesh",
-      position: "Web Developer",
-      company: "HealthTech Solutions"
+      quote: "SparkStorm AI and MediWallet will be so much better than the \"CD\" my mom's doctor gave to her years ago. I have to scramble on my phone looking for what supplements and herbs she takes every time I take her to her appointments.",
+      author: "Sandra Gifford",
+      position: "Marketing Strategist"
+    },
+    {
+      quote: "This app is amazing. With as many times as we have moved, the MediWallet platform and SparkStorm AI would have been so, so important for us. It's clean, efficient, and remarkably easy to navigate.",
+      author: "Jacquie",
+      position: "Parent and Frequent Relocator"
     }
   ];
   
@@ -147,7 +151,7 @@ const Testimonials = () => {
                           <div>
                             <p className="font-semibold text-gray-900">{testimonial.author}</p>
                             <p className="text-gray-500">
-                              {testimonial.position}, {testimonial.company}
+                              {testimonial.position}{testimonial.company ? `, ${testimonial.company}` : ''}
                             </p>
                           </div>
                         </div>

@@ -104,7 +104,7 @@ const AIAssistant = () => {
     }
     else if (lowerCaseMessage.includes('testimonials') || lowerCaseMessage.includes('go to testimonials')) {
       navigate('/#testimonials');
-      response = "Our clients have experienced significant improvements in their operations through our AI solutions. For example, RetailTech Inc. saw a 40% reduction in response times, and healthcare providers praise our MediWallet platform for its efficiency and security.";
+      response = "Our clients have experienced significant improvements in their operations through our AI solutions. We have testimonials from business leaders like Alexandra Chen and Sarah Johnson, healthcare professionals like Dr. Rodriguez, and everyday users like Sandra Gifford and Jacquie who have benefited from our MediWallet platform.";
     }
     else if (lowerCaseMessage.includes('newsletter') || lowerCaseMessage.includes('go to newsletter')) {
       navigate('/#newsletter');
@@ -112,9 +112,12 @@ const AIAssistant = () => {
     }
     // Specific testimonial requests
     else if (lowerCaseMessage.includes('testimonial')) {
-      if (lowerCaseMessage.includes('nitesh')) {
-        response = "Nitesh, a Web Developer at HealthTech Solutions, said: \"SparkStorm's end-to-end approach impressed me. Their custom chatbot handles questions instantly, while the MediWallet platform is clean, efficient, and remarkably easy to navigate – exactly the seamless experience patients need.\"";
-      } 
+      if (lowerCaseMessage.includes('sandra') || lowerCaseMessage.includes('gifford')) {
+        response = "Sandra Gifford, a Marketing Strategist, shared: \"SparkStorm AI and MediWallet will be so much better than the 'CD' my mom's doctor gave to her years ago. I have to scramble on my phone looking for what supplements and herbs she takes every time I take her to her appointments.\"";
+      }
+      else if (lowerCaseMessage.includes('jacquie')) {
+        response = "Jacquie, a Parent and Frequent Relocator, said: \"This app is amazing. With as many times as we have moved, the MediWallet platform and SparkStorm AI would have been so, so important for us. It's clean, efficient, and remarkably easy to navigate.\"";
+      }
       else if (lowerCaseMessage.includes('michael') || lowerCaseMessage.includes('rodriguez') || lowerCaseMessage.includes('doctor') || lowerCaseMessage.includes('mediwallet')) {
         response = "Dr. Michael Rodriguez, Medical Director at Innovate Health, shared: \"The MediWallet app has made managing my patients' medical records incredibly efficient. The secure access features give both my team and our patients peace of mind.\"";
       }
@@ -125,7 +128,7 @@ const AIAssistant = () => {
         response = "Sarah Johnson, Operations Manager at Global Solutions, stated: \"Working with SparkStorm AI has been a game-changer for our business. Their AI solutions streamlined our processes and helped us achieve remarkable growth in just six months.\"";
       }
       else {
-        response = "Our clients have shared amazing feedback about our services. For example, Nitesh praised our MediWallet platform for its clean and efficient design, while Dr. Rodriguez highlighted how it improved his patient record management. Alexandra Chen saw a 40% reduction in response times with our chatbot solution.";
+        response = "Our clients have shared amazing feedback about our services. For example, Sandra Gifford mentioned how MediWallet would help her manage her mother's medical information, while Jacquie highlighted how useful it would have been during her family's frequent moves. Dr. Rodriguez praised the efficiency of our platform, and Alexandra Chen saw a 40% reduction in response times with our chatbot solution.";
       }
     }
     
@@ -137,7 +140,7 @@ const AIAssistant = () => {
       response = "SparkStorm AI was founded by Noopur Gupta, who currently serves as our CEO. She has a strong vision for ethical AI development and application.";
     }
     else if (lowerCaseMessage.includes('service') || lowerCaseMessage.includes('what do you offer')) {
-      response = "We offer a range of AI services including custom AI development, AI integration, machine learning models, natural language processing solutions, computer vision systems, and AI consulting.";
+      response = "We offer a range of AI services including custom AI development, AI integration, machine learning models, natural language processing solutions, computer vision systems, and AI consulting. Our flagship product is the MediWallet platform, a secure solution for managing medical records.";
     }
     else if (lowerCaseMessage.includes('contact') || lowerCaseMessage.includes('reach') || lowerCaseMessage.includes('email')) {
       response = "You can contact us through our contact form on the website, or email us directly at info@sparkstorm.ai. We're always happy to answer your questions!";
@@ -160,7 +163,7 @@ const AIAssistant = () => {
     }
     // MediWallet specific information
     else if (lowerCaseMessage.includes('mediwallet') || lowerCaseMessage.includes('medi wallet') || lowerCaseMessage.includes('health vault') || lowerCaseMessage.includes('medical records')) {
-      response = "MediWallet is our secure personal health records platform that allows patients and healthcare providers to safely manage medical records. It features encrypted storage, easy access controls, and intuitive interfaces to simplify healthcare record management.";
+      response = "MediWallet is our secure personal health records platform that allows patients and healthcare providers to safely manage medical records. It features encrypted storage, easy access controls, and intuitive interfaces to simplify healthcare record management. It's particularly helpful for people like Sandra who need to keep track of family members' medical information, and for families like Jacquie's who move frequently.";
     }
     // Affiliations information
     else if (lowerCaseMessage.includes('affiliate') || lowerCaseMessage.includes('affiliation')) {
@@ -171,7 +174,7 @@ const AIAssistant = () => {
       response = "Hello! Welcome to SparkStorm AI. How can I assist you today?";
     }
     else if (lowerCaseMessage.includes('thank') || lowerCaseMessage.includes('thanks')) {
-      response = "You're welcome! If you have any more questions, feel free to ask.";
+      response = "You're welcome! If you have any more questions about our services, MediWallet platform, or anything else, feel free to ask.";
     }
     // AI technology questions
     else if (lowerCaseMessage.includes('ai') || lowerCaseMessage.includes('artificial intelligence')) {
@@ -188,7 +191,7 @@ const AIAssistant = () => {
     }
     // Product questions
     else if (lowerCaseMessage.includes('product') || lowerCaseMessage.includes('solution')) {
-      response = "SparkStorm offers various AI products and solutions including custom AI development, AI integration with existing systems, predictive analytics, intelligent automation, and AI consulting services.";
+      response = "SparkStorm offers various AI products and solutions including custom AI development, AI integration with existing systems, predictive analytics, intelligent automation, and AI consulting services. Our flagship product is MediWallet, which helps patients and healthcare providers manage medical records efficiently.";
     }
     // Case studies
     else if (lowerCaseMessage.includes('case') || lowerCaseMessage.includes('success') || lowerCaseMessage.includes('example')) {
@@ -196,7 +199,7 @@ const AIAssistant = () => {
     }
     // Generic fallback
     else {
-      response = "Thank you for your question! As SparkStorm's AI assistant, I can help with information about our company, services, team, and AI technology. If I couldn't answer your specific question, please contact our team through the contact form or email info@sparkstorm.ai for more specialized assistance.";
+      response = "Thank you for your question! As SparkStorm's AI assistant, I can help with information about our company, services, team, and AI technology. I can tell you about our MediWallet platform and how it helps users like Sandra Gifford and Jacquie manage medical records. If I couldn't answer your specific question, please contact our team through the contact form or email info@sparkstorm.ai for more specialized assistance.";
     }
 
     // Add bot response
