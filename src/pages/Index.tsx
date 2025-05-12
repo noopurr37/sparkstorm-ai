@@ -44,9 +44,9 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="mb-4">
             <img 
-              src="/lovable-uploads/2e4ba82a-5e26-4ff2-9fd1-1617f0868328.png" 
+              src="/lovable-uploads/e82a7fa3-a351-4944-9c59-f357e283e95d.png" 
               alt="SparkStorm AI Logo" 
-              className="h-10 mx-auto filter brightness-0 invert" // Makes logo white
+              className="h-10 mx-auto" 
             />
           </div>
           <p className="text-sm">© {new Date().getFullYear()} SparkStorm AI. All rights reserved.</p>
