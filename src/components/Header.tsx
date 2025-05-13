@@ -153,14 +153,19 @@ const Header = () => {
               >
                 MediWallet
               </a>
+              
+              {/* Sign In Button moved into the navigation for desktop */}
+              <div className="lg:block ml-4">
+                {renderAuthButtons()}
+              </div>
             </div>
           </div>
 
-          {/* Auth button (desktop) - moved much further to the left */}
-          <div className="hidden lg:block -ml-80">
+          {/* Auth button (desktop) - hidden from here as it's now inside the navigation */}
+          <div className="hidden">
             {renderAuthButtons()}
           </div>
-          
+
           {/* Mobile menu button */}
           <div className="lg:hidden flex items-center gap-4">
             {/* Auth button (mobile) */}
