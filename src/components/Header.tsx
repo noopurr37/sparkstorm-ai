@@ -156,8 +156,8 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Auth button (desktop) - moved significantly to the left */}
-          <div className="hidden lg:block -ml-20">
+          {/* Auth button (desktop) - moved much further to the left */}
+          <div className="hidden lg:block -ml-80">
             {renderAuthButtons()}
           </div>
           
