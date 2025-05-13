@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -17,21 +16,10 @@ const MediWallet = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in
+    // Check if user is logged in, but don't require authentication
     const checkSession = async () => {
       setLoading(true);
       const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        toast({
-          title: "Authentication required",
-          description: "Please sign in to access MediWallet",
-          variant: "destructive",
-        });
-        navigate("/auth");
-        return;
-      }
-      
       setUser(session?.user || null);
       setLoading(false);
     };
@@ -40,15 +28,12 @@ const MediWallet = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        if (event === 'SIGNED_OUT') {
-          navigate("/auth");
-        }
         setUser(session?.user || null);
       }
     );
 
     return () => subscription.unsubscribe();
-  }, [navigate, toast]);
+  }, []);
 
   const handleBookDemo = () => {
     navigate("/book-demo");

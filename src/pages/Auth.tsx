@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Helmet } from "react-helmet-async";
-import { Mail, Lock, User, ArrowRight, Github, Loader2, AlertCircle } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Github, Loader2, AlertCircle, Info } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface LocationState {
@@ -277,6 +277,14 @@ const Auth = () => {
                 </form>
               </TabsContent>
 
+              <Alert className="mt-4 bg-yellow-50 border-yellow-200">
+                <Info className="h-4 w-4 text-yellow-500" />
+                <AlertTitle className="text-yellow-800">Google Sign In</AlertTitle>
+                <AlertDescription className="text-yellow-700">
+                  Google authentication is currently unavailable. Please use email/password to sign up or sign in.
+                </AlertDescription>
+              </Alert>
+
               <div className="relative my-4">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t border-gray-300" />
@@ -290,8 +298,9 @@ const Auth = () => {
 
               <Button
                 variant="outline"
-                className="w-full"
-                onClick={handleGoogleSignIn}
+                className="w-full opacity-60 cursor-not-allowed"
+                disabled={true}
+                title="Google authentication is currently unavailable"
               >
                 <svg viewBox="0 0 24 24" className="mr-2 h-4 w-4">
                   <path

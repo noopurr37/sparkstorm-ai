@@ -50,16 +50,7 @@ const Header = () => {
 
   const handleMediWalletClick = (e) => {
     e.preventDefault();
-    if (!user) {
-      navigate("/auth", { 
-        state: { 
-          redirectTo: "/mediwallet",
-          message: "Please sign in or create an account to access MediWallet" 
-        }
-      });
-    } else {
-      navigate("/mediwallet");
-    }
+    navigate("/mediwallet");
   };
 
   const signOut = async () => {
@@ -231,7 +222,7 @@ const Header = () => {
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={(e) => {
                     closeMenu();
-                    handleMediWalletClick(e);
+                    navigate("/mediwallet");
                   }}
                 >
                   MediWallet

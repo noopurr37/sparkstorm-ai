@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,26 +27,10 @@ const BookDemo = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if user is logged in
+    // Check if user is logged in, but don't require authentication
     const checkSession = async () => {
       setLoading(true);
       const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
-        toast({
-          title: "Authentication required",
-          description: "Please sign in to book a demo",
-          variant: "destructive",
-        });
-        navigate("/auth", { 
-          state: { 
-            redirectTo: "/book-demo",
-            message: "Please sign in or create an account to book a demo" 
-          } 
-        });
-        return;
-      }
-      
       const user = session?.user || null;
       setUser(user);
       
@@ -66,20 +49,12 @@ const BookDemo = () => {
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        if (event === 'SIGNED_OUT') {
-          navigate("/auth", { 
-            state: { 
-              redirectTo: "/book-demo",
-              message: "Please sign in or create an account to book a demo" 
-            } 
-          });
-        }
         setUser(session?.user || null);
       }
     );
 
     return () => subscription.unsubscribe();
-  }, [navigate, toast]);
+  }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
