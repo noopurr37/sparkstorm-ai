@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card";
-import { Loader2, ArrowLeft } from "lucide-react";
+import { CalendarIcon, Loader2, ArrowLeft } from "lucide-react";
 import { Label } from "@/components/ui/label";
 
 const BookDemo = () => {
@@ -187,14 +187,17 @@ const BookDemo = () => {
 
                   <div className="space-y-2 md:col-span-2">
                     <Label htmlFor="preferredDate">Preferred Date & Time</Label>
-                    <Input
-                      id="preferredDate"
-                      name="preferredDate"
-                      type="datetime-local"
-                      value={formData.preferredDate}
-                      onChange={handleChange}
-                      required
-                    />
+                    <div className="flex items-center space-x-2">
+                      <CalendarIcon className="h-5 w-5 text-gray-500" />
+                      <Input
+                        id="preferredDate"
+                        name="preferredDate"
+                        type="datetime-local"
+                        value={formData.preferredDate}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-2 md:col-span-2">

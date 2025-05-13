@@ -5,8 +5,10 @@ interface CalendlyEmbedProps {
   children?: React.ReactNode;
 }
 
-const CalendlyEmbed: React.FC<CalendlyEmbedProps> = () => {
-  // Completely empty component with no functionality
+const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({ 
+  children 
+}) => {
+  // Empty component - removing Calendly functionality as requested
   return null;
 };
 
