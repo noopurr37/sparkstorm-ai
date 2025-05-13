@@ -8,13 +8,8 @@ interface CalendlyEmbedProps {
 const CalendlyEmbed: React.FC<CalendlyEmbedProps> = ({ 
   children 
 }) => {
-  // This component now simply renders its children
-  // No more calendly functionality, no default button
-  return (
-    <>
-      {children}
-    </>
-  );
+  // Empty component - removing Calendly functionality as requested
+  return null;
 };
 
 export default CalendlyEmbed;
