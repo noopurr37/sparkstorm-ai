@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Helmet } from "react-helmet-async";
-import { Mail, Lock, User, ArrowRight, Github, Loader2, AlertCircle, Info } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Github, Loader2, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface LocationState {
@@ -263,13 +263,7 @@ const Auth = () => {
                 </form>
               </TabsContent>
 
-              <Alert className="mt-4 bg-red-50 border-red-200">
-                <Info className="h-4 w-4 text-red-500" />
-                <AlertTitle className="text-red-800">Google Sign In Temporarily Unavailable</AlertTitle>
-                <AlertDescription className="text-red-700">
-                  Google authentication is currently disabled. Please use email/password to sign up or sign in.
-                </AlertDescription>
-              </Alert>
+              {/* The Google sign-in alert has been completely removed as requested */}
 
               <div className="relative my-4 hidden">
                 <div className="absolute inset-0 flex items-center">
@@ -282,7 +276,7 @@ const Auth = () => {
                 </div>
               </div>
 
-              {/* Google button completely removed */}
+              {/* Hidden Google button section completely removed */}
             </CardContent>
 
             <CardFooter className="text-center text-sm text-gray-600">
