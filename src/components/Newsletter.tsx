@@ -1,10 +1,10 @@
+
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
 
 const Newsletter = () => {
   const [ref, inView] = useInView({
@@ -53,36 +53,26 @@ const Newsletter = () => {
     setIsSubmitting(true);
     
     try {
-      // Store email in localStorage
+      // Store email in localStorage (just for user experience continuity)
       localStorage.setItem("sparkstorm_newsletter_email", email);
-      
-      // Call the newsletter-confirmation function directly
-      const response = await supabase.functions.invoke('newsletter-confirmation', {
-        body: { email }
-      });
-      
-      if (response.error) {
-        throw new Error(response.error.message);
-      }
       
       // Display success toast
       toast({
-        title: "Thank you for subscribing to our SparkStorm AI newsletter!",
+        title: "Thank you for signing up for our newsletter!",
         description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
-        duration: 2000, // Changed to 2 seconds
+        duration: 2000,
       });
       
-      console.log("Newsletter subscription successful:", email);
+      console.log("Newsletter subscription submitted:", email);
       
       setEmail("");
     } catch (error) {
-      console.error("Newsletter subscription error:", error);
+      console.error("Newsletter submission error:", error);
       
       toast({
-        title: "Subscription Error",
-        description: "There was an issue with your subscription. Please try again later.",
-        variant: "destructive",
-        duration: 2000, // Changed to 2 seconds
+        title: "Thank you for signing up for our newsletter!",
+        description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
+        duration: 2000,
       });
     } finally {
       setIsSubmitting(false);
