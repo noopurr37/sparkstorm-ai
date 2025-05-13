@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Menu, X, User, LogOut, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -155,8 +156,8 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Auth button (desktop) - positioned to the right */}
-          <div className="hidden lg:block">
+          {/* Auth button (desktop) - positioned much further to the right with added margin */}
+          <div className="hidden lg:block ml-16">
             {renderAuthButtons()}
           </div>
           
