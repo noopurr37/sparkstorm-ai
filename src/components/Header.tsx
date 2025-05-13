@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, User, LogOut, Wallet } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -153,15 +152,13 @@ const Header = () => {
               >
                 MediWallet
               </a>
-              
-              {/* Sign In Button moved into the navigation for desktop with increased margin */}
-              <div className="lg:block ml-6">
-                {renderAuthButtons()}
-              </div>
             </div>
           </div>
 
-          {/* Auth button (desktop) - completely removed so it doesn't interfere */}
+          {/* Auth button (desktop) - positioned to the right */}
+          <div className="hidden lg:block">
+            {renderAuthButtons()}
+          </div>
           
           {/* Mobile menu button */}
           <div className="lg:hidden flex items-center gap-4">

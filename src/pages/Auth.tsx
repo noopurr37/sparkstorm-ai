@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -263,8 +262,6 @@ const Auth = () => {
                 </form>
               </TabsContent>
 
-              {/* The Google sign-in alert has been completely removed as requested */}
-
               <div className="relative my-4 hidden">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t border-gray-300" />
@@ -279,16 +276,17 @@ const Auth = () => {
               {/* Hidden Google button section completely removed */}
             </CardContent>
 
-            <CardFooter className="text-center text-sm text-gray-600">
-              By signing in, you agree to our{" "}
-              <a href="#" className="font-medium text-blue-600 hover:underline">
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a href="#" className="font-medium text-blue-600 hover:underline">
-                Privacy Policy
-              </a>
-              .
+            <CardFooter>
+              <p className="text-center text-sm text-gray-600 w-full">
+                By using this service, you agree to our{" "}
+                <a href="#" className="font-medium text-blue-600 hover:underline">
+                  Terms of Service
+                </a>{" "}
+                and{" "}
+                <a href="#" className="font-medium text-blue-600 hover:underline">
+                  Privacy Policy
+                </a>
+              </p>
             </CardFooter>
           </Tabs>
         </Card>
