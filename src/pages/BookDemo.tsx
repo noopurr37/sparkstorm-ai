@@ -69,15 +69,8 @@ const BookDemo = () => {
           </p>
         </div>
 
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-xl bg-white p-8 rounded-xl shadow-sm">
           <CalendlyEmbed />
-
-          <div className="mt-8 text-center text-sm text-gray-500">
-            <p>
-              By scheduling a demo, you agree to our Terms of Service and Privacy Policy.
-              Our team will contact you within 24 hours to confirm your appointment.
-            </p>
-          </div>
         </div>
       </main>
     </div>

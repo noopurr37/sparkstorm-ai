@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -7,7 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import MediFeature from "@/components/MediWallet/MediFeature";
 import Header from "@/components/Header";
-import { Loader2, ArrowRight } from "lucide-react";
+import { Loader2, ArrowRight, CalendarDays } from "lucide-react";
 
 const MediWallet = () => {
   const [loading, setLoading] = useState(true);
@@ -36,7 +37,7 @@ const MediWallet = () => {
   }, []);
 
   const handleBookDemo = () => {
-    navigate("/book-demo");
+    window.open("https://cal.com/noopurr/sparkstormai", "_blank");
   };
 
   if (loading) {
@@ -67,7 +68,7 @@ const MediWallet = () => {
           </p>
         </div>
 
-        {/* Hero Section with Graphic - This is the ONLY Book Demo button that should remain */}
+        {/* Hero Section with Graphic */}
         <div className="mb-16 flex flex-col items-center rounded-2xl bg-gradient-primary p-8 text-white shadow-lg md:flex-row">
           <div className="md:w-1/2">
             <h2 className="mb-4 text-3xl font-bold">Secure Medical Data at Your Fingertips</h2>
@@ -78,9 +79,9 @@ const MediWallet = () => {
             <Button 
               onClick={handleBookDemo} 
               size="lg" 
-              className="bg-white text-primary hover:bg-gray-100"
+              className="bg-white text-primary hover:bg-gray-100 flex items-center"
             >
-              Book a Demo <ArrowRight className="ml-2 h-4 w-4" />
+              <CalendarDays className="mr-2 h-5 w-5" /> Book a Demo
             </Button>
           </div>
           <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
