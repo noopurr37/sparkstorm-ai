@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
-import { Loader2, User, Lock, LogOut, Camera, Shield, Cog } from "lucide-react";
+import { Loader2, User, Lock, LogOut, Camera, Shield } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import MediWalletSignup from "@/components/MediWalletSignup";
 
@@ -271,7 +270,7 @@ const Profile = () => {
     : '?';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 dark:text-white">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Helmet>
         <title>Your Profile | SparkStorm AI</title>
       </Helmet>
@@ -300,7 +299,7 @@ const Profile = () => {
             />
           </div>
           <h1 className="mb-2 text-3xl font-bold">{formData.fullName}</h1>
-          <p className="text-gray-500 dark:text-gray-400">{formData.email}</p>
+          <p className="text-gray-500">{formData.email}</p>
           {uploadingAvatar && (
             <div className="mt-2 flex items-center">
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -311,14 +310,10 @@ const Profile = () => {
 
         <div className="mx-auto max-w-4xl">
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="mb-6 grid w-full grid-cols-3">
+            <TabsList className="mb-6 grid w-full grid-cols-2">
               <TabsTrigger value="profile">
                 <User className="mr-2 h-4 w-4" />
                 Profile
-              </TabsTrigger>
-              <TabsTrigger value="security">
-                <Lock className="mr-2 h-4 w-4" />
-                Security
               </TabsTrigger>
               <TabsTrigger value="notifications">
                 <Shield className="mr-2 h-4 w-4" />
@@ -327,10 +322,10 @@ const Profile = () => {
             </TabsList>
             
             <TabsContent value="profile">
-              <Card className="dark:border-gray-700 dark:bg-gray-800">
+              <Card>
                 <CardHeader>
                   <CardTitle>Profile Information</CardTitle>
-                  <CardDescription className="dark:text-gray-400">
+                  <CardDescription>
                     Update your SparkStorm AI website profile
                   </CardDescription>
                 </CardHeader>
@@ -345,7 +340,6 @@ const Profile = () => {
                           value={formData.fullName}
                           onChange={handleProfileChange}
                           placeholder="Your full name"
-                          className="dark:border-gray-700 dark:bg-gray-700"
                         />
                       </div>
 
@@ -357,9 +351,9 @@ const Profile = () => {
                           type="email"
                           value={formData.email}
                           disabled
-                          className="bg-gray-100 dark:bg-gray-600 dark:text-gray-300"
+                          className="bg-gray-100"
                         />
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-sm text-gray-500">
                           Email address cannot be changed
                         </p>
                       </div>
@@ -372,7 +366,6 @@ const Profile = () => {
                           value={formData.company}
                           onChange={handleProfileChange}
                           placeholder="Your company name"
-                          className="dark:border-gray-700 dark:bg-gray-700"
                         />
                       </div>
 
@@ -385,7 +378,6 @@ const Profile = () => {
                           onChange={handleProfileChange}
                           placeholder="Tell us a bit about yourself"
                           rows={4}
-                          className="dark:border-gray-700 dark:bg-gray-700"
                         />
                       </div>
                     </div>
@@ -403,37 +395,7 @@ const Profile = () => {
                   </form>
                 </CardContent>
                 <CardFooter>
-                  <div className="w-full text-right">
-                    <Link to="/user-preferences">
-                      <Button variant="outline" className="flex items-center gap-2 dark:border-gray-600 dark:hover:bg-gray-700">
-                        <Cog className="h-4 w-4" />
-                        Additional Preferences
-                      </Button>
-                    </Link>
-                  </div>
-                </CardFooter>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="security">
-              <Card className="dark:border-gray-700 dark:bg-gray-800">
-                <CardHeader>
-                  <CardTitle>Security Settings</CardTitle>
-                  <CardDescription className="dark:text-gray-400">
-                    Manage your account security
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <p className="dark:text-gray-300">
-                      Your account is secured with email and password authentication. For security reasons, you cannot change your password directly from this interface.
-                    </p>
-                    <p className="dark:text-gray-300">
-                      If you need to reset your password, please use the "Forgot Password" option on the login page.
-                    </p>
-                  </div>
-
-                  <div className="mt-6">
+                  <div className="w-full">
                     <Button 
                       variant="destructive" 
                       onClick={handleSignOut}
@@ -444,16 +406,16 @@ const Profile = () => {
                       {saving ? "Signing out..." : "Sign Out"}
                     </Button>
                   </div>
-                </CardContent>
+                </CardFooter>
               </Card>
             </TabsContent>
 
             <TabsContent value="notifications">
-              <Card className="dark:border-gray-700 dark:bg-gray-800">
+              <Card>
                 <CardHeader>
                   <CardTitle>MediWallet Updates</CardTitle>
-                  <CardDescription className="dark:text-gray-400">
-                    Get notified when the MediWallet mobile app launches
+                  <CardDescription>
+                    Get notified when the MediWallet app launches
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

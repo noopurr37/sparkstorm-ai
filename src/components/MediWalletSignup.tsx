@@ -6,7 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { Mail, AlertCircle, Check, Bell, Lock, UserPlus } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const MediWalletSignup = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +14,10 @@ const MediWalletSignup = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const { toast } = useToast();
+  const location = useLocation();
+  
+  // Check if we're in the profile page
+  const isProfilePage = location.pathname === "/profile";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -68,21 +72,23 @@ const MediWalletSignup = () => {
         Join our waitlist to be the first to know when MediWallet launches and get access to exclusive features.
       </p>
 
-      <div className="bg-blue-50 p-4 rounded-md mb-6">
-        <div className="flex items-start gap-2">
-          <Lock className="h-5 w-5 text-blue-600 mt-0.5" />
-          <div>
-            <h4 className="font-medium text-blue-700 mb-1">Create a SparkStorm Account</h4>
-            <p className="text-sm text-blue-600 mb-3">For full access to MediWallet features when it launches, including personalized dashboards and secure document storage.</p>
-            <Link to="/auth">
-              <Button variant="outline" size="sm" className="border-blue-200 bg-white hover:bg-blue-50">
-                <UserPlus className="mr-1 h-4 w-4" />
-                Create Account
-              </Button>
-            </Link>
+      {!isProfilePage && (
+        <div className="bg-blue-50 p-4 rounded-md mb-6">
+          <div className="flex items-start gap-2">
+            <Lock className="h-5 w-5 text-blue-600 mt-0.5" />
+            <div>
+              <h4 className="font-medium text-blue-700 mb-1">Create a SparkStorm Account</h4>
+              <p className="text-sm text-blue-600 mb-3">For full access to MediWallet features when it launches, including personalized dashboards and secure document storage.</p>
+              <Link to="/auth">
+                <Button variant="outline" size="sm" className="border-blue-200 bg-white hover:bg-blue-50">
+                  <UserPlus className="mr-1 h-4 w-4" />
+                  Create Account
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {showSuccess ? (
         <Alert className="bg-green-50 border-green-200">

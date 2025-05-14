@@ -47,7 +47,7 @@ const Index = () => {
                 Coming Soon: MediWallet
               </h2>
               <p className="text-lg text-gray-600 mb-4">
-                Our innovative healthcare finance management solution is launching soon. 
+                Our innovative healthcare management solution is launching soon. 
                 Sign up now to join our waitlist.
               </p>
               <div className="flex items-center justify-center gap-2 text-sm text-blue-600">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { MessageSquare, Globe, Smartphone, HeartPulse, Lock } from "lucide-react";
+import { MessageSquare, Globe, Smartphone, HeartPulse } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -88,12 +88,6 @@ const ServiceCard = ({ icon, title, description, delay, linkTo, requiresAuth, pr
           <CardDescription className="text-gray-500 text-base">
             {description}
           </CardDescription>
-          {requiresAuth && (
-            <div className="mt-4 flex items-center text-sm text-blue-600">
-              <Lock className="h-3.5 w-3.5 mr-1" />
-              <span>Sign in required</span>
-            </div>
-          )}
         </CardContent>
       </Card>
     </div>
@@ -153,7 +147,7 @@ const Services = () => {
 
   return (
     <section id="services" className="py-10 relative bg-gray-50">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMTgyQ0UiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2NWgtMXYtNXptMi0yaDF2MWgtMXYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXpNMTEgNTloNHYxaC00di0xem0wLTJoMXY1aC0xdi01em0yLTJoMXYxaC0xdi0xem0tMiAyaDF2MWgtMXYtMXptLTItMmgxdjRoLTFWN3ptMi0yaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY3em0tMi0yaDF2NGgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1ek0zNiA5aDR2MWgtNFY5em0wLTJoMXY1aC0xdi01em0yLTJoMXYxaHQtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bTYxIDU5aDR2MWgtNFYtMXptMC0yaDF2NWgtMVYtNXptMi0yaDF2MWgtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bTYxIDM0aDR2MWgtNFYtMXptMC0yaDF2NWgtMVYtNXptMi0yaDF2MWgtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaHQtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem02MSA5aDR2MWgtNFY5bTAtMmExdjVoLTFWN3ptMi0yaDF2MWgtMVY1em0tMiAyaDF2MWgtMVY3em0tMi0yaDF2NGgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1ek02MSA5aDR2MWgtNFY5em0wLTJoMXY1aC0xVjd6bTIgMmExdjFoLTF2LTF6bS0yLTJoMXY0aC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMTgyQ0UiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2NWgtMXYtNXptMi0yaDF2MWgtMXYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bTYxIDU5aDR2MWgtNFYtMXptMC0yaDF2NWgtMVYtNXptMi0yaDF2MWgtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bTYxIDM0aDR2MWgtNFYtMXptMC0yaDF2NWgtMVYtNXptMi0yaDF2MWgtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaHQtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem02MSA5aDR2MWgtNFY5em0wLTJoMXY1aC0xdi01em0yLTJoMXYxaHQtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xVjd6bTIgMmExdjFoLTF2LTF6bS0yLTJoMXY0aC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50"></div>
       
       <div className="section-container" ref={ref}>
         <div className="text-center max-w-3xl mx-auto mb-8">

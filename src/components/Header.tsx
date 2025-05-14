@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
+import { Menu, X, User, LogOut, Wallet, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -60,7 +60,6 @@ const Header = () => {
   const signOut = async () => {
     try {
       setIsLoading(true);
-      
       const { error } = await supabase.auth.signOut();
       
       if (error) throw error;
@@ -69,7 +68,9 @@ const Header = () => {
         title: "Signed out",
         description: "You have been signed out successfully.",
       });
-      navigate("/");
+      
+      // Force a page reload after sign out to clear any cached data
+      window.location.href = '/';
     } catch (error) {
       console.error("Sign out error:", error);
       toast({
@@ -118,10 +119,6 @@ const Header = () => {
             <DropdownMenuItem onClick={() => navigate("/profile")}>
               <User className="mr-2 h-4 w-4" />
               Profile Settings
-            </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/user-preferences")}>
-              <Settings className="mr-2 h-4 w-4" />
-              Website Preferences
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem 
