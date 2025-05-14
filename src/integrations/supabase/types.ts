@@ -105,6 +105,27 @@ export type Database = {
         }
         Relationships: []
       }
+      mediwallet_waitlist: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string | null
+        }
+        Relationships: []
+      }
       "Newsletter Subscription": {
         Row: {
           created_at: string

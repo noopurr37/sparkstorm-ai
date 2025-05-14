@@ -32,9 +32,7 @@ const MediWalletSignup = () => {
       // Store in the waitlist table
       const { error } = await supabase
         .from('mediwallet_waitlist')
-        .insert([
-          { email, name: name || null }
-        ]);
+        .insert({ email, name: name || null });
 
       if (error) throw error;
 
