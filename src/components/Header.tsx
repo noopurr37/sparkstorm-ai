@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from "react";
-import { Menu, X, User, LogOut, Wallet, CalendarDays } from "lucide-react";
+import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -54,12 +53,22 @@ const Header = () => {
   };
 
   const signOut = async () => {
-    await supabase.auth.signOut();
-    toast({
-      title: "Signed out",
-      description: "You have been signed out successfully.",
-    });
-    navigate("/");
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      toast({
+        title: "Signed out",
+        description: "You have been signed out successfully.",
+      });
+      navigate("/");
+    } catch (error) {
+      toast({
+        title: "Sign out failed",
+        description: error.message || "There was a problem signing out",
+        variant: "destructive",
+      });
+    }
   };
 
   const userInitials = user?.user_metadata?.full_name
@@ -89,6 +98,10 @@ const Header = () => {
             <DropdownMenuItem onClick={() => navigate("/profile")}>
               <User className="mr-2 h-4 w-4" />
               Profile Settings
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate("/user-preferences")}>
+              <Settings className="mr-2 h-4 w-4" />
+              Website Preferences
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={signOut}>
@@ -257,15 +270,27 @@ const Header = () => {
                   AI Events
                 </a>
                 {user && (
+                  <>
                   <a 
                     href="/profile" 
                     className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                    onClick={closeMenu}
+                    onClick={() => {
+                      closeMenu();
+                      navigate("/profile");
+                    }}
                   >
                     Profile Settings
                   </a>
-                )}
-                {user && (
+                  <a 
+                    href="/user-preferences" 
+                    className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                    onClick={() => {
+                      closeMenu();
+                      navigate("/user-preferences");
+                    }}
+                  >
+                    Website Preferences
+                  </a>
                   <Button 
                     variant="ghost" 
                     className="justify-start p-0 h-auto font-sans text-base font-medium text-red-500 hover:text-red-700 transition-colors"
@@ -276,6 +301,7 @@ const Header = () => {
                   >
                     Sign Out
                   </Button>
+                  </>
                 )}
               </nav>
             </div>

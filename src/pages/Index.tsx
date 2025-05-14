@@ -52,7 +52,7 @@ const Index = () => {
               </p>
               <div className="flex items-center justify-center gap-2 text-sm text-blue-600">
                 <Lock size={16} />
-                <span>Premium features will require an account</span>
+                <span>Create an account to access advanced features like personalized dashboards, secure document storage, and early MediWallet mobile app access</span>
               </div>
             </div>
             

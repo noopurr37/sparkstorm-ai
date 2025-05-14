@@ -11,6 +11,7 @@ import Auth from "./pages/Auth";
 import MediWallet from "./pages/MediWallet";
 import BookDemo from "./pages/BookDemo";
 import Profile from "./pages/Profile";
+import UserPreferences from "./pages/UserPreferences";
 import AIEvents from "./pages/AIEvents";
 import Dashboard from "./pages/Dashboard";
 import TermsOfService from "./pages/TermsOfService";
@@ -31,6 +32,7 @@ const App = () => (
             <Route path="/mediwallet" element={<MediWallet />} />
             <Route path="/book-demo" element={<BookDemo />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/user-preferences" element={<UserPreferences />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/ai-events" element={<AIEvents />} />
             <Route path="/ai-talk" element={<AIEvents />} /> {/* Keep old route for compatibility */}

@@ -3,15 +3,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
-import { Loader2, User, Lock, LogOut, Camera, Shield } from "lucide-react";
+import { Loader2, User, Lock, LogOut, Camera, Shield, Cog } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import MediWalletSignup from "@/components/MediWalletSignup";
 
@@ -82,7 +82,7 @@ const Profile = () => {
     return () => subscription.unsubscribe();
   }, [navigate, toast]);
 
-  const handleProfileChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleProfileChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
@@ -90,7 +90,7 @@ const Profile = () => {
     }));
   };
 
-  const updateProfile = async (e: React.FormEvent) => {
+  const updateProfile = async (e) => {
     e.preventDefault();
     setSaving(true);
     
@@ -125,7 +125,7 @@ const Profile = () => {
     fileInputRef.current.click();
   };
 
-  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAvatarChange = async (e) => {
     if (!e.target.files || e.target.files.length === 0) {
       return;
     }
@@ -145,19 +145,21 @@ const Profile = () => {
     try {
       setUploadingAvatar(true);
       
-      // In a real app, you would upload to storage (e.g., Supabase Storage)
-      // For now, we'll use a data URL as a placeholder
+      // In a real app with storage set up, you would upload to Supabase Storage
+      // For demonstration, we'll use a data URL
       const reader = new FileReader();
       reader.onload = async (event) => {
-        const dataUrl = event.target.result as string;
-        setAvatarUrl(dataUrl);
+        const dataUrl = event.target.result;
         
         // Update user metadata with avatar URL
-        const { error } = await supabase.auth.updateUser({
+        const { data, error } = await supabase.auth.updateUser({
           data: { avatar_url: dataUrl }
         });
         
         if (error) throw error;
+        
+        // Update the local state with the new avatar URL
+        setAvatarUrl(dataUrl);
         
         toast({
           title: "Profile picture updated",
@@ -178,12 +180,21 @@ const Profile = () => {
   };
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
-    toast({
-      title: "Signed out",
-      description: "You have been signed out successfully.",
-    });
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      navigate("/");
+      toast({
+        title: "Signed out",
+        description: "You have been signed out successfully.",
+      });
+    } catch (error) {
+      toast({
+        title: "Sign out failed",
+        description: error.message || "There was a problem signing out",
+        variant: "destructive",
+      });
+    }
   };
 
   if (loading) {
@@ -331,6 +342,16 @@ const Profile = () => {
                     </Button>
                   </form>
                 </CardContent>
+                <CardFooter>
+                  <div className="w-full text-right">
+                    <Link to="/user-preferences">
+                      <Button variant="outline" className="flex items-center gap-2">
+                        <Cog className="h-4 w-4" />
+                        Additional Preferences
+                      </Button>
+                    </Link>
+                  </div>
+                </CardFooter>
               </Card>
             </TabsContent>
             
