@@ -5,10 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Helmet } from "react-helmet-async";
-import { Mail, Lock, User, ArrowRight, Github, Loader2, AlertCircle } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Loader2, AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface LocationState {
@@ -279,16 +279,17 @@ const Auth = () => {
               {/* Hidden Google button section completely removed */}
             </CardContent>
 
-            <CardFooter className="text-center text-sm text-gray-600">
-              By signing in, you agree to our{" "}
-              <a href="#" className="font-medium text-blue-600 hover:underline">
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a href="#" className="font-medium text-blue-600 hover:underline">
-                Privacy Policy
-              </a>
-              .
+            <CardFooter className="text-center text-muted-foreground">
+              <p className="w-full text-sm text-gray-500">
+                By signing in, you agree to our{" "}
+                <Link to="/terms-of-service" className="font-medium text-blue-600 hover:underline">
+                  Terms of Service
+                </Link>{" "}
+                and{" "}
+                <Link to="/privacy-policy" className="font-medium text-blue-600 hover:underline">
+                  Privacy Policy
+                </Link>
+              </p>
             </CardFooter>
           </Tabs>
         </Card>
