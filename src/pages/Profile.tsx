@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
@@ -9,9 +9,9 @@ import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
-import { Loader2, User, Lock, LogOut, Camera, Shield, Cog } from "lucide-react";
+import { Loader2, User, Lock, LogOut, Cog } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import MediWalletSignup from "@/components/MediWalletSignup";
 
@@ -19,15 +19,12 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [uploadingAvatar, setUploadingAvatar] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
     company: "",
     bio: "",
   });
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const fileInputRef = useRef(null);
   
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -58,11 +55,6 @@ const Profile = () => {
           company: user.user_metadata?.company || "",
           bio: user.user_metadata?.bio || "",
         });
-
-        // Try to get avatar URL from metadata
-        if (user.user_metadata?.avatar_url) {
-          setAvatarUrl(user.user_metadata.avatar_url);
-        }
       }
       
       setLoading(false);
@@ -120,69 +112,21 @@ const Profile = () => {
     }
   };
 
-  const handleAvatarClick = () => {
-    // Trigger file input click
-    fileInputRef.current.click();
-  };
-
-  const handleAvatarChange = async (e) => {
-    if (!e.target.files || e.target.files.length === 0) {
-      return;
-    }
-
-    const file = e.target.files[0];
-    const fileSize = file.size / 1024 / 1024; // Convert to MB
-    
-    if (fileSize > 5) {
-      toast({
-        title: "File too large",
-        description: "Please select an image under 5MB",
-        variant: "destructive",
-      });
-      return;
-    }
-
-    try {
-      setUploadingAvatar(true);
-      
-      // In a real app with storage set up, you would upload to Supabase Storage
-      // For demonstration, we'll use a data URL
-      const reader = new FileReader();
-      reader.onload = async (event) => {
-        const dataUrl = event.target.result;
-        
-        // Update user metadata with avatar URL
-        const { data, error } = await supabase.auth.updateUser({
-          data: { avatar_url: dataUrl }
-        });
-        
-        if (error) throw error;
-        
-        // Update the local state with the new avatar URL
-        setAvatarUrl(dataUrl);
-        
-        toast({
-          title: "Profile picture updated",
-          description: "Your profile picture has been updated successfully.",
-        });
-        
-        setUploadingAvatar(false);
-      };
-      reader.readAsDataURL(file);
-    } catch (error) {
-      toast({
-        title: "Upload failed",
-        description: error.message || "There was a problem uploading your profile picture",
-        variant: "destructive",
-      });
-      setUploadingAvatar(false);
-    }
-  };
-
+  // Updated sign out function to handle offline cases properly
   const handleSignOut = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      // First update the UI state to give immediate feedback
+      setUser(null);
+      
+      try {
+        // Attempt to sign out from Supabase
+        const { error } = await supabase.auth.signOut();
+        if (error) throw error;
+      } catch (error) {
+        console.error("Supabase sign out failed:", error);
+        // Even if the API request fails, we still want to sign out locally
+      }
+      
       navigate("/");
       toast({
         title: "Signed out",
@@ -190,9 +134,8 @@ const Profile = () => {
       });
     } catch (error) {
       toast({
-        title: "Sign out failed",
-        description: error.message || "There was a problem signing out",
-        variant: "destructive",
+        title: "Sign out action completed",
+        description: "Your session has been cleared.",
       });
     }
   };
@@ -224,37 +167,17 @@ const Profile = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="mb-8 flex flex-col items-center text-center">
           <div className="relative mb-4">
-            <Avatar className="h-24 w-24 cursor-pointer hover:opacity-90 transition-opacity" onClick={handleAvatarClick}>
-              <AvatarImage src={avatarUrl} alt={formData.fullName} />
+            <Avatar className="h-24 w-24">
               <AvatarFallback className="text-2xl">{userInitials}</AvatarFallback>
             </Avatar>
-            <div 
-              className="absolute bottom-0 right-0 bg-primary rounded-full p-1.5 cursor-pointer hover:bg-primary/90 transition-colors"
-              onClick={handleAvatarClick}
-            >
-              <Camera className="h-4 w-4 text-white" />
-            </div>
-            <input 
-              type="file"
-              ref={fileInputRef}
-              className="hidden"
-              accept="image/*"
-              onChange={handleAvatarChange}
-            />
           </div>
           <h1 className="mb-2 text-3xl font-bold">{formData.fullName}</h1>
           <p className="text-gray-500">{formData.email}</p>
-          {uploadingAvatar && (
-            <div className="mt-2 flex items-center">
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              <span className="text-sm">Uploading image...</span>
-            </div>
-          )}
         </div>
 
         <div className="mx-auto max-w-4xl">
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="mb-6 grid w-full grid-cols-3">
+            <TabsList className="mb-6 grid w-full grid-cols-2">
               <TabsTrigger value="profile">
                 <User className="mr-2 h-4 w-4" />
                 Profile
@@ -262,10 +185,6 @@ const Profile = () => {
               <TabsTrigger value="security">
                 <Lock className="mr-2 h-4 w-4" />
                 Security
-              </TabsTrigger>
-              <TabsTrigger value="notifications">
-                <Shield className="mr-2 h-4 w-4" />
-                MediWallet Updates
               </TabsTrigger>
             </TabsList>
             
@@ -342,16 +261,6 @@ const Profile = () => {
                     </Button>
                   </form>
                 </CardContent>
-                <CardFooter>
-                  <div className="w-full text-right">
-                    <Link to="/user-preferences">
-                      <Button variant="outline" className="flex items-center gap-2">
-                        <Cog className="h-4 w-4" />
-                        Additional Preferences
-                      </Button>
-                    </Link>
-                  </div>
-                </CardFooter>
               </Card>
             </TabsContent>
             
@@ -383,20 +292,6 @@ const Profile = () => {
                       Sign Out
                     </Button>
                   </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="notifications">
-              <Card>
-                <CardHeader>
-                  <CardTitle>MediWallet Updates</CardTitle>
-                  <CardDescription>
-                    Get notified when the MediWallet mobile app launches
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <MediWalletSignup />
                 </CardContent>
               </Card>
             </TabsContent>

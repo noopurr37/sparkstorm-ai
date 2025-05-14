@@ -69,7 +69,7 @@ const MediWallet = () => {
             medical records into actionable intelligence.
           </p>
           
-          {/* Product Hunt Badge */}
+          {/* Updated Product Hunt Badge with Dark Theme */}
           <div className="mt-6 flex justify-center">
             <a 
               href="https://www.producthunt.com/posts/mediwallet?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-mediwallet" 
@@ -78,12 +78,12 @@ const MediWallet = () => {
               className="transform transition-transform hover:scale-105"
             >
               <img 
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=965559&theme=neutral&t=1747260839447" 
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=965559&theme=dark&t=1747261562110" 
                 alt="MediWallet - Health Data at Fingertips | Product Hunt" 
                 style={{ width: '250px', height: '54px' }} 
                 width="250" 
                 height="54" 
-                className="rounded shadow-md border border-blue-100"
+                className="rounded shadow-md border border-gray-800"
               />
             </a>
           </div>

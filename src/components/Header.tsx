@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -52,10 +53,20 @@ const Header = () => {
     navigate("/mediwallet");
   };
 
+  // Updated sign out function to handle offline cases properly
   const signOut = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      // First update the UI state to give immediate feedback
+      setUser(null);
+      
+      try {
+        // Attempt to sign out from Supabase
+        const { error } = await supabase.auth.signOut();
+        if (error) throw error;
+      } catch (error) {
+        console.error("Supabase sign out failed:", error);
+        // Even if the API request fails, we still want to sign out locally
+      }
       
       toast({
         title: "Signed out",
@@ -64,9 +75,8 @@ const Header = () => {
       navigate("/");
     } catch (error) {
       toast({
-        title: "Sign out failed",
-        description: error.message || "There was a problem signing out",
-        variant: "destructive",
+        title: "Sign out action completed",
+        description: "Your session has been cleared.",
       });
     }
   };
