@@ -174,23 +174,64 @@ const AITalk = () => {
               <div className="grid md:grid-cols-3 gap-6">
                 <Card>
                   <CardContent className="pt-6">
-                    <h3 className="text-xl font-bold">AI in Healthcare Symposium</h3>
+                    <h3 className="text-xl font-bold">Austin Women in Technology Conference</h3>
+                    <p className="text-sm text-gray-500 mt-1">April 5, 2025</p>
+                    <p className="mt-3">Panel discussion on breaking barriers for women in AI and tech entrepreneurship at the WTC Texas Conference.</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold">GenAI Collective Summit</h3>
                     <p className="text-sm text-gray-500 mt-1">March 12, 2025</p>
                     <p className="mt-3">Noopur presented on AI applications in medical data management and patient care optimization.</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-6">
-                    <h3 className="text-xl font-bold">Women in Tech Conference</h3>
+                    <h3 className="text-xl font-bold">The Austin Forum on Technology & Society</h3>
                     <p className="text-sm text-gray-500 mt-1">February 8, 2025</p>
-                    <p className="mt-3">Panel discussion on breaking barriers in AI and entrepreneurship for women in technology.</p>
+                    <p className="mt-3">Featured speaker on the ethical implications of AI in business and society.</p>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-6 mt-6">
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold">AI Camp at Capital Factory</h3>
+                    <p className="text-sm text-gray-500 mt-1">January 15, 2025</p>
+                    <p className="mt-3">Workshop on leveraging AI to scale early-stage startups with limited resources.</p>
                   </CardContent>
                 </Card>
                 <Card>
                   <CardContent className="pt-6">
-                    <h3 className="text-xl font-bold">Startup Summit</h3>
+                    <h3 className="text-xl font-bold">InnoTech Women's Summit</h3>
+                    <p className="text-sm text-gray-500 mt-1">December 8, 2024</p>
+                    <p className="mt-3">Keynote on "AI for Entrepreneurs: Navigating the Future of Business" at the annual conference.</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold">Antler's ATX Female Founder Galentine's Day</h3>
                     <p className="text-sm text-gray-500 mt-1">November 22, 2024</p>
-                    <p className="mt-3">Workshop on leveraging AI to scale early-stage startups with limited resources.</p>
+                    <p className="mt-3">Fireside chat on AI innovation and entrepreneurship at Austin Public Library's Faulk Central Library.</p>
+                  </CardContent>
+                </Card>
+              </div>
+              
+              <div className="grid md:grid-cols-3 gap-6 mt-6">
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold">TEXAS EMBASSY at SXSW</h3>
+                    <p className="text-sm text-gray-500 mt-1">October 5, 2024</p>
+                    <p className="mt-3">Panel on "Health & Human Performance" discussing AI applications in healthcare and wellness technology.</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold">Better Business Bureau AI Conference</h3>
+                    <p className="text-sm text-gray-500 mt-1">September 18, 2024</p>
+                    <p className="mt-3">"Artificial Intelligence in Real Life" - practical applications for businesses of all sizes.</p>
                   </CardContent>
                 </Card>
               </div>

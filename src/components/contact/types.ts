@@ -12,7 +12,7 @@ export interface AITalkRequestFormData {
   email: string;
   organization: string;
   eventDate: string;
-  audienceSize: string;
+  audienceSize?: string;
   topic: string;
-  additionalInfo: string;
+  additionalInfo?: string;
 }
