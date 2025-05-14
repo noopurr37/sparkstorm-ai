@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +16,7 @@ import {
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
@@ -59,7 +59,11 @@ const Header = () => {
 
   const signOut = async () => {
     try {
-      await supabase.auth.signOut();
+      setIsLoading(true);
+      
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) throw error;
       
       toast({
         title: "Signed out",
@@ -73,6 +77,8 @@ const Header = () => {
         description: "There was a problem signing out. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -89,8 +95,17 @@ const Header = () => {
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" size="icon" className="rounded-full bg-primary/10">
-              <span className="font-medium text-sm text-primary">{userInitials}</span>
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="rounded-full bg-primary/10"
+              disabled={isLoading}
+            >
+              {isLoading ? (
+                <span className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent"></span>
+              ) : (
+                <span className="font-medium text-sm text-primary">{userInitials}</span>
+              )}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -109,9 +124,12 @@ const Header = () => {
               Website Preferences
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={signOut}>
+            <DropdownMenuItem 
+              onClick={signOut}
+              disabled={isLoading}
+            >
               <LogOut className="mr-2 h-4 w-4" />
-              Sign Out
+              {isLoading ? "Signing out..." : "Sign Out"}
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -129,7 +147,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white py-4 shadow-sm sticky top-0 z-50">
+    <header className="bg-white dark:bg-gray-900 py-4 shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between">
           {/* Logo and navigation container */}
@@ -141,23 +159,23 @@ const Header = () => {
                 alt="SparkStorm AI Logo"
                 className="h-10 w-auto"
               />
-              <span className="font-sans text-base font-medium text-gray-800 hover:text-primary transition-colors">
+              <span className="font-sans text-base font-medium text-gray-800 dark:text-white hover:text-primary transition-colors">
                 Home
               </span>
             </a>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-8">
-              <a href="/#services" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
+              <a href="/#services" className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors">
                 Services
               </a>
-              <a href="/#team" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
+              <a href="/#team" className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors">
                 Team
               </a>
-              <a href="/#testimonials" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
+              <a href="/#testimonials" className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors">
                 Testimonials
               </a>
-              <a href="/#contact" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
+              <a href="/#contact" className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors">
                 Contact
               </a>
               <a 
@@ -165,7 +183,7 @@ const Header = () => {
                 className={`font-sans text-base font-medium transition-colors ${
                   location.pathname === '/mediwallet' 
                     ? 'text-primary' 
-                    : 'text-gray-700 hover:text-primary'
+                    : 'text-gray-700 dark:text-gray-200 hover:text-primary'
                 }`}
                 onClick={handleMediWalletClick}
               >
@@ -176,7 +194,7 @@ const Header = () => {
                 className={`font-sans text-base font-medium transition-colors ${
                   location.pathname === '/ai-events' || location.pathname === '/ai-talk'
                     ? 'text-primary' 
-                    : 'text-gray-700 hover:text-primary'
+                    : 'text-gray-700 dark:text-gray-200 hover:text-primary'
                 }`}
                 onClick={(e) => {
                   e.preventDefault();
@@ -217,46 +235,46 @@ const Header = () => {
 
           {/* Mobile menu */}
           {isMenuOpen && (
-            <div className="lg:hidden absolute top-16 left-0 right-0 bg-white shadow-md py-4 px-4 z-50">
+            <div className="lg:hidden absolute top-16 left-0 right-0 bg-white dark:bg-gray-900 shadow-md py-4 px-4 z-50">
               <nav className="flex flex-col space-y-4">
                 <a 
                   href="/" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                   onClick={closeMenu}
                 >
                   Home
                 </a>
                 <a 
                   href="/#services" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                   onClick={closeMenu}
                 >
                   Services
                 </a>
                 <a 
                   href="/#team" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                   onClick={closeMenu}
                 >
                   Team
                 </a>
                 <a 
                   href="/#testimonials" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                   onClick={closeMenu}
                 >
                   Testimonials
                 </a>
                 <a 
                   href="/#contact" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                   onClick={closeMenu}
                 >
                   Contact
                 </a>
                 <a 
                   href="/mediwallet" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                   onClick={(e) => {
                     closeMenu();
                     navigate("/mediwallet");
@@ -266,7 +284,7 @@ const Header = () => {
                 </a>
                 <a 
                   href="/ai-events" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                   onClick={(e) => {
                     closeMenu();
                     navigate("/ai-events");
@@ -278,7 +296,7 @@ const Header = () => {
                   <>
                   <a 
                     href="/profile" 
-                    className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                    className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                     onClick={() => {
                       closeMenu();
                       navigate("/profile");
@@ -288,7 +306,7 @@ const Header = () => {
                   </a>
                   <a 
                     href="/user-preferences" 
-                    className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                    className="font-sans text-base font-medium text-gray-700 dark:text-gray-200 hover:text-primary transition-colors"
                     onClick={() => {
                       closeMenu();
                       navigate("/user-preferences");
@@ -303,8 +321,9 @@ const Header = () => {
                       signOut();
                       closeMenu();
                     }}
+                    disabled={isLoading}
                   >
-                    Sign Out
+                    {isLoading ? "Signing out..." : "Sign Out"}
                   </Button>
                   </>
                 )}

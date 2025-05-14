@@ -11,15 +11,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Loader2, Moon, Bell, Shield, Globe } from "lucide-react";
+import { getUserPreferences, saveUserPreferences, setThemePreference } from "@/lib/utils";
 
 const UserPreferences = () => {
   const [loading, setLoading] = useState(true);
-  const [preferences, setPreferences] = useState({
-    emailNotifications: true,
-    darkMode: false,
-    language: "English",
-    twoFactorAuth: false,
-  });
+  const [preferences, setPreferences] = useState(getUserPreferences());
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -35,12 +31,18 @@ const UserPreferences = () => {
           description: "Please sign in to view your preferences",
           variant: "destructive",
         });
-        navigate("/auth");
+        navigate("/auth", { 
+          state: { 
+            redirectTo: "/user-preferences",
+            message: "Please sign in to access your preferences"
+          }
+        });
         return;
       }
       
-      // Try to fetch user preferences (in a real app, this would come from the database)
-      // For now, we just use the default state
+      // Load saved preferences
+      const savedPrefs = getUserPreferences();
+      setPreferences(savedPrefs);
       
       setLoading(false);
     };
@@ -49,20 +51,42 @@ const UserPreferences = () => {
   }, [navigate, toast]);
 
   const handleToggleChange = (prefName) => {
-    setPreferences(prev => ({
-      ...prev,
-      [prefName]: !prev[prefName]
-    }));
+    const newPreferences = {
+      ...preferences,
+      [prefName]: !preferences[prefName]
+    };
     
-    // In a real implementation, this would save to the database
+    setPreferences(newPreferences);
+    saveUserPreferences(newPreferences);
+    
+    // Handle special case for dark mode
+    if (prefName === 'darkMode') {
+      setThemePreference(newPreferences.darkMode ? 'dark' : 'light');
+    }
+    
     toast({
       title: "Preference updated",
       description: `Your ${prefName} setting has been updated.`,
     });
   };
 
+  const handleLanguageChange = (language) => {
+    const newPreferences = {
+      ...preferences,
+      language
+    };
+    
+    setPreferences(newPreferences);
+    saveUserPreferences(newPreferences);
+    
+    toast({
+      title: "Language preference updated",
+      description: `Your language has been set to ${language}.`,
+    });
+  };
+
   const handleSavePreferences = () => {
-    // In a real implementation, this would save all preferences to the database
+    saveUserPreferences(preferences);
     toast({
       title: "Preferences saved",
       description: "Your preferences have been updated successfully.",
@@ -78,7 +102,7 @@ const UserPreferences = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 dark:text-white">
       <Helmet>
         <title>User Preferences | SparkStorm AI</title>
       </Helmet>
@@ -88,7 +112,7 @@ const UserPreferences = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Customize Your Experience</h1>
-          <p className="text-gray-500">Manage your website preferences and settings</p>
+          <p className="text-gray-500 dark:text-gray-400">Manage your website preferences and settings</p>
         </div>
 
         <div className="mx-auto max-w-4xl">
@@ -109,7 +133,7 @@ const UserPreferences = () => {
             </TabsList>
             
             <TabsContent value="notifications">
-              <Card>
+              <Card className="dark:border-gray-700 dark:bg-gray-800">
                 <CardHeader>
                   <CardTitle>Notification Preferences</CardTitle>
                 </CardHeader>
@@ -117,7 +141,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="email-notifications">Email Notifications</Label>
-                      <p className="text-sm text-gray-500">Receive updates and alerts via email</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Receive updates and alerts via email</p>
                     </div>
                     <Switch 
                       id="email-notifications" 
@@ -129,7 +153,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="mediWallet-updates">MediWallet Updates</Label>
-                      <p className="text-sm text-gray-500">Receive notifications about MediWallet launches and features</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Receive notifications about MediWallet launches and features</p>
                     </div>
                     <Switch 
                       id="mediWallet-updates" 
@@ -145,7 +169,7 @@ const UserPreferences = () => {
             </TabsContent>
             
             <TabsContent value="appearance">
-              <Card>
+              <Card className="dark:border-gray-700 dark:bg-gray-800">
                 <CardHeader>
                   <CardTitle>Appearance Settings</CardTitle>
                 </CardHeader>
@@ -153,7 +177,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="dark-mode">Dark Mode</Label>
-                      <p className="text-sm text-gray-500">Use dark theme for the website</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Use dark theme for the website</p>
                     </div>
                     <Switch 
                       id="dark-mode" 
@@ -165,14 +189,14 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="language">Language</Label>
-                      <p className="text-sm text-gray-500">Select your preferred language</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Select your preferred language</p>
                     </div>
                     <div className="w-32">
                       <select 
                         id="language"
-                        className="w-full rounded border border-gray-300 p-2"
+                        className="w-full rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-700 p-2"
                         value={preferences.language}
-                        onChange={(e) => setPreferences(prev => ({...prev, language: e.target.value}))}
+                        onChange={(e) => handleLanguageChange(e.target.value)}
                       >
                         <option value="English">English</option>
                         <option value="Spanish">Spanish</option>
@@ -185,7 +209,7 @@ const UserPreferences = () => {
             </TabsContent>
             
             <TabsContent value="privacy">
-              <Card>
+              <Card className="dark:border-gray-700 dark:bg-gray-800">
                 <CardHeader>
                   <CardTitle>Privacy Settings</CardTitle>
                 </CardHeader>
@@ -193,7 +217,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="two-factor">Two-Factor Authentication</Label>
-                      <p className="text-sm text-gray-500">Add an extra layer of security to your account</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Add an extra layer of security to your account</p>
                     </div>
                     <Switch 
                       id="two-factor" 
@@ -205,7 +229,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="data-sharing">Share Usage Data</Label>
-                      <p className="text-sm text-gray-500">Help us improve by allowing anonymous usage statistics</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">Help us improve by allowing anonymous usage statistics</p>
                     </div>
                     <Switch 
                       id="data-sharing" 

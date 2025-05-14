@@ -45,7 +45,12 @@ const Profile = () => {
             description: "Please sign in to view your profile",
             variant: "destructive",
           });
-          navigate("/auth");
+          navigate("/auth", { 
+            state: { 
+              redirectTo: "/profile",
+              message: "Please sign in to access your profile settings"
+            }
+          });
           return;
         }
         
@@ -83,8 +88,21 @@ const Profile = () => {
       (event, session) => {
         if (event === 'SIGNED_OUT') {
           navigate("/auth");
-        } else {
+        } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
           setUser(session?.user || null);
+          
+          if (session?.user) {
+            setFormData({
+              fullName: session.user.user_metadata?.full_name || "",
+              email: session.user.email || "",
+              company: session.user.user_metadata?.company || "",
+              bio: session.user.user_metadata?.bio || "",
+            });
+            
+            if (session.user.user_metadata?.avatar_url) {
+              setAvatarUrl(session.user.user_metadata.avatar_url);
+            }
+          }
         }
       }
     );
@@ -120,6 +138,7 @@ const Profile = () => {
         description: "Your profile information has been updated successfully.",
       });
     } catch (error) {
+      console.error("Update failed:", error);
       toast({
         title: "Update failed",
         description: error.message || "There was a problem updating your profile",
@@ -155,11 +174,12 @@ const Profile = () => {
     try {
       setUploadingAvatar(true);
       
-      // For demonstration, we'll use a data URL instead of Supabase Storage
+      // Convert the file to a data URL
       const reader = new FileReader();
+      
       reader.onload = async (event) => {
         try {
-          // Fix: Ensure we're working with a string for the data URL
+          // Get the data URL
           const dataUrl = event.target.result as string;
           
           // Update user metadata with avatar URL
@@ -198,6 +218,7 @@ const Profile = () => {
       };
       
       reader.readAsDataURL(file);
+      
     } catch (error) {
       console.error("Avatar upload error:", error);
       toast({
@@ -211,7 +232,11 @@ const Profile = () => {
 
   const handleSignOut = async () => {
     try {
-      await supabase.auth.signOut();
+      setSaving(true);
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) throw error;
+      
       navigate("/");
       toast({
         title: "Signed out",
@@ -224,6 +249,8 @@ const Profile = () => {
         description: "There was a problem signing out. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -244,7 +271,7 @@ const Profile = () => {
     : '?';
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 dark:text-white">
       <Helmet>
         <title>Your Profile | SparkStorm AI</title>
       </Helmet>
@@ -273,7 +300,7 @@ const Profile = () => {
             />
           </div>
           <h1 className="mb-2 text-3xl font-bold">{formData.fullName}</h1>
-          <p className="text-gray-500">{formData.email}</p>
+          <p className="text-gray-500 dark:text-gray-400">{formData.email}</p>
           {uploadingAvatar && (
             <div className="mt-2 flex items-center">
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -300,10 +327,10 @@ const Profile = () => {
             </TabsList>
             
             <TabsContent value="profile">
-              <Card>
+              <Card className="dark:border-gray-700 dark:bg-gray-800">
                 <CardHeader>
                   <CardTitle>Profile Information</CardTitle>
-                  <CardDescription>
+                  <CardDescription className="dark:text-gray-400">
                     Update your SparkStorm AI website profile
                   </CardDescription>
                 </CardHeader>
@@ -318,6 +345,7 @@ const Profile = () => {
                           value={formData.fullName}
                           onChange={handleProfileChange}
                           placeholder="Your full name"
+                          className="dark:border-gray-700 dark:bg-gray-700"
                         />
                       </div>
 
@@ -329,9 +357,9 @@ const Profile = () => {
                           type="email"
                           value={formData.email}
                           disabled
-                          className="bg-gray-100"
+                          className="bg-gray-100 dark:bg-gray-600 dark:text-gray-300"
                         />
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-400">
                           Email address cannot be changed
                         </p>
                       </div>
@@ -344,6 +372,7 @@ const Profile = () => {
                           value={formData.company}
                           onChange={handleProfileChange}
                           placeholder="Your company name"
+                          className="dark:border-gray-700 dark:bg-gray-700"
                         />
                       </div>
 
@@ -356,6 +385,7 @@ const Profile = () => {
                           onChange={handleProfileChange}
                           placeholder="Tell us a bit about yourself"
                           rows={4}
+                          className="dark:border-gray-700 dark:bg-gray-700"
                         />
                       </div>
                     </div>
@@ -375,7 +405,7 @@ const Profile = () => {
                 <CardFooter>
                   <div className="w-full text-right">
                     <Link to="/user-preferences">
-                      <Button variant="outline" className="flex items-center gap-2">
+                      <Button variant="outline" className="flex items-center gap-2 dark:border-gray-600 dark:hover:bg-gray-700">
                         <Cog className="h-4 w-4" />
                         Additional Preferences
                       </Button>
@@ -386,19 +416,19 @@ const Profile = () => {
             </TabsContent>
             
             <TabsContent value="security">
-              <Card>
+              <Card className="dark:border-gray-700 dark:bg-gray-800">
                 <CardHeader>
                   <CardTitle>Security Settings</CardTitle>
-                  <CardDescription>
+                  <CardDescription className="dark:text-gray-400">
                     Manage your account security
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <p>
+                    <p className="dark:text-gray-300">
                       Your account is secured with email and password authentication. For security reasons, you cannot change your password directly from this interface.
                     </p>
-                    <p>
+                    <p className="dark:text-gray-300">
                       If you need to reset your password, please use the "Forgot Password" option on the login page.
                     </p>
                   </div>
@@ -408,9 +438,10 @@ const Profile = () => {
                       variant="destructive" 
                       onClick={handleSignOut}
                       className="flex items-center gap-2"
+                      disabled={saving}
                     >
                       <LogOut className="h-4 w-4" />
-                      Sign Out
+                      {saving ? "Signing out..." : "Sign Out"}
                     </Button>
                   </div>
                 </CardContent>
@@ -418,10 +449,10 @@ const Profile = () => {
             </TabsContent>
 
             <TabsContent value="notifications">
-              <Card>
+              <Card className="dark:border-gray-700 dark:bg-gray-800">
                 <CardHeader>
                   <CardTitle>MediWallet Updates</CardTitle>
-                  <CardDescription>
+                  <CardDescription className="dark:text-gray-400">
                     Get notified when the MediWallet mobile app launches
                   </CardDescription>
                 </CardHeader>
