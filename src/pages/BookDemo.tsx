@@ -5,42 +5,12 @@ import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
-import { Loader2, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import CalendlyEmbed from "@/components/CalendlyEmbed";
+import RequireAuth from "@/components/RequireAuth";
 
 const BookDemo = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    // Check if user is logged in, but don't require authentication
-    const checkSession = async () => {
-      setLoading(true);
-      const { data: { session } } = await supabase.auth.getSession();
-      const user = session?.user || null;
-      setUser(user);
-      setLoading(false);
-    };
-
-    checkSession();
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user || null);
-      }
-    );
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -70,7 +40,9 @@ const BookDemo = () => {
         </div>
 
         <div className="mx-auto max-w-xl bg-white p-8 rounded-xl shadow-sm">
-          <CalendlyEmbed />
+          <RequireAuth feature="Demo Booking">
+            <CalendlyEmbed />
+          </RequireAuth>
         </div>
       </main>
     </div>

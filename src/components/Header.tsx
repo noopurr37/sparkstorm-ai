@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -23,8 +24,12 @@ const Header = () => {
   useEffect(() => {
     // Get user on mount
     const getUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      setUser(session?.user || null);
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        setUser(session?.user || null);
+      } catch (error) {
+        console.error("Error fetching session:", error);
+      }
     };
 
     getUser();
@@ -54,8 +59,7 @@ const Header = () => {
 
   const signOut = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      await supabase.auth.signOut();
       
       toast({
         title: "Signed out",
@@ -63,9 +67,10 @@ const Header = () => {
       });
       navigate("/");
     } catch (error) {
+      console.error("Sign out error:", error);
       toast({
         title: "Sign out failed",
-        description: error.message || "There was a problem signing out",
+        description: "There was a problem signing out. Please try again.",
         variant: "destructive",
       });
     }

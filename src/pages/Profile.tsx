@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -34,37 +35,46 @@ const Profile = () => {
   useEffect(() => {
     // Check if user is logged in
     const checkSession = async () => {
-      setLoading(true);
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (!session) {
+      try {
+        setLoading(true);
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (!session) {
+          toast({
+            title: "Authentication required",
+            description: "Please sign in to view your profile",
+            variant: "destructive",
+          });
+          navigate("/auth");
+          return;
+        }
+        
+        const user = session?.user || null;
+        setUser(user);
+        
+        if (user) {
+          setFormData({
+            fullName: user.user_metadata?.full_name || "",
+            email: user.email || "",
+            company: user.user_metadata?.company || "",
+            bio: user.user_metadata?.bio || "",
+          });
+
+          // Try to get avatar URL from metadata
+          if (user.user_metadata?.avatar_url) {
+            setAvatarUrl(user.user_metadata.avatar_url);
+          }
+        }
+      } catch (error) {
+        console.error("Error checking session:", error);
         toast({
-          title: "Authentication required",
-          description: "Please sign in to view your profile",
+          title: "Error",
+          description: "Failed to load your profile information",
           variant: "destructive",
         });
-        navigate("/auth");
-        return;
+      } finally {
+        setLoading(false);
       }
-      
-      const user = session?.user || null;
-      setUser(user);
-      
-      if (user) {
-        setFormData({
-          fullName: user.user_metadata?.full_name || "",
-          email: user.email || "",
-          company: user.user_metadata?.company || "",
-          bio: user.user_metadata?.bio || "",
-        });
-
-        // Try to get avatar URL from metadata
-        if (user.user_metadata?.avatar_url) {
-          setAvatarUrl(user.user_metadata.avatar_url);
-        }
-      }
-      
-      setLoading(false);
     };
 
     checkSession();
@@ -73,8 +83,9 @@ const Profile = () => {
       (event, session) => {
         if (event === 'SIGNED_OUT') {
           navigate("/auth");
+        } else {
+          setUser(session?.user || null);
         }
-        setUser(session?.user || null);
       }
     );
 
@@ -144,35 +155,54 @@ const Profile = () => {
     try {
       setUploadingAvatar(true);
       
-      // In a real app with storage set up, you would upload to Supabase Storage
-      // For demonstration, we'll use a data URL
+      // For demonstration, we'll use a data URL instead of Supabase Storage
       const reader = new FileReader();
       reader.onload = async (event) => {
-        // Fix: Ensure we're working with a string for the data URL
-        const dataUrl = event.target.result as string;
-        
-        // Update user metadata with avatar URL
-        const { data, error } = await supabase.auth.updateUser({
-          data: { avatar_url: dataUrl }
-        });
-        
-        if (error) throw error;
-        
-        // Update the local state with the new avatar URL
-        setAvatarUrl(dataUrl);
-        
-        toast({
-          title: "Profile picture updated",
-          description: "Your profile picture has been updated successfully.",
-        });
-        
-        setUploadingAvatar(false);
+        try {
+          // Fix: Ensure we're working with a string for the data URL
+          const dataUrl = event.target.result as string;
+          
+          // Update user metadata with avatar URL
+          const { error } = await supabase.auth.updateUser({
+            data: { avatar_url: dataUrl }
+          });
+          
+          if (error) throw error;
+          
+          // Update the local state with the new avatar URL
+          setAvatarUrl(dataUrl);
+          
+          toast({
+            title: "Profile picture updated",
+            description: "Your profile picture has been updated successfully.",
+          });
+        } catch (error) {
+          console.error("Error updating avatar:", error);
+          toast({
+            title: "Update failed",
+            description: "Failed to update your profile picture. Please try again.",
+            variant: "destructive",
+          });
+        } finally {
+          setUploadingAvatar(false);
+        }
       };
+      
+      reader.onerror = () => {
+        setUploadingAvatar(false);
+        toast({
+          title: "Upload failed",
+          description: "Failed to read the image file. Please try another image.",
+          variant: "destructive",
+        });
+      };
+      
       reader.readAsDataURL(file);
     } catch (error) {
+      console.error("Avatar upload error:", error);
       toast({
         title: "Upload failed",
-        description: error.message || "There was a problem uploading your profile picture",
+        description: "There was a problem uploading your profile picture",
         variant: "destructive",
       });
       setUploadingAvatar(false);
@@ -181,17 +211,17 @@ const Profile = () => {
 
   const handleSignOut = async () => {
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      await supabase.auth.signOut();
       navigate("/");
       toast({
         title: "Signed out",
         description: "You have been signed out successfully.",
       });
     } catch (error) {
+      console.error("Sign out error:", error);
       toast({
         title: "Sign out failed",
-        description: error.message || "There was a problem signing out",
+        description: "There was a problem signing out. Please try again.",
         variant: "destructive",
       });
     }
