@@ -64,6 +64,15 @@ const config: Config = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         display: ["Inter", ...fontFamily.sans], // Define font-display here
       },
+      boxShadow: {
+        glass: "0 4px 16px rgba(0, 0, 0, 0.08)",
+        "glass-hover": "0 10px 24px rgba(0, 0, 0, 0.12)",
+        button: "0 2px 8px rgba(0, 0, 0, 0.08)",
+        "button-hover": "0 4px 16px rgba(0, 0, 0, 0.12)",
+      },
+      backgroundImage: {
+        "gradient-primary": "linear-gradient(135deg, #0070F3 0%, #00BFFF 100%)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
