@@ -9,6 +9,7 @@ import Testimonials from "@/components/Testimonials";
 import Newsletter from "@/components/Newsletter";
 import Contact from "@/components/Contact";
 import AIAssistant from "@/components/AIAssistant";
+import MediWalletSignup from "@/components/MediWalletSignup";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet-async";
 import { Linkedin, Instagram } from "lucide-react";
@@ -37,6 +38,26 @@ const Index = () => {
         <div className="bg-gradient-to-b from-white to-gray-50 py-4">
           <Affiliations />
         </div>
+        
+        {/* MediWallet Signup Section */}
+        <section className="py-16 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Coming Soon: MediWallet
+              </h2>
+              <p className="text-lg text-gray-600">
+                Our innovative healthcare finance management solution is launching soon. 
+                Be the first to know when it's available.
+              </p>
+            </div>
+            
+            <div className="max-w-md mx-auto">
+              <MediWalletSignup />
+            </div>
+          </div>
+        </section>
+        
         <Newsletter />
         <Contact />
       </main>
