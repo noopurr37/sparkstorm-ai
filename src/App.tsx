@@ -31,6 +31,7 @@ const App = () => (
             <Route path="/mediwallet" element={<MediWallet />} />
             <Route path="/book-demo" element={<BookDemo />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/ai-events" element={<AIEvents />} />
             <Route path="/ai-talk" element={<AIEvents />} /> {/* Keep old route for compatibility */}
             <Route path="/terms-of-service" element={<TermsOfService />} />

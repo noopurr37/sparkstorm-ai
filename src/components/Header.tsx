@@ -48,11 +48,6 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  const handleMediWalletClick = (e) => {
-    e.preventDefault();
-    navigate("/mediwallet");
-  };
-
   // Updated sign out function to handle offline cases properly
   const signOut = async () => {
     try {
@@ -133,23 +128,22 @@ const Header = () => {
     <header className="bg-white py-4 shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between">
-          {/* Logo - now on the left */}
-          <div className="flex items-center">
+          {/* Logo and navigation container */}
+          <div className="flex items-center gap-8">
+            {/* Logo */}
             <a href="/" className="flex items-center gap-3">
               <img
                 src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png"
                 alt="SparkStorm AI Logo"
                 className="h-10 w-auto"
               />
-            </a>
-          </div>
-
-          {/* Center navigation - now actually centered */}
-          <div className="hidden lg:flex items-center justify-center">
-            <div className="flex items-center gap-6">
-              <a href="/" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
+              <span className="font-sans text-base font-medium text-gray-800 hover:text-primary transition-colors">
                 Home
-              </a>
+              </span>
+            </a>
+
+            {/* Desktop Navigation - SIMPLIFIED to only main pages */}
+            <div className="hidden lg:flex items-center justify-center gap-8">
               <a 
                 href="/mediwallet" 
                 className={`font-sans text-base font-medium transition-colors ${
@@ -157,7 +151,10 @@ const Header = () => {
                     ? 'text-primary' 
                     : 'text-gray-700 hover:text-primary'
                 }`}
-                onClick={handleMediWalletClick}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/mediwallet");
+                }}
               >
                 MediWallet
               </a>
@@ -178,28 +175,26 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Auth button - now on the right */}
-          <div className="flex items-center">
-            <div className="hidden lg:block">
+          {/* Auth button (desktop) */}
+          <div className="hidden lg:block">
+            {renderAuthButtons()}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="lg:hidden flex items-center gap-4">
+            {/* Auth button (mobile) */}
+            <div className="block lg:hidden">
               {renderAuthButtons()}
             </div>
 
-            {/* Mobile menu button */}
-            <div className="lg:hidden flex items-center gap-4">
-              {/* Auth button (mobile) */}
-              <div className="block lg:hidden">
-                {renderAuthButtons()}
-              </div>
-
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleMenu}
-                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </Button>
-            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleMenu}
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </Button>
           </div>
 
           {/* Mobile menu */}
@@ -209,7 +204,11 @@ const Header = () => {
                 <a 
                   href="/" 
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeMenu();
+                    navigate("/");
+                  }}
                 >
                   Home
                 </a>
@@ -217,6 +216,7 @@ const Header = () => {
                   href="/mediwallet" 
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={(e) => {
+                    e.preventDefault();
                     closeMenu();
                     navigate("/mediwallet");
                   }}
@@ -227,6 +227,7 @@ const Header = () => {
                   href="/ai-events" 
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={(e) => {
+                    e.preventDefault();
                     closeMenu();
                     navigate("/ai-events");
                   }}
@@ -238,7 +239,8 @@ const Header = () => {
                   <a 
                     href="/profile" 
                     className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       closeMenu();
                       navigate("/profile");
                     }}
