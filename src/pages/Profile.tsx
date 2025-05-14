@@ -2,17 +2,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { supabase } from "@/integrations/supabase/client";
 import Header from "@/components/Header";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
-import { Loader2, User, Lock, LogOut, Camera, Shield, Settings, Image } from "lucide-react";
+import { Loader2, User, Lock, LogOut, Camera, Shield } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import MediWalletSignup from "@/components/MediWalletSignup";
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -22,28 +23,8 @@ const Profile = () => {
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
-    phoneNumber: "",
-    dateOfBirth: "",
-    address: "",
-    city: "",
-    state: "",
-    zipCode: "",
-    country: "",
+    company: "",
     bio: "",
-    emergencyContact: "",
-    emergencyPhone: "",
-  });
-  const [passwordData, setPasswordData] = useState({
-    currentPassword: "",
-    newPassword: "",
-    confirmPassword: "",
-  });
-  const [preferenceData, setPreferenceData] = useState({
-    emailNotifications: true,
-    smsNotifications: false,
-    darkMode: false,
-    twoFactorAuth: false,
-    language: "english",
   });
   const [avatarUrl, setAvatarUrl] = useState("");
   const fileInputRef = useRef(null);
@@ -74,31 +55,14 @@ const Profile = () => {
         setFormData({
           fullName: user.user_metadata?.full_name || "",
           email: user.email || "",
-          phoneNumber: user.user_metadata?.phone_number || "",
-          dateOfBirth: user.user_metadata?.date_of_birth || "",
-          address: user.user_metadata?.address || "",
-          city: user.user_metadata?.city || "",
-          state: user.user_metadata?.state || "",
-          zipCode: user.user_metadata?.zip_code || "",
-          country: user.user_metadata?.country || "",
+          company: user.user_metadata?.company || "",
           bio: user.user_metadata?.bio || "",
-          emergencyContact: user.user_metadata?.emergency_contact || "",
-          emergencyPhone: user.user_metadata?.emergency_phone || "",
         });
 
         // Try to get avatar URL from metadata
         if (user.user_metadata?.avatar_url) {
           setAvatarUrl(user.user_metadata.avatar_url);
         }
-        
-        // Set preferences (in a real app, these would also come from the database)
-        setPreferenceData({
-          emailNotifications: user.user_metadata?.email_notifications !== false,
-          smsNotifications: user.user_metadata?.sms_notifications || false,
-          darkMode: user.user_metadata?.dark_mode || false,
-          twoFactorAuth: user.user_metadata?.two_factor_auth || false,
-          language: user.user_metadata?.language || "english",
-        });
       }
       
       setLoading(false);
@@ -126,22 +90,6 @@ const Profile = () => {
     }));
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setPasswordData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handlePreferenceChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type } = e.target as HTMLInputElement;
-    setPreferenceData(prev => ({
-      ...prev,
-      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value
-    }));
-  };
-
   const updateProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
@@ -150,16 +98,8 @@ const Profile = () => {
       const { error } = await supabase.auth.updateUser({
         data: { 
           full_name: formData.fullName,
-          phone_number: formData.phoneNumber,
-          date_of_birth: formData.dateOfBirth,
-          address: formData.address,
-          city: formData.city,
-          state: formData.state,
-          zip_code: formData.zipCode,
-          country: formData.country,
-          bio: formData.bio,
-          emergency_contact: formData.emergencyContact,
-          emergency_phone: formData.emergencyPhone
+          company: formData.company,
+          bio: formData.bio
         }
       });
       
@@ -173,81 +113,6 @@ const Profile = () => {
       toast({
         title: "Update failed",
         description: error.message || "There was a problem updating your profile",
-        variant: "destructive",
-      });
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const updatePassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
-      toast({
-        title: "Passwords don't match",
-        description: "New password and confirmation must match",
-        variant: "destructive",
-      });
-      return;
-    }
-    
-    setSaving(true);
-    
-    try {
-      const { error } = await supabase.auth.updateUser({ 
-        password: passwordData.newPassword 
-      });
-      
-      if (error) throw error;
-      
-      toast({
-        title: "Password updated",
-        description: "Your password has been changed successfully.",
-      });
-      
-      // Reset form
-      setPasswordData({
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: "",
-      });
-    } catch (error) {
-      toast({
-        title: "Update failed",
-        description: error.message || "There was a problem updating your password",
-        variant: "destructive",
-      });
-    } finally {
-      setSaving(false);
-    }
-  };
-
-  const updatePreferences = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSaving(true);
-    
-    try {
-      const { error } = await supabase.auth.updateUser({
-        data: { 
-          email_notifications: preferenceData.emailNotifications,
-          sms_notifications: preferenceData.smsNotifications,
-          dark_mode: preferenceData.darkMode,
-          two_factor_auth: preferenceData.twoFactorAuth,
-          language: preferenceData.language
-        }
-      });
-      
-      if (error) throw error;
-      
-      toast({
-        title: "Preferences updated",
-        description: "Your preferences have been updated successfully.",
-      });
-    } catch (error) {
-      toast({
-        title: "Update failed",
-        description: error.message || "There was a problem updating your preferences",
         variant: "destructive",
       });
     } finally {
@@ -288,7 +153,6 @@ const Profile = () => {
         setAvatarUrl(dataUrl);
         
         // Update user metadata with avatar URL
-        // In a real app with Supabase Storage, you would store the storage URL
         const { error } = await supabase.auth.updateUser({
           data: { avatar_url: dataUrl }
         });
@@ -341,7 +205,7 @@ const Profile = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Helmet>
-        <title>Your Profile | MediWallet</title>
+        <title>Your Profile | SparkStorm AI</title>
       </Helmet>
 
       <Header />
@@ -379,31 +243,27 @@ const Profile = () => {
 
         <div className="mx-auto max-w-4xl">
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="mb-6 grid w-full grid-cols-4">
+            <TabsList className="mb-6 grid w-full grid-cols-3">
               <TabsTrigger value="profile">
                 <User className="mr-2 h-4 w-4" />
-                Personal Info
+                Profile
               </TabsTrigger>
               <TabsTrigger value="security">
                 <Lock className="mr-2 h-4 w-4" />
                 Security
               </TabsTrigger>
-              <TabsTrigger value="preferences">
-                <Settings className="mr-2 h-4 w-4" />
-                Preferences
-              </TabsTrigger>
-              <TabsTrigger value="privacy">
+              <TabsTrigger value="notifications">
                 <Shield className="mr-2 h-4 w-4" />
-                Privacy
+                MediWallet Updates
               </TabsTrigger>
             </TabsList>
             
             <TabsContent value="profile">
               <Card>
                 <CardHeader>
-                  <CardTitle>Personal Information</CardTitle>
+                  <CardTitle>Profile Information</CardTitle>
                   <CardDescription>
-                    Update your personal information
+                    Update your SparkStorm AI website profile
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -436,79 +296,13 @@ const Profile = () => {
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="phoneNumber">Phone Number</Label>
+                        <Label htmlFor="company">Company</Label>
                         <Input
-                          id="phoneNumber"
-                          name="phoneNumber"
-                          value={formData.phoneNumber}
+                          id="company"
+                          name="company"
+                          value={formData.company}
                           onChange={handleProfileChange}
-                          placeholder="Your phone number"
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="dateOfBirth">Date of Birth</Label>
-                        <Input
-                          id="dateOfBirth"
-                          name="dateOfBirth"
-                          type="date"
-                          value={formData.dateOfBirth}
-                          onChange={handleProfileChange}
-                        />
-                      </div>
-
-                      <div className="space-y-2 md:col-span-2">
-                        <Label htmlFor="address">Address</Label>
-                        <Input
-                          id="address"
-                          name="address"
-                          value={formData.address}
-                          onChange={handleProfileChange}
-                          placeholder="Street address"
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="city">City</Label>
-                        <Input
-                          id="city"
-                          name="city"
-                          value={formData.city}
-                          onChange={handleProfileChange}
-                          placeholder="City"
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="state">State/Province</Label>
-                        <Input
-                          id="state"
-                          name="state"
-                          value={formData.state}
-                          onChange={handleProfileChange}
-                          placeholder="State or province"
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="zipCode">ZIP/Postal Code</Label>
-                        <Input
-                          id="zipCode"
-                          name="zipCode"
-                          value={formData.zipCode}
-                          onChange={handleProfileChange}
-                          placeholder="ZIP or postal code"
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="country">Country</Label>
-                        <Input
-                          id="country"
-                          name="country"
-                          value={formData.country}
-                          onChange={handleProfileChange}
-                          placeholder="Country"
+                          placeholder="Your company name"
                         />
                       </div>
 
@@ -521,28 +315,6 @@ const Profile = () => {
                           onChange={handleProfileChange}
                           placeholder="Tell us a bit about yourself"
                           rows={4}
-                        />
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="emergencyContact">Emergency Contact</Label>
-                        <Input
-                          id="emergencyContact"
-                          name="emergencyContact"
-                          value={formData.emergencyContact}
-                          onChange={handleProfileChange}
-                          placeholder="Emergency contact name"
-                        />
-                      </div>
-                      
-                      <div className="space-y-2">
-                        <Label htmlFor="emergencyPhone">Emergency Contact Phone</Label>
-                        <Input
-                          id="emergencyPhone"
-                          name="emergencyPhone"
-                          value={formData.emergencyPhone}
-                          onChange={handleProfileChange}
-                          placeholder="Emergency contact phone"
                         />
                       </div>
                     </div>
@@ -567,252 +339,43 @@ const Profile = () => {
                 <CardHeader>
                   <CardTitle>Security Settings</CardTitle>
                   <CardDescription>
-                    Update your password and security preferences
+                    Manage your account security
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={updatePassword} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="currentPassword">Current Password</Label>
-                      <Input
-                        id="currentPassword"
-                        name="currentPassword"
-                        type="password"
-                        value={passwordData.currentPassword}
-                        onChange={handlePasswordChange}
-                        placeholder="Your current password"
-                        required
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="newPassword">New Password</Label>
-                      <Input
-                        id="newPassword"
-                        name="newPassword"
-                        type="password"
-                        value={passwordData.newPassword}
-                        onChange={handlePasswordChange}
-                        placeholder="Your new password"
-                        required
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="confirmPassword">Confirm New Password</Label>
-                      <Input
-                        id="confirmPassword"
-                        name="confirmPassword"
-                        type="password"
-                        value={passwordData.confirmPassword}
-                        onChange={handlePasswordChange}
-                        placeholder="Confirm your new password"
-                        required
-                      />
-                    </div>
-
-                    <Button type="submit" disabled={saving}>
-                      {saving ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Updating...
-                        </>
-                      ) : (
-                        "Update Password"
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-
-              <Card className="mt-6 border-red-200">
-                <CardHeader>
-                  <CardTitle className="text-red-500">Account Management</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-4">
-                    Sign out from your account or manage your account settings.
-                  </p>
-                  <Button 
-                    variant="destructive" 
-                    onClick={handleSignOut}
-                    className="flex items-center gap-2"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    Sign Out
-                  </Button>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="preferences">
-              <Card>
-                <CardHeader>
-                  <CardTitle>User Preferences</CardTitle>
-                  <CardDescription>
-                    Customize your application experience
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={updatePreferences} className="space-y-6">
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <Label className="text-base">Email Notifications</Label>
-                          <p className="text-sm text-gray-500">Receive updates and alerts via email</p>
-                        </div>
-                        <input
-                          type="checkbox"
-                          name="emailNotifications"
-                          checked={preferenceData.emailNotifications}
-                          onChange={handlePreferenceChange}
-                          className="h-6 w-6 rounded border-gray-300 text-primary focus:ring-primary"
-                        />
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <Label className="text-base">SMS Notifications</Label>
-                          <p className="text-sm text-gray-500">Receive updates and alerts via SMS</p>
-                        </div>
-                        <input
-                          type="checkbox"
-                          name="smsNotifications"
-                          checked={preferenceData.smsNotifications}
-                          onChange={handlePreferenceChange}
-                          className="h-6 w-6 rounded border-gray-300 text-primary focus:ring-primary"
-                        />
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <Label className="text-base">Dark Mode</Label>
-                          <p className="text-sm text-gray-500">Use dark theme for the application</p>
-                        </div>
-                        <input
-                          type="checkbox"
-                          name="darkMode"
-                          checked={preferenceData.darkMode}
-                          onChange={handlePreferenceChange}
-                          className="h-6 w-6 rounded border-gray-300 text-primary focus:ring-primary"
-                        />
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <Label className="text-base">Two-Factor Authentication</Label>
-                          <p className="text-sm text-gray-500">Add an extra layer of security to your account</p>
-                        </div>
-                        <input
-                          type="checkbox"
-                          name="twoFactorAuth"
-                          checked={preferenceData.twoFactorAuth}
-                          onChange={handlePreferenceChange}
-                          className="h-6 w-6 rounded border-gray-300 text-primary focus:ring-primary"
-                        />
-                      </div>
-
-                      <div>
-                        <Label htmlFor="language">Language</Label>
-                        <select
-                          id="language"
-                          name="language"
-                          value={preferenceData.language}
-                          onChange={handlePreferenceChange}
-                          className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-primary focus:outline-none focus:ring-primary sm:text-sm"
-                        >
-                          <option value="english">English</option>
-                          <option value="spanish">Spanish</option>
-                          <option value="french">French</option>
-                          <option value="german">German</option>
-                          <option value="chinese">Chinese</option>
-                          <option value="japanese">Japanese</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <Button type="submit" disabled={saving}>
-                      {saving ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Saving...
-                        </>
-                      ) : (
-                        "Save Preferences"
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </TabsContent>
-
-            <TabsContent value="privacy">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Privacy Settings</CardTitle>
-                  <CardDescription>
-                    Manage your privacy and data settings
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-6">
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-medium">Data Sharing</h3>
-                      <p className="text-gray-500">
-                        Control how your data is shared and used within the application
-                      </p>
-                      
-                      <div className="rounded-lg border p-4">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="font-medium">Share usage data to improve services</p>
-                            <p className="text-sm text-gray-500">
-                              Help us improve by allowing anonymous usage statistics
-                            </p>
-                          </div>
-                          <input
-                            type="checkbox"
-                            defaultChecked={true}
-                            className="h-6 w-6 rounded border-gray-300 text-primary focus:ring-primary"
-                          />
-                        </div>
-                      </div>
-                      
-                      <div className="rounded-lg border p-4">
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <p className="font-medium">Allow profile discovery</p>
-                            <p className="text-sm text-gray-500">
-                              Let other users find your profile
-                            </p>
-                          </div>
-                          <input
-                            type="checkbox"
-                            defaultChecked={false}
-                            className="h-6 w-6 rounded border-gray-300 text-primary focus:ring-primary"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-medium">Data Management</h3>
-                      <p className="text-gray-500">
-                        Manage your personal data stored in our systems
-                      </p>
-                      
-                      <div className="flex flex-col space-y-4">
-                        <Button variant="outline">
-                          <Image className="mr-2 h-4 w-4" />
-                          Download Your Data
-                        </Button>
-                        
-                        <Button variant="outline" className="text-red-500 hover:bg-red-50 hover:text-red-600">
-                          Delete All Data
-                        </Button>
-                      </div>
-                    </div>
+                  <div className="space-y-4">
+                    <p>
+                      Your account is secured with email and password authentication. For security reasons, you cannot change your password directly from this interface.
+                    </p>
+                    <p>
+                      If you need to reset your password, please use the "Forgot Password" option on the login page.
+                    </p>
                   </div>
+
+                  <div className="mt-6">
+                    <Button 
+                      variant="destructive" 
+                      onClick={handleSignOut}
+                      className="flex items-center gap-2"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Sign Out
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <TabsContent value="notifications">
+              <Card>
+                <CardHeader>
+                  <CardTitle>MediWallet Updates</CardTitle>
+                  <CardDescription>
+                    Get notified when the MediWallet mobile app launches
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <MediWalletSignup />
                 </CardContent>
               </Card>
             </TabsContent>
