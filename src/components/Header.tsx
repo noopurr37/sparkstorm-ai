@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
+import { Menu, X, User, LogOut, Wallet, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -109,10 +109,6 @@ const Header = () => {
               <User className="mr-2 h-4 w-4" />
               Profile Settings
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/user-preferences")}>
-              <Settings className="mr-2 h-4 w-4" />
-              Website Preferences
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={signOut}>
               <LogOut className="mr-2 h-4 w-4" />
@@ -137,33 +133,22 @@ const Header = () => {
     <header className="bg-white py-4 shadow-sm sticky top-0 z-50">
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between">
-          {/* Logo and navigation container */}
-          <div className="flex items-center gap-8">
-            {/* Logo */}
+          {/* Logo - now on the left */}
+          <div className="flex items-center">
             <a href="/" className="flex items-center gap-3">
               <img
                 src="/lovable-uploads/7879e10d-f875-48a1-a7a4-43be226d30a0.png"
                 alt="SparkStorm AI Logo"
                 className="h-10 w-auto"
               />
-              <span className="font-sans text-base font-medium text-gray-800 hover:text-primary transition-colors">
-                Home
-              </span>
             </a>
+          </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
-              <a href="/#services" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Services
-              </a>
-              <a href="/#team" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Team
-              </a>
-              <a href="/#testimonials" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Testimonials
-              </a>
-              <a href="/#contact" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Contact
+          {/* Center navigation - now actually centered */}
+          <div className="hidden lg:flex items-center justify-center">
+            <div className="flex items-center gap-6">
+              <a href="/" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
+                Home
               </a>
               <a 
                 href="/mediwallet" 
@@ -190,34 +175,31 @@ const Header = () => {
               >
                 AI Events
               </a>
-              
-              {/* Sign In Button moved into the navigation for desktop */}
-              <div className="lg:block ml-4">
-                {renderAuthButtons()}
-              </div>
             </div>
           </div>
 
-          {/* Auth button (desktop) - hidden from here as it's now inside the navigation */}
-          <div className="hidden">
-            {renderAuthButtons()}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="lg:hidden flex items-center gap-4">
-            {/* Auth button (mobile) */}
-            <div className="block lg:hidden">
+          {/* Auth button - now on the right */}
+          <div className="flex items-center">
+            <div className="hidden lg:block">
               {renderAuthButtons()}
             </div>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleMenu}
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </Button>
+            {/* Mobile menu button */}
+            <div className="lg:hidden flex items-center gap-4">
+              {/* Auth button (mobile) */}
+              <div className="block lg:hidden">
+                {renderAuthButtons()}
+              </div>
+
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleMenu}
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </Button>
+            </div>
           </div>
 
           {/* Mobile menu */}
@@ -230,34 +212,6 @@ const Header = () => {
                   onClick={closeMenu}
                 >
                   Home
-                </a>
-                <a 
-                  href="/#services" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Services
-                </a>
-                <a 
-                  href="/#team" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Team
-                </a>
-                <a 
-                  href="/#testimonials" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Testimonials
-                </a>
-                <a 
-                  href="/#contact" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Contact
                 </a>
                 <a 
                   href="/mediwallet" 
@@ -290,16 +244,6 @@ const Header = () => {
                     }}
                   >
                     Profile Settings
-                  </a>
-                  <a 
-                    href="/user-preferences" 
-                    className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                    onClick={() => {
-                      closeMenu();
-                      navigate("/user-preferences");
-                    }}
-                  >
-                    Website Preferences
                   </a>
                   <Button 
                     variant="ghost" 
