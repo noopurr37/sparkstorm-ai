@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -369,8 +370,6 @@ const MediWallet = () => {
             </p>
           </div>
         </section>
-
-        {/* Memorial Section is kept, Call to Action is removed */}
       </main>
     </div>
   );

@@ -82,7 +82,7 @@ const UserPreferences = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800 dark:text-white">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Helmet>
         <title>User Preferences | SparkStorm AI</title>
       </Helmet>
@@ -92,7 +92,7 @@ const UserPreferences = () => {
       <main className="container mx-auto px-4 py-12">
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Customize Your Experience</h1>
-          <p className="text-gray-500 dark:text-gray-400">Manage your website preferences and settings</p>
+          <p className="text-gray-500">Manage your website preferences and settings</p>
         </div>
 
         <div className="mx-auto max-w-4xl">
@@ -109,7 +109,7 @@ const UserPreferences = () => {
             </TabsList>
             
             <TabsContent value="notifications">
-              <Card className="dark:border-gray-700 dark:bg-gray-800">
+              <Card>
                 <CardHeader>
                   <CardTitle>Notification Preferences</CardTitle>
                 </CardHeader>
@@ -117,7 +117,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="email-notifications">Email Notifications</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Receive updates and alerts via email</p>
+                      <p className="text-sm text-gray-500">Receive updates and alerts via email</p>
                     </div>
                     <Switch 
                       id="email-notifications" 
@@ -129,7 +129,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="mediWallet-updates">MediWallet Updates</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Receive notifications about MediWallet launches and features</p>
+                      <p className="text-sm text-gray-500">Receive notifications about MediWallet launches and features</p>
                     </div>
                     <Switch 
                       id="mediWallet-updates" 
@@ -145,7 +145,7 @@ const UserPreferences = () => {
             </TabsContent>
             
             <TabsContent value="privacy">
-              <Card className="dark:border-gray-700 dark:bg-gray-800">
+              <Card>
                 <CardHeader>
                   <CardTitle>Privacy Settings</CardTitle>
                 </CardHeader>
@@ -153,7 +153,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="two-factor">Two-Factor Authentication</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Add an extra layer of security to your account</p>
+                      <p className="text-sm text-gray-500">Add an extra layer of security to your account</p>
                     </div>
                     <Switch 
                       id="two-factor" 
@@ -165,7 +165,7 @@ const UserPreferences = () => {
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="data-sharing">Share Usage Data</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Help us improve by allowing anonymous usage statistics</p>
+                      <p className="text-sm text-gray-500">Help us improve by allowing anonymous usage statistics</p>
                     </div>
                     <Switch 
                       id="data-sharing" 
