@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -54,65 +53,68 @@ const MediWallet = () => {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Helmet>
         <title>MediWallet | SparkStorm AI</title>
-        <meta name="description" content="Secure medical data at your fingertips" />
       </Helmet>
 
       <Header />
 
-      <main className="container mx-auto px-4 py-12">
-        <div className="mb-12 text-center">
-          <h1 className="mb-4 text-4xl font-bold md:text-5xl">
-            MediWallet: Empowering Borderless Personal Health Management
-          </h1>
-          <p className="mx-auto max-w-3xl text-lg text-gray-600">
-            A secure, AI-powered personal health vault that transforms fragmented 
-            medical records into actionable intelligence.
-          </p>
-          
-          {/* Product Hunt Badge */}
-          <div className="mt-6 flex justify-center">
-            <a 
-              href="https://www.producthunt.com/posts/mediwallet?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-mediwallet" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="transform transition-transform hover:scale-105"
-            >
-              <img 
-                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=965559&theme=neutral&t=1747260839447" 
-                alt="MediWallet - Health Data at Fingertips | Product Hunt" 
-                style={{ width: '250px', height: '54px' }} 
-                width="250" 
-                height="54" 
-                className="rounded shadow-md border border-blue-100"
-              />
-            </a>
-          </div>
-        </div>
-
-        {/* Hero Section with Graphic */}
-        <div className="mb-16 flex flex-col items-center rounded-2xl bg-gradient-primary p-8 text-white shadow-lg md:flex-row">
-          <div className="md:w-1/2">
-            <h2 className="mb-4 text-3xl font-bold">Secure Medical Data at Your Fingertips</h2>
-            <p className="mb-6 text-lg">
-              Our platform aggregates, organizes, and interprets medical data across borders, 
-              giving travelers, caregivers, and clinicians instant clarity over complete medical histories.
+      <main>
+        {/* Hero Section with Text */}
+        <section className="bg-gradient-to-r from-blue-50 to-indigo-50 py-16 md:py-24">
+          <div className="container mx-auto px-4 text-center">
+            <h1 className="mb-4 text-4xl font-bold leading-tight md:text-5xl lg:text-6xl">
+              Your <span className="text-gradient">Health Data</span> <br />
+              at Your Fingertips
+            </h1>
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-gray-600">
+              A secure, AI-powered personal health vault that transforms fragmented 
+              medical records into actionable intelligence.
             </p>
-            <Button 
-              onClick={handleBookDemo} 
-              size="lg" 
-              className="bg-white text-primary hover:bg-gray-100 flex items-center"
-            >
-              <CalendarDays className="mr-2 h-5 w-5" /> Book a Demo
-            </Button>
+            
+            {/* Product Hunt Badge - Updated with dark theme */}
+            <div className="mt-6 flex justify-center">
+              <a 
+                href="https://www.producthunt.com/posts/mediwallet?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-mediwallet" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="transform transition-transform hover:scale-105"
+              >
+                <img 
+                  src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=965559&theme=dark&t=1747261145033" 
+                  alt="MediWallet - Health Data at Fingertips | Product Hunt" 
+                  style={{ width: '250px', height: '54px' }} 
+                  width="250" 
+                  height="54" 
+                  className="rounded shadow-md"
+                />
+              </a>
+            </div>
           </div>
-          <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
-            <img 
-              src="/lovable-uploads/dfcc5169-02a0-4fa3-bff5-42f9c9ff85f6.png" 
-              alt="Medical data visualization" 
-              className="max-h-64 w-auto rounded-lg shadow-xl" 
-            />
+
+          {/* Hero Section with Graphic */}
+          <div className="mb-16 flex flex-col items-center rounded-2xl bg-gradient-primary p-8 text-white shadow-lg md:flex-row">
+            <div className="md:w-1/2">
+              <h2 className="mb-4 text-3xl font-bold">Secure Medical Data at Your Fingertips</h2>
+              <p className="mb-6 text-lg">
+                Our platform aggregates, organizes, and interprets medical data across borders, 
+                giving travelers, caregivers, and clinicians instant clarity over complete medical histories.
+              </p>
+              <Button 
+                onClick={handleBookDemo} 
+                size="lg" 
+                className="bg-white text-primary hover:bg-gray-100 flex items-center"
+              >
+                <CalendarDays className="mr-2 h-5 w-5" /> Book a Demo
+              </Button>
+            </div>
+            <div className="mt-8 flex justify-center md:mt-0 md:w-1/2">
+              <img 
+                src="/lovable-uploads/dfcc5169-02a0-4fa3-bff5-42f9c9ff85f6.png" 
+                alt="Medical data visualization" 
+                className="max-h-64 w-auto rounded-lg shadow-xl" 
+              />
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* Features Section */}
         <section className="mb-16">
