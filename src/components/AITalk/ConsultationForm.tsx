@@ -151,10 +151,6 @@ const ConsultationForm = () => {
       >
         {isSubmitting ? "Submitting..." : "Submit Request"}
       </Button>
-      
-      <p className="text-xs text-center text-gray-500">
-        You can also book directly via the calendar link above.
-      </p>
     </form>
   );
 };

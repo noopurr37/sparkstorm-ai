@@ -11,7 +11,7 @@ import Auth from "./pages/Auth";
 import MediWallet from "./pages/MediWallet";
 import BookDemo from "./pages/BookDemo";
 import Profile from "./pages/Profile";
-import AITalk from "./pages/AITalk";
+import AIEvents from "./pages/AIEvents";
 
 const queryClient = new QueryClient();
 
@@ -28,7 +28,8 @@ const App = () => (
             <Route path="/mediwallet" element={<MediWallet />} />
             <Route path="/book-demo" element={<BookDemo />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/ai-talk" element={<AITalk />} />
+            <Route path="/ai-events" element={<AIEvents />} />
+            <Route path="/ai-talk" element={<AIEvents />} /> {/* Keep old route for compatibility */}
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
