@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,7 +11,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Label } from "@/components/ui/label";
-import { Loader2, User, Lock, LogOut, Camera, Shield } from "lucide-react";
+import { Loader2, User, Lock, LogOut, Camera, Shield, Cog } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import MediWalletSignup from "@/components/MediWalletSignup";
 
@@ -34,51 +35,37 @@ const Profile = () => {
   useEffect(() => {
     // Check if user is logged in
     const checkSession = async () => {
-      try {
-        setLoading(true);
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (!session) {
-          toast({
-            title: "Authentication required",
-            description: "Please sign in to view your profile",
-            variant: "destructive",
-          });
-          navigate("/auth", { 
-            state: { 
-              redirectTo: "/profile",
-              message: "Please sign in to access your profile settings"
-            }
-          });
-          return;
-        }
-        
-        const user = session?.user || null;
-        setUser(user);
-        
-        if (user) {
-          setFormData({
-            fullName: user.user_metadata?.full_name || "",
-            email: user.email || "",
-            company: user.user_metadata?.company || "",
-            bio: user.user_metadata?.bio || "",
-          });
-
-          // Try to get avatar URL from metadata
-          if (user.user_metadata?.avatar_url) {
-            setAvatarUrl(user.user_metadata.avatar_url);
-          }
-        }
-      } catch (error) {
-        console.error("Error checking session:", error);
+      setLoading(true);
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
         toast({
-          title: "Error",
-          description: "Failed to load your profile information",
+          title: "Authentication required",
+          description: "Please sign in to view your profile",
           variant: "destructive",
         });
-      } finally {
-        setLoading(false);
+        navigate("/auth");
+        return;
       }
+      
+      const user = session?.user || null;
+      setUser(user);
+      
+      if (user) {
+        setFormData({
+          fullName: user.user_metadata?.full_name || "",
+          email: user.email || "",
+          company: user.user_metadata?.company || "",
+          bio: user.user_metadata?.bio || "",
+        });
+
+        // Try to get avatar URL from metadata
+        if (user.user_metadata?.avatar_url) {
+          setAvatarUrl(user.user_metadata.avatar_url);
+        }
+      }
+      
+      setLoading(false);
     };
 
     checkSession();
@@ -87,22 +74,8 @@ const Profile = () => {
       (event, session) => {
         if (event === 'SIGNED_OUT') {
           navigate("/auth");
-        } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-          setUser(session?.user || null);
-          
-          if (session?.user) {
-            setFormData({
-              fullName: session.user.user_metadata?.full_name || "",
-              email: session.user.email || "",
-              company: session.user.user_metadata?.company || "",
-              bio: session.user.user_metadata?.bio || "",
-            });
-            
-            if (session.user.user_metadata?.avatar_url) {
-              setAvatarUrl(session.user.user_metadata.avatar_url);
-            }
-          }
         }
+        setUser(session?.user || null);
       }
     );
 
@@ -137,7 +110,6 @@ const Profile = () => {
         description: "Your profile information has been updated successfully.",
       });
     } catch (error) {
-      console.error("Update failed:", error);
       toast({
         title: "Update failed",
         description: error.message || "There was a problem updating your profile",
@@ -173,56 +145,34 @@ const Profile = () => {
     try {
       setUploadingAvatar(true);
       
-      // Convert the file to a data URL
+      // In a real app with storage set up, you would upload to Supabase Storage
+      // For demonstration, we'll use a data URL
       const reader = new FileReader();
-      
       reader.onload = async (event) => {
-        try {
-          // Get the data URL
-          const dataUrl = event.target.result as string;
-          
-          // Update user metadata with avatar URL
-          const { error } = await supabase.auth.updateUser({
-            data: { avatar_url: dataUrl }
-          });
-          
-          if (error) throw error;
-          
-          // Update the local state with the new avatar URL
-          setAvatarUrl(dataUrl);
-          
-          toast({
-            title: "Profile picture updated",
-            description: "Your profile picture has been updated successfully.",
-          });
-        } catch (error) {
-          console.error("Error updating avatar:", error);
-          toast({
-            title: "Update failed",
-            description: "Failed to update your profile picture. Please try again.",
-            variant: "destructive",
-          });
-        } finally {
-          setUploadingAvatar(false);
-        }
-      };
-      
-      reader.onerror = () => {
-        setUploadingAvatar(false);
-        toast({
-          title: "Upload failed",
-          description: "Failed to read the image file. Please try another image.",
-          variant: "destructive",
+        const dataUrl = event.target.result;
+        
+        // Update user metadata with avatar URL
+        const { data, error } = await supabase.auth.updateUser({
+          data: { avatar_url: dataUrl }
         });
+        
+        if (error) throw error;
+        
+        // Update the local state with the new avatar URL
+        setAvatarUrl(dataUrl);
+        
+        toast({
+          title: "Profile picture updated",
+          description: "Your profile picture has been updated successfully.",
+        });
+        
+        setUploadingAvatar(false);
       };
-      
       reader.readAsDataURL(file);
-      
     } catch (error) {
-      console.error("Avatar upload error:", error);
       toast({
         title: "Upload failed",
-        description: "There was a problem uploading your profile picture",
+        description: error.message || "There was a problem uploading your profile picture",
         variant: "destructive",
       });
       setUploadingAvatar(false);
@@ -231,25 +181,19 @@ const Profile = () => {
 
   const handleSignOut = async () => {
     try {
-      setSaving(true);
       const { error } = await supabase.auth.signOut();
-      
       if (error) throw error;
-      
       navigate("/");
       toast({
         title: "Signed out",
         description: "You have been signed out successfully.",
       });
     } catch (error) {
-      console.error("Sign out error:", error);
       toast({
         title: "Sign out failed",
-        description: "There was a problem signing out. Please try again.",
+        description: error.message || "There was a problem signing out",
         variant: "destructive",
       });
-    } finally {
-      setSaving(false);
     }
   };
 
@@ -310,10 +254,14 @@ const Profile = () => {
 
         <div className="mx-auto max-w-4xl">
           <Tabs defaultValue="profile" className="w-full">
-            <TabsList className="mb-6 grid w-full grid-cols-2">
+            <TabsList className="mb-6 grid w-full grid-cols-3">
               <TabsTrigger value="profile">
                 <User className="mr-2 h-4 w-4" />
                 Profile
+              </TabsTrigger>
+              <TabsTrigger value="security">
+                <Lock className="mr-2 h-4 w-4" />
+                Security
               </TabsTrigger>
               <TabsTrigger value="notifications">
                 <Shield className="mr-2 h-4 w-4" />
@@ -395,18 +343,47 @@ const Profile = () => {
                   </form>
                 </CardContent>
                 <CardFooter>
-                  <div className="w-full">
+                  <div className="w-full text-right">
+                    <Link to="/user-preferences">
+                      <Button variant="outline" className="flex items-center gap-2">
+                        <Cog className="h-4 w-4" />
+                        Additional Preferences
+                      </Button>
+                    </Link>
+                  </div>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+            
+            <TabsContent value="security">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Security Settings</CardTitle>
+                  <CardDescription>
+                    Manage your account security
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <p>
+                      Your account is secured with email and password authentication. For security reasons, you cannot change your password directly from this interface.
+                    </p>
+                    <p>
+                      If you need to reset your password, please use the "Forgot Password" option on the login page.
+                    </p>
+                  </div>
+
+                  <div className="mt-6">
                     <Button 
                       variant="destructive" 
                       onClick={handleSignOut}
                       className="flex items-center gap-2"
-                      disabled={saving}
                     >
                       <LogOut className="h-4 w-4" />
-                      {saving ? "Signing out..." : "Sign Out"}
+                      Sign Out
                     </Button>
                   </div>
-                </CardFooter>
+                </CardContent>
               </Card>
             </TabsContent>
 
@@ -415,7 +392,7 @@ const Profile = () => {
                 <CardHeader>
                   <CardTitle>MediWallet Updates</CardTitle>
                   <CardDescription>
-                    Get notified when the MediWallet app launches
+                    Get notified when the MediWallet mobile app launches
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

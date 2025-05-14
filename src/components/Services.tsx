@@ -4,7 +4,6 @@ import { MessageSquare, Globe, Smartphone, HeartPulse } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-import { Badge } from "@/components/ui/badge";
 
 interface ServiceCardProps {
   icon: React.ReactNode;
@@ -13,10 +12,9 @@ interface ServiceCardProps {
   delay: number;
   linkTo?: string;
   requiresAuth?: boolean;
-  premiumFeature?: boolean;
 }
 
-const ServiceCard = ({ icon, title, description, delay, linkTo, requiresAuth, premiumFeature }: ServiceCardProps) => {
+const ServiceCard = ({ icon, title, description, delay, linkTo, requiresAuth }: ServiceCardProps) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.2,
@@ -53,7 +51,7 @@ const ServiceCard = ({ icon, title, description, delay, linkTo, requiresAuth, pr
         navigate("/auth", { 
           state: { 
             redirectTo: linkTo,
-            message: `Please sign in or create an account to access ${title}` 
+            message: "Please sign in or create an account to access MediWallet" 
           } 
         });
       } else {
@@ -72,12 +70,7 @@ const ServiceCard = ({ icon, title, description, delay, linkTo, requiresAuth, pr
       } ${linkTo ? "cursor-pointer" : ""}`}
       onClick={handleClick}
     >
-      <Card className="h-full border border-gray-200 bg-white/50 backdrop-blur-sm hover:shadow-md transition-shadow relative">
-        {premiumFeature && (
-          <Badge className="absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-primary text-white">
-            Account Required
-          </Badge>
-        )}
+      <Card className="h-full border border-gray-200 bg-white/50 backdrop-blur-sm hover:shadow-md transition-shadow">
         <CardHeader>
           <div className="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4">
             {icon}
@@ -118,9 +111,6 @@ const Services = () => {
       title: "AI Chatbots",
       description: "Custom conversational AI chatbots designed to automate customer interactions, answer queries, and enhance your business's digital presence 24/7.",
       delay: 100,
-      linkTo: "/ai-events",
-      requiresAuth: true,
-      premiumFeature: true,
     },
     {
       icon: <Globe className="w-7 h-7 text-blue-600" />,
@@ -141,13 +131,12 @@ const Services = () => {
       delay: 400,
       linkTo: "/mediwallet",
       requiresAuth: true,
-      premiumFeature: true,
     },
   ];
 
   return (
     <section id="services" className="py-10 relative bg-gray-50">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMTgyQ0UiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2NWgtMXYtNXptMi0yaDF2MWgtMXYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bTYxIDU5aDR2MWgtNFYtMXptMC0yaDF2NWgtMVYtNXptMi0yaDF2MWgtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bTYxIDM0aDR2MWgtNFYtMXptMC0yaDF2NWgtMVYtNXptMi0yaDF2MWgtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaHQtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem02MSA5aDR2MWgtNFY5em0wLTJoMXY1aC0xdi01em0yLTJoMXYxaHQtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xVjd6bTIgMmExdjFoLTF2LTF6bS0yLTJoMXY0aC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMzMTgyQ0UiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0aDR2MWgtNHYtMXptMC0yaDF2NWgtMXYtNXptMi0yaDF2MWgtMXYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXpNMTEgNTloNHYxaC00di0xem0wLTJoMXY1aC0xdi01em0yLTJoMXYxaC0xdi0xem0tMiAyaDF2MWgtMXYtMXptLTItMmgxdjRoLTFWN3ptMi0yaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY3em0tMi0yaDF2NGgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1em0tMiAwaDF2MWgtMVY1ek0zNiA5aDR2MWgtNFY5em0wLTJoMXY1aC0xdi01em0yLTJoMXYxaC0xdi0xem0tMiAyaDF2MWgtMXYtMXptLTItMmgxdjRoLTF2LTR6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXpNNjEgNTloNHYxaC00di0xem0wLTJoMXY1aC0xdi01em0yLTJoMXYxaC0xdi0xem0tMiAyaDF2MWgtMXYtMXptLTItMmgxdjRoLTF2LTR6bS0yIDBoMXYxaHQtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMXYtMXptLTIgMGgxdjFoLTF2LTF6bTYxIDM0aDR2MWgtNFYtMXptMC0yaDF2NWgtMVYtNXptMi0yaDF2MWgtMVYtMXptLTIgMmgxdjFoLTF2LTF6bS0yLTJoMXY0aC0xdi00em0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bS0yIDBoMXYxaC0xdi0xem0tMiAwaDF2MWgtMVYtMXptLTIgMGgxdjFoLTF2LTF6bTYxIDloNHYxaC00VjltMC0yaDF2NWgtMVY3em0yLTJoMXYxaC0xVjV6bS0yIDJoMXYxaC0xVjd6bS0yLTJoMXY0aC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6bS0yIDBoMXYxaC0xVjV6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-50"></div>
       
       <div className="section-container" ref={ref}>
         <div className="text-center max-w-3xl mx-auto mb-8">
@@ -178,7 +167,6 @@ const Services = () => {
               delay={service.delay}
               linkTo={service.linkTo}
               requiresAuth={service.requiresAuth}
-              premiumFeature={service.premiumFeature}
             />
           ))}
         </div>
