@@ -124,10 +124,10 @@ const Auth = () => {
             className="mx-auto h-16 w-auto"
           />
           <h2 className="mt-6 text-3xl font-bold tracking-tight text-gray-900">
-            Welcome to MediWallet
+            Welcome to SparkStorm
           </h2>
           <p className="mt-2 text-sm text-gray-600">
-            Secure medical data at your fingertips
+            Your AI-powered healthcare platform
           </p>
         </div>
 
@@ -281,7 +281,7 @@ const Auth = () => {
 
             <CardFooter className="text-center text-muted-foreground">
               <p className="w-full text-sm text-gray-500">
-                By signing in, you agree to our{" "}
+                By signing in, you agree to SparkStorm's{" "}
                 <Link to="/terms-of-service" className="font-medium text-blue-600 hover:underline">
                   Terms of Service
                 </Link>{" "}
