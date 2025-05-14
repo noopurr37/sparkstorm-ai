@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -55,25 +54,14 @@ const Header = () => {
 
   const signOut = async () => {
     try {
-      // Fix: Use setTimeout to avoid potential race conditions with auth state management
-      setTimeout(async () => {
-        try {
-          const { error } = await supabase.auth.signOut();
-          if (error) throw error;
-          
-          toast({
-            title: "Signed out",
-            description: "You have been signed out successfully.",
-          });
-          navigate("/");
-        } catch (error) {
-          toast({
-            title: "Sign out failed",
-            description: error.message || "There was a problem signing out",
-            variant: "destructive",
-          });
-        }
-      }, 0);
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+      
+      toast({
+        title: "Signed out",
+        description: "You have been signed out successfully.",
+      });
+      navigate("/");
     } catch (error) {
       toast({
         title: "Sign out failed",
@@ -110,6 +98,10 @@ const Header = () => {
             <DropdownMenuItem onClick={() => navigate("/profile")}>
               <User className="mr-2 h-4 w-4" />
               Profile Settings
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigate("/user-preferences")}>
+              <Settings className="mr-2 h-4 w-4" />
+              Website Preferences
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={signOut}>
