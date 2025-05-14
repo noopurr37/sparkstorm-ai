@@ -10,8 +10,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { Loader2, Moon, Bell, Shield, Globe } from "lucide-react";
-import { getUserPreferences, saveUserPreferences, setThemePreference } from "@/lib/utils";
+import { Loader2, Bell, Shield } from "lucide-react";
+import { getUserPreferences, saveUserPreferences } from "@/lib/utils";
 
 const UserPreferences = () => {
   const [loading, setLoading] = useState(true);
@@ -59,29 +59,9 @@ const UserPreferences = () => {
     setPreferences(newPreferences);
     saveUserPreferences(newPreferences);
     
-    // Handle special case for dark mode
-    if (prefName === 'darkMode') {
-      setThemePreference(newPreferences.darkMode ? 'dark' : 'light');
-    }
-    
     toast({
       title: "Preference updated",
       description: `Your ${prefName} setting has been updated.`,
-    });
-  };
-
-  const handleLanguageChange = (language) => {
-    const newPreferences = {
-      ...preferences,
-      language
-    };
-    
-    setPreferences(newPreferences);
-    saveUserPreferences(newPreferences);
-    
-    toast({
-      title: "Language preference updated",
-      description: `Your language has been set to ${language}.`,
     });
   };
 
@@ -117,14 +97,10 @@ const UserPreferences = () => {
 
         <div className="mx-auto max-w-4xl">
           <Tabs defaultValue="notifications" className="w-full">
-            <TabsList className="mb-6 grid w-full grid-cols-3">
+            <TabsList className="mb-6 grid w-full grid-cols-2">
               <TabsTrigger value="notifications">
                 <Bell className="mr-2 h-4 w-4" />
                 Notifications
-              </TabsTrigger>
-              <TabsTrigger value="appearance">
-                <Moon className="mr-2 h-4 w-4" />
-                Appearance
               </TabsTrigger>
               <TabsTrigger value="privacy">
                 <Shield className="mr-2 h-4 w-4" />
@@ -163,46 +139,6 @@ const UserPreferences = () => {
                         description: "To manage MediWallet updates, please visit the MediWallet tab in your profile.",
                       })}
                     />
-                  </div>
-                </CardContent>
-              </Card>
-            </TabsContent>
-            
-            <TabsContent value="appearance">
-              <Card className="dark:border-gray-700 dark:bg-gray-800">
-                <CardHeader>
-                  <CardTitle>Appearance Settings</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <Label htmlFor="dark-mode">Dark Mode</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Use dark theme for the website</p>
-                    </div>
-                    <Switch 
-                      id="dark-mode" 
-                      checked={preferences.darkMode} 
-                      onCheckedChange={() => handleToggleChange('darkMode')} 
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <div className="space-y-1">
-                      <Label htmlFor="language">Language</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Select your preferred language</p>
-                    </div>
-                    <div className="w-32">
-                      <select 
-                        id="language"
-                        className="w-full rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-700 p-2"
-                        value={preferences.language}
-                        onChange={(e) => handleLanguageChange(e.target.value)}
-                      >
-                        <option value="English">English</option>
-                        <option value="Spanish">Spanish</option>
-                        <option value="French">French</option>
-                      </select>
-                    </div>
                   </div>
                 </CardContent>
               </Card>
