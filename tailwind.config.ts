@@ -62,6 +62,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        display: ["Inter", ...fontFamily.sans], // Define font-display here
       },
       keyframes: {
         "accordion-down": {
