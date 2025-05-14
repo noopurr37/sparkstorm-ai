@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X, User, LogOut, Wallet } from "lucide-react";
+import { Menu, X, User, LogOut, Wallet, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -153,6 +153,20 @@ const Header = () => {
               >
                 MediWallet
               </a>
+              <a 
+                href="/ai-talk" 
+                className={`font-sans text-base font-medium transition-colors ${
+                  location.pathname === '/ai-talk' 
+                    ? 'text-primary' 
+                    : 'text-gray-700 hover:text-primary'
+                }`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/ai-talk");
+                }}
+              >
+                AI Talks
+              </a>
               
               {/* Sign In Button moved into the navigation for desktop */}
               <div className="lg:block ml-4">
@@ -231,6 +245,16 @@ const Header = () => {
                   }}
                 >
                   MediWallet
+                </a>
+                <a 
+                  href="/ai-talk" 
+                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  onClick={(e) => {
+                    closeMenu();
+                    navigate("/ai-talk");
+                  }}
+                >
+                  AI Talks
                 </a>
                 {user && (
                   <a 

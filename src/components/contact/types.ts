@@ -6,3 +6,13 @@ export interface ContactFormData {
   subject?: string;
   message: string;
 }
+
+export interface AITalkRequestFormData {
+  name: string;
+  email: string;
+  organization: string;
+  eventDate: string;
+  audienceSize: string;
+  topic: string;
+  additionalInfo: string;
+}
