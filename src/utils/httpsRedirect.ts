@@ -3,10 +3,11 @@
 export const forceHttps = () => {
   if (
     import.meta.env.PROD && 
-    location.protocol !== "https:" && 
-    !location.hostname.includes("localhost") && 
-    !location.hostname.includes("127.0.0.1")
+    window.location.protocol !== "https:" && 
+    !window.location.hostname.includes("localhost") && 
+    !window.location.hostname.includes("127.0.0.1")
   ) {
-    location.replace(`https:${location.href.substring(location.protocol.length)}`);
+    // Use window.location.href to preserve the full path when redirecting
+    window.location.href = window.location.href.replace("http:", "https:");
   }
 };
