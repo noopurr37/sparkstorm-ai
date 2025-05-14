@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -149,7 +148,8 @@ const Profile = () => {
       // For demonstration, we'll use a data URL
       const reader = new FileReader();
       reader.onload = async (event) => {
-        const dataUrl = event.target.result;
+        // Fix: Ensure we're working with a string for the data URL
+        const dataUrl = event.target.result as string;
         
         // Update user metadata with avatar URL
         const { data, error } = await supabase.auth.updateUser({

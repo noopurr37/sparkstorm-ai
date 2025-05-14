@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Helmet } from "react-helmet-async";
-import { Mail, Lock, User, ArrowRight, Loader2, AlertCircle } from "lucide-react";
+import { Mail, Lock, User, ArrowRight, Loader2, AlertCircle, CalendarDays, MessageSquare, BookOpen, Shield } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface LocationState {
@@ -151,6 +151,24 @@ const Auth = () => {
             </CardHeader>
 
             <CardContent className="space-y-4">
+              <div className="bg-blue-50 rounded-lg p-4 mb-4">
+                <h3 className="font-medium text-blue-800 mb-2">Account Benefits</h3>
+                <ul className="space-y-2 text-sm text-blue-700">
+                  <li className="flex items-center gap-2">
+                    <CalendarDays className="h-4 w-4 text-blue-500" /> Book demos and consultations
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4 text-blue-500" /> Request AI talks for your events
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <BookOpen className="h-4 w-4 text-blue-500" /> Access exclusive content and resources
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <Shield className="h-4 w-4 text-blue-500" /> Early access to MediWallet features
+                  </li>
+                </ul>
+              </div>
+
               <TabsContent value="signin">
                 <form onSubmit={handleSignIn}>
                   <div className="space-y-4">
@@ -263,8 +281,6 @@ const Auth = () => {
                 </form>
               </TabsContent>
 
-              {/* The Google sign-in alert has been completely removed as requested */}
-
               <div className="relative my-4 hidden">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t border-gray-300" />
@@ -275,8 +291,6 @@ const Auth = () => {
                   </span>
                 </div>
               </div>
-
-              {/* Hidden Google button section completely removed */}
             </CardContent>
 
             <CardFooter className="text-center text-muted-foreground">
