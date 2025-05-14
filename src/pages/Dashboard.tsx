@@ -8,8 +8,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import { Loader2, FileText, Calendar, Activity, Settings, User } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
+import { Loader2, FileText, Calendar, Activity, Settings, User, AlertCircle } from "lucide-react";
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
@@ -33,6 +33,13 @@ const Dashboard = () => {
       
       setUser(session.user);
       setLoading(false);
+      
+      // Display welcome toast when dashboard loads
+      toast({
+        title: "Welcome to your dashboard!",
+        description: "Your profile and medical information are synced and up to date.",
+        variant: "default",
+      });
     };
     
     checkUser();
@@ -47,7 +54,7 @@ const Dashboard = () => {
     );
     
     return () => subscription.unsubscribe();
-  }, [navigate]);
+  }, [navigate, toast]);
   
   if (loading) {
     return (
@@ -64,6 +71,22 @@ const Dashboard = () => {
     .map(name => name[0])
     .join('')
     .toUpperCase();
+    
+  // Get additional profile info from metadata
+  const userPhone = user?.user_metadata?.phone_number || "Not set";
+  const userAddress = user?.user_metadata?.address 
+    ? `${user.user_metadata.address}, ${user.user_metadata.city || ''} ${user.user_metadata.state || ''}`
+    : "Not set";
+  const userDOB = user?.user_metadata?.date_of_birth || "Not set";
+  const avatarUrl = user?.user_metadata?.avatar_url || "";
+
+  const handleEditProfile = () => {
+    navigate("/profile");
+    toast({
+      title: "Profile Settings",
+      description: "Update your personal information, preferences, and privacy settings.",
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
@@ -76,8 +99,8 @@ const Dashboard = () => {
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
-            <Avatar className="h-16 w-16">
-              <AvatarImage src="" alt={userName} />
+            <Avatar className="h-16 w-16 border-2 border-primary/20">
+              <AvatarImage src={avatarUrl} alt={userName} />
               <AvatarFallback className="bg-primary text-xl text-white">{userInitials}</AvatarFallback>
             </Avatar>
             <div>
@@ -87,11 +110,43 @@ const Dashboard = () => {
           </div>
           
           <div className="mt-4 flex gap-2 md:mt-0">
-            <Button variant="outline" size="sm" onClick={() => navigate("/profile")}>
+            <Button onClick={handleEditProfile}>
               <Settings className="mr-2 h-4 w-4" />
-              Settings
+              Edit Profile
             </Button>
           </div>
+        </div>
+
+        {/* Profile completeness indicator */}
+        <div className="mb-6">
+          <Card className="border-primary/10 bg-primary/5">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="h-5 w-5 text-primary mt-0.5" />
+                <div>
+                  <h3 className="font-medium mb-1">Complete your profile</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Your profile information helps us provide better medical services. 
+                    Visit your profile settings to add missing information.
+                  </p>
+                  <div className="mt-4 space-y-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <span>Phone Number:</span>
+                      <span className="font-medium">{userPhone !== "Not set" ? userPhone : "⚠️ Not set"}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span>Address:</span>
+                      <span className="font-medium">{userAddress !== "Not set" ? userAddress : "⚠️ Not set"}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span>Date of Birth:</span>
+                      <span className="font-medium">{userDOB !== "Not set" ? userDOB : "⚠️ Not set"}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <Tabs defaultValue="overview" className="w-full">
