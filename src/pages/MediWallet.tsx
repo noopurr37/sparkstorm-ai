@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -68,6 +67,23 @@ const MediWallet = () => {
             A secure, AI-powered personal health vault that transforms fragmented 
             medical records into actionable intelligence.
           </p>
+          
+          {/* Product Hunt Badge */}
+          <div className="flex justify-center mt-4">
+            <a 
+              href="https://www.producthunt.com/posts/mediwallet?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-mediwallet" 
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <img 
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=965559&theme=light&t=1747259638156" 
+                alt="MediWallet - Health Data at Fingertips | Product Hunt" 
+                width="250" 
+                height="54" 
+                className="transition-transform hover:scale-105"
+              />
+            </a>
+          </div>
         </div>
 
         {/* Hero Section with Graphic */}
