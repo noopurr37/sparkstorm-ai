@@ -2,9 +2,9 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { Mail, AlertCircle, Check } from "lucide-react";
+import { Mail, AlertCircle, Check, Bell } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const MediWalletSignup = () => {
@@ -20,7 +20,7 @@ const MediWalletSignup = () => {
     if (!email) {
       toast({
         title: "Email Required",
-        description: "Please enter your email address to sign up for updates.",
+        description: "Please enter your email address to sign up for MediWallet updates.",
         variant: "destructive",
       });
       return;
@@ -60,11 +60,11 @@ const MediWalletSignup = () => {
   return (
     <div className="bg-gradient-to-b from-blue-50 to-white p-6 md:p-8 rounded-lg shadow-sm border border-blue-100">
       <h3 className="text-xl md:text-2xl font-bold text-navy-blue mb-3">
-        Get Early Access to MediWallet
+        Sign Up for MediWallet Updates
       </h3>
       
       <p className="text-gray-600 mb-6">
-        Sign up to be notified when MediWallet launches and receive important updates.
+        Join our waitlist to be the first to know when MediWallet launches and get access to exclusive features.
       </p>
 
       {showSuccess ? (
@@ -72,7 +72,7 @@ const MediWalletSignup = () => {
           <Check className="h-4 w-4 text-green-600" />
           <AlertTitle className="text-green-700">Thank you for signing up!</AlertTitle>
           <AlertDescription className="text-green-600">
-            We'll notify you when MediWallet launches.
+            We'll notify you when MediWallet launches with early access opportunities.
           </AlertDescription>
         </Alert>
       ) : (
@@ -107,14 +107,14 @@ const MediWalletSignup = () => {
               <>Signing up...</>
             ) : (
               <>
-                <Mail className="mr-2 h-4 w-4" />
-                Notify Me
+                <Bell className="mr-2 h-4 w-4" />
+                Get Updates
               </>
             )}
           </Button>
           
           <p className="text-xs text-gray-500 text-center">
-            We respect your privacy and will only send important updates.
+            By signing up, you'll receive important updates about MediWallet's launch and features.
           </p>
         </form>
       )}

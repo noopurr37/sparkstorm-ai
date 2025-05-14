@@ -12,7 +12,7 @@ import AIAssistant from "@/components/AIAssistant";
 import MediWalletSignup from "@/components/MediWalletSignup";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet-async";
-import { Linkedin, Instagram } from "lucide-react";
+import { Linkedin, Instagram, Lock } from "lucide-react";
 
 const Index = () => {
   const { toast } = useToast();
@@ -46,10 +46,14 @@ const Index = () => {
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 Coming Soon: MediWallet
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-gray-600 mb-4">
                 Our innovative healthcare finance management solution is launching soon. 
-                Be the first to know when it's available.
+                Sign up now to join our waitlist.
               </p>
+              <div className="flex items-center justify-center gap-2 text-sm text-blue-600">
+                <Lock size={16} />
+                <span>Premium features will require an account</span>
+              </div>
             </div>
             
             <div className="max-w-md mx-auto">
