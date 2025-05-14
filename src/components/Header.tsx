@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
+import { Menu, X, User, LogOut, Wallet, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -46,11 +46,6 @@ const Header = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  };
-
-  const handleMediWalletClick = (e) => {
-    e.preventDefault();
-    navigate("/mediwallet");
   };
 
   // Updated sign out function to handle offline cases properly
@@ -109,10 +104,6 @@ const Header = () => {
               <User className="mr-2 h-4 w-4" />
               Profile Settings
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => navigate("/user-preferences")}>
-              <Settings className="mr-2 h-4 w-4" />
-              Website Preferences
-            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={signOut}>
               <LogOut className="mr-2 h-4 w-4" />
@@ -151,20 +142,8 @@ const Header = () => {
               </span>
             </a>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8">
-              <a href="/#services" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Services
-              </a>
-              <a href="/#team" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Team
-              </a>
-              <a href="/#testimonials" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Testimonials
-              </a>
-              <a href="/#contact" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Contact
-              </a>
+            {/* Desktop Navigation - SIMPLIFIED to only main pages */}
+            <div className="hidden lg:flex items-center justify-center gap-8">
               <a 
                 href="/mediwallet" 
                 className={`font-sans text-base font-medium transition-colors ${
@@ -172,7 +151,10 @@ const Header = () => {
                     ? 'text-primary' 
                     : 'text-gray-700 hover:text-primary'
                 }`}
-                onClick={handleMediWalletClick}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/mediwallet");
+                }}
               >
                 MediWallet
               </a>
@@ -190,16 +172,11 @@ const Header = () => {
               >
                 AI Events
               </a>
-              
-              {/* Sign In Button moved into the navigation for desktop */}
-              <div className="lg:block ml-4">
-                {renderAuthButtons()}
-              </div>
             </div>
           </div>
 
-          {/* Auth button (desktop) - hidden from here as it's now inside the navigation */}
-          <div className="hidden">
+          {/* Auth button (desktop) */}
+          <div className="hidden lg:block">
             {renderAuthButtons()}
           </div>
 
@@ -227,42 +204,19 @@ const Header = () => {
                 <a 
                   href="/" 
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeMenu();
+                    navigate("/");
+                  }}
                 >
                   Home
-                </a>
-                <a 
-                  href="/#services" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Services
-                </a>
-                <a 
-                  href="/#team" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Team
-                </a>
-                <a 
-                  href="/#testimonials" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Testimonials
-                </a>
-                <a 
-                  href="/#contact" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Contact
                 </a>
                 <a 
                   href="/mediwallet" 
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={(e) => {
+                    e.preventDefault();
                     closeMenu();
                     navigate("/mediwallet");
                   }}
@@ -273,6 +227,7 @@ const Header = () => {
                   href="/ai-events" 
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={(e) => {
+                    e.preventDefault();
                     closeMenu();
                     navigate("/ai-events");
                   }}
@@ -284,22 +239,13 @@ const Header = () => {
                   <a 
                     href="/profile" 
                     className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       closeMenu();
                       navigate("/profile");
                     }}
                   >
                     Profile Settings
-                  </a>
-                  <a 
-                    href="/user-preferences" 
-                    className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                    onClick={() => {
-                      closeMenu();
-                      navigate("/user-preferences");
-                    }}
-                  >
-                    Website Preferences
                   </a>
                   <Button 
                     variant="ghost" 
