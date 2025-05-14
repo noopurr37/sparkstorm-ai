@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -22,7 +21,7 @@ const AITalk = () => {
   };
   
   const handleLinkedInClick = () => {
-    window.open("https://www.linkedin.com/in/noopurg/", "_blank");
+    window.open("https://www.linkedin.com/in/noopurgupta01/", "_blank");
   };
   
   const handleCalendlyClick = () => {
@@ -324,10 +323,10 @@ const AITalk = () => {
                     <Button 
                       variant="outline" 
                       className="flex items-center gap-2"
-                      onClick={() => {window.location.href = "mailto:noopurr@sparkstorm.ai";}}
+                      onClick={() => {window.location.href = "mailto:ask@sparkstorm.ai";}}
                     >
                       <Mail className="h-4 w-4" />
-                      noopurr@sparkstorm.ai
+                      ask@sparkstorm.ai
                     </Button>
                   </div>
                 </div>
@@ -372,15 +371,8 @@ const AITalk = () => {
                   </AlertDescription>
                 </Alert>
                 
-                <Button 
-                  onClick={handleCalendlyClick}
-                  className="w-full py-6 text-lg mt-4 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600"
-                >
-                  Schedule Consultation
-                </Button>
-                
-                <p className="text-center text-gray-500 text-sm">
-                  Or fill out the form to request more information
+                <p className="text-center text-gray-500 text-sm mt-4">
+                  Fill out the form to request more information
                 </p>
               </div>
               
