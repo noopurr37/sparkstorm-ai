@@ -6,11 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { CalendarDays, User, Mail, Users, Speaker } from "lucide-react";
+import { User, Mail, Users, CalendarDays } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { AITalkRequestFormData } from "@/components/contact/types";
 
-const AITalkRequestForm = () => {
+interface ConsultationFormData {
+  name: string;
+  email: string;
+  company?: string;
+  topic: string;
+  message?: string;
+}
+
+const ConsultationForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   
@@ -19,30 +26,28 @@ const AITalkRequestForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<AITalkRequestFormData>();
+  } = useForm<ConsultationFormData>();
   
-  const onSubmit = async (data: AITalkRequestFormData) => {
+  const onSubmit = async (data: ConsultationFormData) => {
     setIsSubmitting(true);
     
     try {
       // Send data to Supabase
       const { error } = await supabase
-        .from('ai_talk_requests')
+        .from('consultation_requests')
         .insert({
           name: data.name,
           email: data.email,
-          organization: data.organization,
-          event_date: data.eventDate,
-          audience_size: data.audienceSize || null,
+          company: data.company || null,
           topic: data.topic,
-          additional_info: data.additionalInfo || null
+          message: data.message || null
         });
       
       if (error) throw error;
       
       toast({
-        title: "Request Submitted",
-        description: "We'll get back to you soon regarding your AI talk request.",
+        title: "Consultation Request Submitted",
+        description: "We'll contact you shortly to schedule your consultation with Noopur.",
       });
       
       reset();
@@ -61,9 +66,9 @@ const AITalkRequestForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white p-6 rounded-lg shadow-sm border">
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold">Request AI Talk</h2>
+        <h2 className="text-2xl font-bold">Request Consultation Information</h2>
         <p className="text-sm text-gray-500">
-          Fill out this form to request a custom AI talk for your event or organization
+          Fill out this form to receive more information about scheduling a consultation
         </p>
       </div>
       
@@ -104,53 +109,23 @@ const AITalkRequestForm = () => {
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="organization" className="flex items-center gap-2">
-            <Users className="h-4 w-4 text-primary" /> Organization
+          <Label htmlFor="company" className="flex items-center gap-2">
+            <Users className="h-4 w-4 text-primary" /> Company (Optional)
           </Label>
           <Input
-            id="organization"
-            placeholder="Company or organization name"
-            {...register("organization", { required: "Organization is required" })}
+            id="company"
+            placeholder="Your company name"
+            {...register("company")}
           />
-          {errors.organization && (
-            <p className="text-sm text-red-500">{errors.organization.message}</p>
-          )}
-        </div>
-        
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="eventDate" className="flex items-center gap-2">
-              <CalendarDays className="h-4 w-4 text-primary" /> Event Date
-            </Label>
-            <Input
-              id="eventDate"
-              type="date"
-              {...register("eventDate", { required: "Date is required" })}
-            />
-            {errors.eventDate && (
-              <p className="text-sm text-red-500">{errors.eventDate.message}</p>
-            )}
-          </div>
-          
-          <div className="space-y-2">
-            <Label htmlFor="audienceSize" className="flex items-center gap-2">
-              <Users className="h-4 w-4 text-primary" /> Audience Size
-            </Label>
-            <Input
-              id="audienceSize"
-              placeholder="Estimated number"
-              {...register("audienceSize")}
-            />
-          </div>
         </div>
         
         <div className="space-y-2">
           <Label htmlFor="topic" className="flex items-center gap-2">
-            <Speaker className="h-4 w-4 text-primary" /> Preferred Topic
+            <CalendarDays className="h-4 w-4 text-primary" /> Consultation Topic
           </Label>
           <Input
             id="topic"
-            placeholder="AI topic you're interested in"
+            placeholder="What would you like to discuss?"
             {...register("topic", { required: "Topic is required" })}
           />
           {errors.topic && (
@@ -159,12 +134,12 @@ const AITalkRequestForm = () => {
         </div>
         
         <div className="space-y-2">
-          <Label htmlFor="additionalInfo">Additional Information</Label>
+          <Label htmlFor="message">Additional Information (Optional)</Label>
           <Textarea
-            id="additionalInfo"
-            placeholder="Any specific requirements, questions, or details about your event"
+            id="message"
+            placeholder="Any specific questions or information about what you'd like to discuss"
             rows={4}
-            {...register("additionalInfo")}
+            {...register("message")}
           />
         </div>
       </div>
@@ -178,10 +153,10 @@ const AITalkRequestForm = () => {
       </Button>
       
       <p className="text-xs text-center text-gray-500">
-        We'll get back to you within 2 business days to discuss your request in detail.
+        You can also book directly via the calendar link above.
       </p>
     </form>
   );
 };
 
-export default AITalkRequestForm;
+export default ConsultationForm;

@@ -9,6 +9,72 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      ai_talk_requests: {
+        Row: {
+          additional_info: string | null
+          audience_size: string | null
+          created_at: string
+          email: string
+          event_date: string
+          id: string
+          name: string
+          organization: string
+          topic: string
+        }
+        Insert: {
+          additional_info?: string | null
+          audience_size?: string | null
+          created_at?: string
+          email: string
+          event_date: string
+          id?: string
+          name: string
+          organization: string
+          topic: string
+        }
+        Update: {
+          additional_info?: string | null
+          audience_size?: string | null
+          created_at?: string
+          email?: string
+          event_date?: string
+          id?: string
+          name?: string
+          organization?: string
+          topic?: string
+        }
+        Relationships: []
+      }
+      consultation_requests: {
+        Row: {
+          company: string | null
+          created_at: string
+          email: string
+          id: string
+          message: string | null
+          name: string
+          topic: string
+        }
+        Insert: {
+          company?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          message?: string | null
+          name: string
+          topic: string
+        }
+        Update: {
+          company?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string | null
+          name?: string
+          topic?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
