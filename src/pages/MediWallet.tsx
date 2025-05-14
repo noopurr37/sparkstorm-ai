@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Helmet } from "react-helmet-async";
 import { Card, CardContent } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
+import { useIsMobile } from "@/hooks/use-mobile";
 import MediFeature from "@/components/MediWallet/MediFeature";
 import Header from "@/components/Header";
 import { Loader2, ArrowRight, CalendarDays } from "lucide-react";
@@ -15,6 +16,7 @@ const MediWallet = () => {
   const [user, setUser] = useState(null);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Check if user is logged in, but don't require authentication
