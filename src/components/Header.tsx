@@ -154,18 +154,18 @@ const Header = () => {
                 MediWallet
               </a>
               <a 
-                href="/ai-talk" 
+                href="/ai-events" 
                 className={`font-sans text-base font-medium transition-colors ${
-                  location.pathname === '/ai-talk' 
+                  location.pathname === '/ai-events' || location.pathname === '/ai-talk'
                     ? 'text-primary' 
                     : 'text-gray-700 hover:text-primary'
                 }`}
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate("/ai-talk");
+                  navigate("/ai-events");
                 }}
               >
-                AI Talks
+                AI Events
               </a>
               
               {/* Sign In Button moved into the navigation for desktop */}
@@ -247,14 +247,14 @@ const Header = () => {
                   MediWallet
                 </a>
                 <a 
-                  href="/ai-talk" 
+                  href="/ai-events" 
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={(e) => {
                     closeMenu();
-                    navigate("/ai-talk");
+                    navigate("/ai-events");
                   }}
                 >
-                  AI Talks
+                  AI Events
                 </a>
                 {user && (
                   <a 

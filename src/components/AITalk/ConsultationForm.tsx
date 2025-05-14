@@ -151,6 +151,10 @@ const ConsultationForm = () => {
       >
         {isSubmitting ? "Submitting..." : "Submit Request"}
       </Button>
+      
+      <p className="text-xs text-center text-gray-500">
+        We'll get back to you within 2 business days to discuss your request in detail.
+      </p>
     </form>
   );
 };
