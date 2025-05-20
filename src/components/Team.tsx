@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
@@ -118,7 +117,7 @@ const Team = () => {
     },
     {
       name: "Muzammil",
-      role: "Fractional COO",
+      role: "CPO",
       image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png",
       delay: 200,
       linkedinUrl: "https://www.linkedin.com/in/muzammil-w-iqbal/",
