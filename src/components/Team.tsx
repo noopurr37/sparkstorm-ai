@@ -134,18 +134,10 @@ const Team = () => {
       email: "shloakgupta09@gmail.com",
     },
     {
-      name: "Rachel Pulice",
-      role: "UX Designer",
-      image: "/lovable-uploads/8734bd9a-c4d3-48e9-866b-11fcff83b6e3.png",
-      delay: 400,
-      linkedinUrl: "https://www.linkedin.com/in/rachel-pulice/",
-      email: "rachel.t.pulice@gmail.com",
-    },
-    {
       name: "Aarnav Chandraganti",
       role: "AI Developer",
       image: "/lovable-uploads/e7c668aa-10d3-4688-93eb-f9c2c4b685f9.png",
-      delay: 500,
+      delay: 400,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
       instagramUrl: "https://www.instagram.com/aarnav_c_",
       email: "aarnav.chandraganti@gmail.com",
@@ -154,19 +146,19 @@ const Team = () => {
   
   const advisoryBoard = [
     {
-      name: "Siva",
+      name: "Sivapunniyam Dakshinamurthy",
       role: "Advisory Board Member",
       image: "/lovable-uploads/16c72fb9-4b68-4d2c-9837-ed5d77bdf7c7.png",
-      delay: 600,
+      delay: 500,
       linkedinUrl: "https://www.linkedin.com/in/sivapunniyamdakshinamurthy",
       email: "siva@example.com",
     },
     {
-      name: "Girija",
+      name: "Girija Sivapunniyam",
       role: "Advisory Board Member",
       image: "/lovable-uploads/e799f8e7-efe8-421a-8904-fb3bc81e1aae.png",
-      delay: 700,
-      linkedinUrl: "https://www.linkedin.com/",
+      delay: 600,
+      linkedinUrl: "https://www.linkedin.com/in/girijasivapunniyam/",
       email: "girija@example.com",
     }
   ];
@@ -187,7 +179,7 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {teamMembers.map((member, index) => (
             <TeamMember
               key={index}
