@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
@@ -10,7 +11,7 @@ interface TeamMemberProps {
   delay: number;
   linkedinUrl: string;
   instagramUrl?: string;
-  email: string;
+  email?: string;
 }
 
 const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email }: TeamMemberProps) => {
@@ -73,13 +74,15 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
                 <Instagram size={18} />
               </a>
             )}
-            <a
-              href={`mailto:${email}`}
-              className="text-gray-400 hover:text-blue-500 transition-colors"
-              aria-label={`Email ${name}`}
-            >
-              <Mail size={18} />
-            </a>
+            {email && (
+              <a
+                href={`mailto:${email}`}
+                className="text-gray-400 hover:text-blue-500 transition-colors"
+                aria-label={`Email ${name}`}
+              >
+                <Mail size={18} />
+              </a>
+            )}
           </div>
         </div>
       </div>
@@ -113,7 +116,7 @@ const Team = () => {
       delay: 100,
       linkedinUrl: "https://www.linkedin.com/in/noopurgupta01/",
       instagramUrl: "https://www.instagram.com/noopurrofficial",
-      email: "noopurgupta01@gmail.com",
+      email: "noopurr@sparkstorm.ai",
     },
     {
       name: "Muzammil",
@@ -122,7 +125,7 @@ const Team = () => {
       delay: 200,
       linkedinUrl: "https://www.linkedin.com/in/muzammil-w-iqbal/",
       instagramUrl: "https://www.instagram.com/muzammil.iqbal.11",
-      email: "muzammil.iqbal@gmail.com",
+      email: "ask@sparkstorm.ai",
     },
     {
       name: "Shloak Gupta",
@@ -131,7 +134,7 @@ const Team = () => {
       delay: 300,
       linkedinUrl: "https://www.linkedin.com/in/shloak-gupta-428412218/",
       instagramUrl: "https://www.instagram.com/shloakgupta",
-      email: "shloakgupta09@gmail.com",
+      email: "ask@sparkstorm.ai",
     },
     {
       name: "Aarnav Chandraganti",
@@ -140,7 +143,7 @@ const Team = () => {
       delay: 400,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
       instagramUrl: "https://www.instagram.com/aarnav_c_",
-      email: "aarnav.chandraganti@gmail.com",
+      email: "ask@sparkstorm.ai",
     },
   ];
   
@@ -151,7 +154,6 @@ const Team = () => {
       image: "/lovable-uploads/16c72fb9-4b68-4d2c-9837-ed5d77bdf7c7.png",
       delay: 500,
       linkedinUrl: "https://www.linkedin.com/in/sivapunniyamdakshinamurthy",
-      email: "siva@example.com",
     },
     {
       name: "Girija Sivapunniyam",
@@ -159,7 +161,6 @@ const Team = () => {
       image: "/lovable-uploads/e799f8e7-efe8-421a-8904-fb3bc81e1aae.png",
       delay: 600,
       linkedinUrl: "https://www.linkedin.com/in/girijasivapunniyam/",
-      email: "girija@example.com",
     }
   ];
 
@@ -217,7 +218,6 @@ const Team = () => {
                 image={member.image}
                 delay={member.delay}
                 linkedinUrl={member.linkedinUrl}
-                email={member.email}
               />
             ))}
           </div>
