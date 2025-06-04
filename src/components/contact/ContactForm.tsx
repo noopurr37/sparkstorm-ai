@@ -4,7 +4,7 @@ import { MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Form,
@@ -45,22 +45,33 @@ const ContactForm = () => {
   });
 
   const handleSubmit = async (formData: FormValues) => {
+    console.log("Form submission started with data:", formData);
     setIsSubmitting(true);
     
     try {
       // Ensure we're passing values that match Supabase's requirements
-      const { error } = await supabase
+      const insertData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || null,
+        subject: formData.subject || null,
+        message: formData.message
+      };
+      
+      console.log("Inserting data to Supabase:", insertData);
+      
+      const { data, error } = await supabase
         .from('contact_submissions')
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || null,
-          subject: formData.subject || null,
-          message: formData.message
-        });
+        .insert(insertData);
 
-      if (error) throw error;
+      console.log("Supabase response:", { data, error });
 
+      if (error) {
+        console.error("Supabase error:", error);
+        throw error;
+      }
+
+      console.log("Form submitted successfully");
       toast({
         title: "Message Sent!",
         description: "Thank you for your inquiry. We'll get back to you soon.",
