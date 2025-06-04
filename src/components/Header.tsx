@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Menu, X, User, LogOut, Wallet, CalendarDays, Settings } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -184,7 +185,7 @@ const Header = () => {
                   navigate("/ai-events");
                 }}
               >
-                AI Talk with Noopur
+                AI Talk with Noopurr
               </a>
               
               {/* Sign In Button moved into the navigation for desktop */}
@@ -266,7 +267,7 @@ const Header = () => {
                     navigate("/ai-events");
                   }}
                 >
-                  AI Talk with Noopur
+                  AI Talk with Noopurr
                 </a>
                 {user && (
                   <>
