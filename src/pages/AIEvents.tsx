@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -30,7 +31,7 @@ const AITalk = () => {
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="summit" className="w-full" onValueChange={setActiveTab}>
           <TabsList className="grid w-full grid-cols-2 mb-8">
-            <TabsTrigger value="summit">Past Events</TabsTrigger>
+            <TabsTrigger value="summit">AI Talk with Noopur</TabsTrigger>
             <TabsTrigger value="request">Book AI Talk</TabsTrigger>
           </TabsList>
           
