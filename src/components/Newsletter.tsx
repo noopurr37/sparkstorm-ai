@@ -51,13 +51,18 @@ const Newsletter = () => {
       return;
     }
     
+    // Sanitize email input
+    const sanitizedEmail = email.trim().toLowerCase();
+    
     setIsSubmitting(true);
     
     try {
-      // Save email to Supabase
+      console.log("Submitting newsletter subscription:", sanitizedEmail);
+      
+      // Save email to corrected Supabase table
       const { error } = await supabase
-        .from('Newsletter Subscription')
-        .insert({ });
+        .from('newsletter_subscriptions')
+        .insert({ email: sanitizedEmail });
 
       if (error) {
         console.error("Newsletter subscription error:", error);
@@ -80,7 +85,7 @@ const Newsletter = () => {
           duration: 2000,
         });
         
-        console.log("Newsletter subscription saved to Supabase:", email);
+        console.log("Newsletter subscription saved to Supabase:", sanitizedEmail);
         setEmail("");
       }
     } catch (error) {
@@ -98,8 +103,9 @@ const Newsletter = () => {
   };
   
   const isValidEmail = (email: string) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
+    // Enhanced email validation regex
+    const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    return emailPattern.test(email) && email.length <= 254;
   };
 
   return (
@@ -136,6 +142,8 @@ const Newsletter = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={isSubmitting}
+              maxLength={254}
+              required
             />
             <Button 
               type="submit" 

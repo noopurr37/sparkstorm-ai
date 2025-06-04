@@ -12,10 +12,36 @@ const MediWalletSignup = () => {
   const [name, setName] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
   const { toast } = useToast();
+
+  // Input sanitization function
+  const sanitizeInput = (input: string): string => {
+    return input
+      .trim()
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
+      .replace(/[<>]/g, ''); // Remove HTML brackets
+  };
+
+  // Enhanced email validation
+  const isValidEmail = (email: string): boolean => {
+    const emailPattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+    return emailPattern.test(email) && email.length <= 254;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Rate limiting: prevent submissions within 30 seconds
+    const now = Date.now();
+    if (now - lastSubmitTime < 30000) {
+      toast({
+        title: "Please wait",
+        description: "Please wait 30 seconds before signing up again.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     if (!email) {
       toast({
@@ -25,21 +51,59 @@ const MediWalletSignup = () => {
       });
       return;
     }
+
+    if (!isValidEmail(email)) {
+      toast({
+        title: "Invalid Email",
+        description: "Please enter a valid email address.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (name && name.length > 100) {
+      toast({
+        title: "Name too long",
+        description: "Name must be less than 100 characters.",
+        variant: "destructive",
+      });
+      return;
+    }
     
     setIsSubmitting(true);
 
     try {
+      console.log("Submitting MediWallet waitlist:", { email, name });
+      
+      // Sanitize inputs
+      const sanitizedData = {
+        email: email.trim().toLowerCase(),
+        name: name ? sanitizeInput(name) : null
+      };
+
       // Store in the waitlist table
       const { error } = await supabase
         .from('mediwallet_waitlist')
-        .insert({ email, name: name || null });
+        .insert(sanitizedData);
 
-      if (error) throw error;
+      if (error) {
+        // Check for duplicate email
+        if (error.message.includes('duplicate') || error.code === '23505') {
+          toast({
+            title: "Already signed up",
+            description: "This email is already on our waitlist.",
+            variant: "destructive",
+          });
+          return;
+        }
+        throw error;
+      }
 
       // Show success message
       setShowSuccess(true);
       setEmail("");
       setName("");
+      setLastSubmitTime(now);
       
       toast({
         title: "Successfully signed up!",
@@ -84,6 +148,7 @@ const MediWalletSignup = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full"
+              maxLength={254}
               required
             />
           </div>
@@ -95,6 +160,7 @@ const MediWalletSignup = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full"
+              maxLength={100}
             />
           </div>
           

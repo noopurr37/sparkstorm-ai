@@ -8,42 +8,86 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { User, Mail, Users, CalendarDays } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-interface ConsultationFormData {
-  name: string;
-  email: string;
-  company?: string;
-  topic: string;
-  message?: string;
-}
+const formSchema = z.object({
+  name: z.string()
+    .min(1, "Name is required")
+    .max(100, "Name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s'-]+$/, "Name contains invalid characters"),
+  email: z.string()
+    .email("Invalid email address")
+    .max(254, "Email must be less than 254 characters"),
+  company: z.string()
+    .optional()
+    .refine((val) => !val || val.length <= 200, "Company name must be less than 200 characters"),
+  topic: z.string()
+    .min(1, "Topic is required")
+    .max(200, "Topic must be less than 200 characters"),
+  message: z.string()
+    .optional()
+    .refine((val) => !val || val.length <= 1000, "Message must be less than 1000 characters"),
+});
+
+type ConsultationFormData = z.infer<typeof formSchema>;
 
 const ConsultationForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
   
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ConsultationFormData>();
+  } = useForm<ConsultationFormData>({
+    resolver: zodResolver(formSchema),
+  });
+
+  // Input sanitization function
+  const sanitizeInput = (input: string): string => {
+    return input
+      .trim()
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
+      .replace(/[<>]/g, ''); // Remove HTML brackets
+  };
   
   const onSubmit = async (data: ConsultationFormData) => {
+    // Rate limiting: prevent submissions within 60 seconds
+    const now = Date.now();
+    if (now - lastSubmitTime < 60000) {
+      toast({
+        title: "Please wait",
+        description: "Please wait 1 minute before submitting another request.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
+      console.log("Submitting consultation request:", data);
+      
+      // Sanitize all text inputs
+      const sanitizedData = {
+        name: sanitizeInput(data.name),
+        email: data.email.trim().toLowerCase(),
+        company: data.company ? sanitizeInput(data.company) : null,
+        topic: sanitizeInput(data.topic),
+        message: data.message ? sanitizeInput(data.message) : null
+      };
+      
       // Send data to Supabase
       const { error } = await supabase
         .from('consultation_requests')
-        .insert({
-          name: data.name,
-          email: data.email,
-          company: data.company || null,
-          topic: data.topic,
-          message: data.message || null
-        });
+        .insert(sanitizedData);
       
       if (error) throw error;
+      
+      setLastSubmitTime(now);
       
       toast({
         title: "Consultation Request Submitted",
@@ -80,7 +124,8 @@ const ConsultationForm = () => {
           <Input
             id="name"
             placeholder="Full name"
-            {...register("name", { required: "Name is required" })}
+            maxLength={100}
+            {...register("name")}
           />
           {errors.name && (
             <p className="text-sm text-red-500">{errors.name.message}</p>
@@ -95,13 +140,8 @@ const ConsultationForm = () => {
             id="email"
             placeholder="you@example.com"
             type="email"
-            {...register("email", { 
-              required: "Email is required",
-              pattern: {
-                value: /\S+@\S+\.\S+/,
-                message: "Please enter a valid email address",
-              },
-            })}
+            maxLength={254}
+            {...register("email")}
           />
           {errors.email && (
             <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -115,8 +155,12 @@ const ConsultationForm = () => {
           <Input
             id="company"
             placeholder="Your company name"
+            maxLength={200}
             {...register("company")}
           />
+          {errors.company && (
+            <p className="text-sm text-red-500">{errors.company.message}</p>
+          )}
         </div>
         
         <div className="space-y-2">
@@ -126,7 +170,8 @@ const ConsultationForm = () => {
           <Input
             id="topic"
             placeholder="What would you like to discuss?"
-            {...register("topic", { required: "Topic is required" })}
+            maxLength={200}
+            {...register("topic")}
           />
           {errors.topic && (
             <p className="text-sm text-red-500">{errors.topic.message}</p>
@@ -139,8 +184,12 @@ const ConsultationForm = () => {
             id="message"
             placeholder="Any specific questions or information about what you'd like to discuss"
             rows={4}
+            maxLength={1000}
             {...register("message")}
           />
+          {errors.message && (
+            <p className="text-sm text-red-500">{errors.message.message}</p>
+          )}
         </div>
       </div>
       

@@ -19,11 +19,22 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 const formSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional(),
-  subject: z.string().optional(),
-  message: z.string().min(1, "Message is required"),
+  name: z.string()
+    .min(1, "Name is required")
+    .max(100, "Name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s'-]+$/, "Name contains invalid characters"),
+  email: z.string()
+    .email("Invalid email address")
+    .max(254, "Email must be less than 254 characters"),
+  phone: z.string()
+    .optional()
+    .refine((val) => !val || /^[\+]?[1-9][\d]{0,15}$/.test(val), "Invalid phone number"),
+  subject: z.string()
+    .optional()
+    .refine((val) => !val || val.length <= 200, "Subject must be less than 200 characters"),
+  message: z.string()
+    .min(1, "Message is required")
+    .max(2000, "Message must be less than 2000 characters"),
 });
 
 // This type ensures our form values match what Supabase expects
@@ -31,6 +42,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastSubmitTime, setLastSubmitTime] = useState(0);
   const { toast } = useToast();
   
   const form = useForm<FormValues>({
@@ -44,21 +56,40 @@ const ContactForm = () => {
     },
   });
 
+  // Input sanitization function
+  const sanitizeInput = (input: string): string => {
+    return input
+      .trim()
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
+      .replace(/[<>]/g, ''); // Remove HTML brackets
+  };
+
   const handleSubmit = async (formData: FormValues) => {
+    // Rate limiting: prevent submissions within 30 seconds
+    const now = Date.now();
+    if (now - lastSubmitTime < 30000) {
+      toast({
+        title: "Please wait",
+        description: "Please wait 30 seconds before submitting another message.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     console.log("Form submission started with data:", formData);
     setIsSubmitting(true);
     
     try {
-      // Ensure we're passing values that match Supabase's requirements
+      // Sanitize all text inputs
       const insertData = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || null,
-        subject: formData.subject || null,
-        message: formData.message
+        name: sanitizeInput(formData.name),
+        email: formData.email.trim().toLowerCase(),
+        phone: formData.phone ? sanitizeInput(formData.phone) : null,
+        subject: formData.subject ? sanitizeInput(formData.subject) : null,
+        message: sanitizeInput(formData.message)
       };
       
-      console.log("Inserting data to Supabase:", insertData);
+      console.log("Inserting sanitized data to Supabase:", insertData);
       
       const { data, error } = await supabase
         .from('contact_submissions')
@@ -72,6 +103,8 @@ const ContactForm = () => {
       }
 
       console.log("Form submitted successfully");
+      setLastSubmitTime(now);
+      
       toast({
         title: "Message Sent!",
         description: "Thank you for your inquiry. We'll get back to you soon.",
@@ -111,6 +144,7 @@ const ContactForm = () => {
                       placeholder="Your name"
                       {...field}
                       disabled={isSubmitting}
+                      maxLength={100}
                     />
                   </FormControl>
                   <FormMessage />
@@ -132,6 +166,7 @@ const ContactForm = () => {
                       placeholder="your@email.com"
                       {...field}
                       disabled={isSubmitting}
+                      maxLength={254}
                     />
                   </FormControl>
                   <FormMessage />
@@ -152,6 +187,7 @@ const ContactForm = () => {
                       placeholder="Your phone number"
                       {...field}
                       disabled={isSubmitting}
+                      maxLength={20}
                     />
                   </FormControl>
                   <FormMessage />
@@ -170,6 +206,7 @@ const ContactForm = () => {
                       placeholder="How can we help?"
                       {...field}
                       disabled={isSubmitting}
+                      maxLength={200}
                     />
                   </FormControl>
                   <FormMessage />
@@ -193,6 +230,7 @@ const ContactForm = () => {
                     className="resize-none"
                     {...field}
                     disabled={isSubmitting}
+                    maxLength={2000}
                   />
                 </FormControl>
                 <FormMessage />
