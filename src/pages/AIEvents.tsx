@@ -6,10 +6,8 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarDays, User, Mail, Mic, Linkedin } from "lucide-react";
+import { CalendarDays, User, Mail, Mic } from "lucide-react";
 import AITalkRequestForm from "@/components/AITalk/AITalkRequestForm";
-import ConsultationForm from "@/components/AITalk/ConsultationForm";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const AITalk = () => {
   const navigate = useNavigate();
@@ -19,30 +17,21 @@ const AITalk = () => {
   const handleRegisterClick = () => {
     window.open("https://www.zeffy.com/en-US/ticketing/autmhq-tech-summit--2025", "_blank");
   };
-  
-  const handleLinkedInClick = () => {
-    window.open("https://www.linkedin.com/in/noopurgupta01/", "_blank");
-  };
-  
-  const handleCalendlyClick = () => {
-    window.open("https://cal.com/noopurr/1-1-ai-advisory-call", "_blank");
-  };
 
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>AI Events & Consultation | SparkStorm AI</title>
-        <meta name="description" content="AI Events, speaking engagements and consultation services by SparkStorm AI CEO Noopur Gupta" />
+        <title>AI Events & Speaking | SparkStorm AI</title>
+        <meta name="description" content="AI Events and speaking engagements by SparkStorm AI CEO Noopur Gupta" />
       </Helmet>
       
       <Header />
       
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="summit" className="w-full" onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-3 mb-8">
+          <TabsList className="grid w-full grid-cols-2 mb-8">
             <TabsTrigger value="summit">Past Events</TabsTrigger>
             <TabsTrigger value="request">Book AI Talk</TabsTrigger>
-            <TabsTrigger value="consultation">Book Consultation</TabsTrigger>
           </TabsList>
           
           <TabsContent value="summit" className="space-y-8">
@@ -221,82 +210,6 @@ const AITalk = () => {
               <div>
                 <AITalkRequestForm />
               </div>
-            </div>
-          </TabsContent>
-          
-          <TabsContent value="consultation">
-            <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-6">
-                <div className="space-y-4">
-                  <h1 className="text-3xl font-bold">30-Minute Expert Consultation</h1>
-                  <h2 className="text-xl text-gray-700">with Noopur Gupta, Founder & CEO of SparkStorm AI</h2>
-                  
-                  <div className="flex flex-wrap gap-4 mt-4">
-                    <Button 
-                      variant="outline" 
-                      className="flex items-center gap-2"
-                      onClick={handleLinkedInClick}
-                    >
-                      <Linkedin className="h-4 w-4" />
-                      LinkedIn
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="flex items-center gap-2"
-                      onClick={() => {window.location.href = "mailto:ask@sparkstorm.ai";}}
-                    >
-                      <Mail className="h-4 w-4" />
-                      ask@sparkstorm.ai
-                    </Button>
-                  </div>
-                </div>
-                
-                <p className="text-lg">
-                  Gain tailored, one-on-one guidance on AI development, startup strategy, and scaling technology businesses. Whether you're a founder, developer, or just diving into emerging tech, Noopur Gupta brings deep expertise from building SparkStorm AI to help you navigate your next step with clarity.
-                </p>
-                
-                <Card className="bg-gray-50">
-                  <CardContent className="pt-6">
-                    <h3 className="text-xl font-semibold mb-4">Topics You Can Cover:</h3>
-                    <ul className="space-y-3">
-                      <li className="flex items-start">
-                        <span className="mr-3 font-bold">•</span>
-                        <span>AI & machine learning development</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="mr-3 font-bold">•</span>
-                        <span>Startup and business strategy</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="mr-3 font-bold">•</span>
-                        <span>Product-market fit & scaling</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="mr-3 font-bold">•</span>
-                        <span>Fundraising & leadership</span>
-                      </li>
-                      <li className="flex items-start">
-                        <span className="mr-3 font-bold">•</span>
-                        <span>Breaking into tech as a developer or entrepreneur</span>
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
-                
-                <Alert className="bg-blue-50 border-blue-200">
-                  <AlertDescription>
-                    <p className="font-medium">
-                      💡 Ideal for tech founders, early-stage startups, aspiring developers, or anyone exploring AI and innovation.
-                    </p>
-                  </AlertDescription>
-                </Alert>
-                
-                <p className="text-center text-gray-500 text-sm mt-4">
-                  Fill out the form to request more information
-                </p>
-              </div>
-              
-              <ConsultationForm />
             </div>
           </TabsContent>
         </Tabs>
