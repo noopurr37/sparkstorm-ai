@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
@@ -127,21 +128,21 @@ const Team = () => {
       email: "ask@sparkstorm.ai",
     },
     {
-      name: "Shloak Gupta",
-      role: "AI Developer",
-      image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
-      delay: 300,
-      linkedinUrl: "https://www.linkedin.com/in/shloak-gupta-428412218/",
-      instagramUrl: "https://www.instagram.com/shloakgupta",
-      email: "ask@sparkstorm.ai",
-    },
-    {
       name: "Aarnav Chandraganti",
       role: "AI Developer",
       image: "/lovable-uploads/e7c668aa-10d3-4688-93eb-f9c2c4b685f9.png",
-      delay: 400,
+      delay: 300,
       linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
       instagramUrl: "https://www.instagram.com/aarnav_c_",
+      email: "ask@sparkstorm.ai",
+    },
+    {
+      name: "Shloak Gupta",
+      role: "AI Developer",
+      image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
+      delay: 400,
+      linkedinUrl: "https://www.linkedin.com/in/shloak-gupta-428412218/",
+      instagramUrl: "https://www.instagram.com/shloakgupta",
       email: "ask@sparkstorm.ai",
     },
   ];
