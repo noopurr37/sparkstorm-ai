@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { Linkedin, Instagram, Mail } from "lucide-react";
@@ -112,7 +111,7 @@ const Team = () => {
     {
       name: "Noopur Gupta",
       role: "Founder & CEO",
-      image: "/lovable-uploads/ae1d15ed-0b22-438d-aede-6554e09de8ed.png",
+      image: "/lovable-uploads/344afa04-d485-4c41-9445-33e244eb140a.png",
       delay: 100,
       linkedinUrl: "https://www.linkedin.com/in/noopurgupta01/",
       instagramUrl: "https://www.instagram.com/noopurrofficial",
