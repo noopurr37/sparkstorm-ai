@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
@@ -11,18 +12,16 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Loader2, Moon, Bell, Shield, Globe } from "lucide-react";
 
-import { useTheme } from "@/contexts/ThemeContext";
-
 const UserPreferences = () => {
   const [loading, setLoading] = useState(true);
   const [preferences, setPreferences] = useState({
     emailNotifications: true,
+    darkMode: false,
     language: "English",
     twoFactorAuth: false,
   });
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     // Check if user is logged in
@@ -79,7 +78,7 @@ const UserPreferences = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Helmet>
         <title>User Preferences | SparkStorm AI</title>
       </Helmet>
@@ -88,8 +87,8 @@ const UserPreferences = () => {
 
       <main className="container mx-auto px-4 py-12">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold dark:text-white">Customize Your Experience</h1>
-          <p className="text-gray-500 dark:text-gray-400">Manage your website preferences and settings</p>
+          <h1 className="text-3xl font-bold">Customize Your Experience</h1>
+          <p className="text-gray-500">Manage your website preferences and settings</p>
         </div>
 
         <div className="mx-auto max-w-4xl">
@@ -153,32 +152,25 @@ const UserPreferences = () => {
                 <CardContent className="space-y-6">
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
-                      <Label htmlFor="theme-mode">Theme</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Choose your preferred theme</p>
+                      <Label htmlFor="dark-mode">Dark Mode</Label>
+                      <p className="text-sm text-gray-500">Use dark theme for the website</p>
                     </div>
-                    <div className="w-32">
-                      <select 
-                        id="theme-mode"
-                        className="w-full rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2"
-                        value={theme}
-                        onChange={(e) => setTheme(e.target.value as any)}
-                      >
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                        <option value="system">System</option>
-                      </select>
-                    </div>
+                    <Switch 
+                      id="dark-mode" 
+                      checked={preferences.darkMode} 
+                      onCheckedChange={() => handleToggleChange('darkMode')} 
+                    />
                   </div>
 
                   <div className="flex items-center justify-between">
                     <div className="space-y-1">
                       <Label htmlFor="language">Language</Label>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Select your preferred language</p>
+                      <p className="text-sm text-gray-500">Select your preferred language</p>
                     </div>
                     <div className="w-32">
                       <select 
                         id="language"
-                        className="w-full rounded border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white p-2"
+                        className="w-full rounded border border-gray-300 p-2"
                         value={preferences.language}
                         onChange={(e) => setPreferences(prev => ({...prev, language: e.target.value}))}
                       >
