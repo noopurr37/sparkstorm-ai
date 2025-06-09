@@ -74,6 +74,9 @@ const ContactForm = () => {
     }
 
     console.log("Form submission started with data:", formData);
+    console.log("Supabase URL:", "https://ykcidfmkvreidsuscert.supabase.co");
+    console.log("Current domain:", window.location.hostname);
+    
     setIsSubmitting(true);
     
     try {
@@ -87,16 +90,31 @@ const ContactForm = () => {
       
       console.log("Inserting data to Supabase:", insertData);
       
+      // Test Supabase connection first
+      console.log("Testing Supabase connection...");
+      
       const { error } = await supabase
         .from('contact_submissions')
         .insert(insertData);
 
       if (error) {
         console.error("Supabase error:", error);
+        console.error("Error code:", error.code);
+        console.error("Error details:", error.details);
+        console.error("Error hint:", error.hint);
+        console.error("Error message:", error.message);
         
-        // Handle specific CORS or network errors
-        if (error.message?.includes('Failed to fetch') || error.message?.includes('CORS')) {
-          throw new Error('Network connection issue. Please check your internet connection and try again.');
+        // Handle specific error types
+        if (error.message?.includes('Failed to fetch')) {
+          throw new Error('Unable to connect to the server. This might be a network connectivity issue or CORS configuration problem.');
+        }
+        
+        if (error.message?.includes('CORS')) {
+          throw new Error('CORS error: The website cannot connect to the backend. Please check the CORS configuration.');
+        }
+        
+        if (error.code === 'PGRST301') {
+          throw new Error('Database connection issue. Please try again in a moment.');
         }
         
         throw error;
@@ -113,15 +131,20 @@ const ContactForm = () => {
       form.reset();
     } catch (error: any) {
       console.error('Error submitting form:', error);
+      console.error('Error name:', error.name);
+      console.error('Error stack:', error.stack);
       
       let errorMessage = "There was an error sending your message. Please try again.";
       
-      if (error.message?.includes('Network connection issue')) {
-        errorMessage = error.message;
-      } else if (error.message?.includes('Failed to fetch')) {
-        errorMessage = "Unable to connect to the server. Please check your internet connection and try again.";
+      // Handle network errors
+      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
+        errorMessage = "Network error: Unable to connect to the server. Please check your internet connection and try again.";
       } else if (error.message?.includes('CORS')) {
-        errorMessage = "Connection issue detected. Please try refreshing the page and submitting again.";
+        errorMessage = "Connection blocked by browser security. Please try refreshing the page.";
+      } else if (error.message?.includes('network')) {
+        errorMessage = error.message;
+      } else if (error.message && error.message.length < 100) {
+        errorMessage = error.message;
       }
       
       toast({
