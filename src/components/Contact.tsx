@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
+import SimpleContactForm from "./contact/SimpleContactForm";
 import ContactInfo from "./contact/ContactInfo";
 
 const Contact = () => {
@@ -44,13 +45,23 @@ const Contact = () => {
           </p>
         </div>
         
-        <div className="flex justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {/* Contact Information */}
           <div 
-            className={`max-w-md transition-all duration-700 delay-200 ${
+            className={`lg:col-span-1 transition-all duration-700 delay-200 ${
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             <ContactInfo />
+          </div>
+          
+          {/* Contact Form */}
+          <div 
+            className={`lg:col-span-2 transition-all duration-700 delay-300 ${
+              isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+            }`}
+          >
+            <SimpleContactForm />
           </div>
         </div>
       </div>
