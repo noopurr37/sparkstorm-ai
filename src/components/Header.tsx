@@ -159,6 +159,9 @@ const Header = () => {
               <a href="/#team" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Team
               </a>
+              <a href="/#testimonials" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
+                Testimonials
+              </a>
               <a href="/#contact" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Contact
               </a>
@@ -185,7 +188,7 @@ const Header = () => {
                   navigate("/ai-events");
                 }}
               >
-                AI Talk with Noopurr
+                AI Events
               </a>
               
               {/* Sign In Button moved into the navigation for desktop */}
@@ -243,6 +246,13 @@ const Header = () => {
                   Team
                 </a>
                 <a 
+                  href="/#testimonials" 
+                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
+                  onClick={closeMenu}
+                >
+                  Testimonials
+                </a>
+                <a 
                   href="/#contact" 
                   className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
                   onClick={closeMenu}
@@ -267,7 +277,7 @@ const Header = () => {
                     navigate("/ai-events");
                   }}
                 >
-                  AI Talk with Noopurr
+                  AI Events
                 </a>
                 {user && (
                   <>

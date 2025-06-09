@@ -9,94 +9,36 @@ import { Label } from "@/components/ui/label";
 import { CalendarDays, User, Mail, Users, Speaker } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { AITalkRequestFormData } from "@/components/contact/types";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
-const formSchema = z.object({
-  name: z.string()
-    .min(1, "Name is required")
-    .max(100, "Name must be less than 100 characters")
-    .regex(/^[a-zA-Z\s'-]+$/, "Name contains invalid characters"),
-  email: z.string()
-    .email("Invalid email address")
-    .max(254, "Email must be less than 254 characters"),
-  organization: z.string()
-    .min(1, "Organization is required")
-    .max(200, "Organization name must be less than 200 characters"),
-  eventDate: z.string()
-    .min(1, "Event date is required")
-    .refine((date) => new Date(date) > new Date(), "Event date must be in the future"),
-  audienceSize: z.string()
-    .optional()
-    .refine((val) => !val || /^\d+$/.test(val), "Audience size must be a number"),
-  topic: z.string()
-    .min(1, "Topic is required")
-    .max(200, "Topic must be less than 200 characters"),
-  additionalInfo: z.string()
-    .optional()
-    .refine((val) => !val || val.length <= 1000, "Additional info must be less than 1000 characters"),
-});
-
-type FormData = z.infer<typeof formSchema>;
 
 const AITalkRequestForm = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [lastSubmitTime, setLastSubmitTime] = useState(0);
   
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
-  });
-
-  // Input sanitization function
-  const sanitizeInput = (input: string): string => {
-    return input
-      .trim()
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
-      .replace(/[<>]/g, ''); // Remove HTML brackets
-  };
+  } = useForm<AITalkRequestFormData>();
   
-  const onSubmit = async (data: FormData) => {
-    // Rate limiting: prevent submissions within 60 seconds
-    const now = Date.now();
-    if (now - lastSubmitTime < 60000) {
-      toast({
-        title: "Please wait",
-        description: "Please wait 1 minute before submitting another request.",
-        variant: "destructive",
-      });
-      return;
-    }
-
+  const onSubmit = async (data: AITalkRequestFormData) => {
     setIsSubmitting(true);
     
     try {
-      console.log("Submitting AI talk request:", data);
-      
-      // Sanitize all text inputs
-      const sanitizedData = {
-        name: sanitizeInput(data.name),
-        email: data.email.trim().toLowerCase(),
-        organization: sanitizeInput(data.organization),
-        event_date: data.eventDate,
-        audience_size: data.audienceSize ? sanitizeInput(data.audienceSize) : null,
-        topic: sanitizeInput(data.topic),
-        additional_info: data.additionalInfo ? sanitizeInput(data.additionalInfo) : null
-      };
-      
       // Send data to Supabase
       const { error } = await supabase
         .from('ai_talk_requests')
-        .insert(sanitizedData);
+        .insert({
+          name: data.name,
+          email: data.email,
+          organization: data.organization,
+          event_date: data.eventDate,
+          audience_size: data.audienceSize || null,
+          topic: data.topic,
+          additional_info: data.additionalInfo || null
+        });
       
       if (error) throw error;
-      
-      setLastSubmitTime(now);
       
       toast({
         title: "Request Submitted",
@@ -133,8 +75,7 @@ const AITalkRequestForm = () => {
           <Input
             id="name"
             placeholder="Full name"
-            maxLength={100}
-            {...register("name")}
+            {...register("name", { required: "Name is required" })}
           />
           {errors.name && (
             <p className="text-sm text-red-500">{errors.name.message}</p>
@@ -149,8 +90,13 @@ const AITalkRequestForm = () => {
             id="email"
             placeholder="you@example.com"
             type="email"
-            maxLength={254}
-            {...register("email")}
+            {...register("email", { 
+              required: "Email is required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Please enter a valid email address",
+              },
+            })}
           />
           {errors.email && (
             <p className="text-sm text-red-500">{errors.email.message}</p>
@@ -164,8 +110,7 @@ const AITalkRequestForm = () => {
           <Input
             id="organization"
             placeholder="Company or organization name"
-            maxLength={200}
-            {...register("organization")}
+            {...register("organization", { required: "Organization is required" })}
           />
           {errors.organization && (
             <p className="text-sm text-red-500">{errors.organization.message}</p>
@@ -180,8 +125,7 @@ const AITalkRequestForm = () => {
             <Input
               id="eventDate"
               type="date"
-              min={new Date().toISOString().split('T')[0]}
-              {...register("eventDate")}
+              {...register("eventDate", { required: "Date is required" })}
             />
             {errors.eventDate && (
               <p className="text-sm text-red-500">{errors.eventDate.message}</p>
@@ -195,12 +139,8 @@ const AITalkRequestForm = () => {
             <Input
               id="audienceSize"
               placeholder="Estimated number"
-              pattern="[0-9]*"
               {...register("audienceSize")}
             />
-            {errors.audienceSize && (
-              <p className="text-sm text-red-500">{errors.audienceSize.message}</p>
-            )}
           </div>
         </div>
         
@@ -211,8 +151,7 @@ const AITalkRequestForm = () => {
           <Input
             id="topic"
             placeholder="AI topic you're interested in"
-            maxLength={200}
-            {...register("topic")}
+            {...register("topic", { required: "Topic is required" })}
           />
           {errors.topic && (
             <p className="text-sm text-red-500">{errors.topic.message}</p>
@@ -225,12 +164,8 @@ const AITalkRequestForm = () => {
             id="additionalInfo"
             placeholder="Any specific requirements, questions, or details about your event"
             rows={4}
-            maxLength={1000}
             {...register("additionalInfo")}
           />
-          {errors.additionalInfo && (
-            <p className="text-sm text-red-500">{errors.additionalInfo.message}</p>
-          )}
         </div>
       </div>
       

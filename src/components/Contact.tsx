@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import SimpleContactForm from "./contact/SimpleContactForm";
+import ContactForm from "./contact/ContactForm";
 import ContactInfo from "./contact/ContactInfo";
 
 const Contact = () => {
@@ -61,7 +61,7 @@ const Contact = () => {
               isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
-            <SimpleContactForm />
+            <ContactForm />
           </div>
         </div>
       </div>
