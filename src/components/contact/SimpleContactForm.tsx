@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,9 +19,10 @@ import * as z from "zod";
 
 const formSchema = z.object({
   name: z.string()
-    .min(1, "Name is required")
-    .max(100, "Name must be less than 100 characters"),
+    .max(100, "Name must be less than 100 characters")
+    .optional(),
   email: z.string()
+    .min(1, "Email is required")
     .email("Invalid email address")
     .max(254, "Email must be less than 254 characters"),
   phone: z.string()
@@ -73,7 +73,7 @@ const SimpleContactForm = () => {
     
     try {
       const insertData = {
-        name: sanitizeInput(formData.name),
+        name: formData.name ? sanitizeInput(formData.name) : null,
         email: formData.email.trim().toLowerCase(),
         phone: formData.phone ? sanitizeInput(formData.phone) : null,
         subject: null,
@@ -131,9 +131,7 @@ const SimpleContactForm = () => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>
-                  Full Name <span className="text-red-500">*</span>
-                </FormLabel>
+                <FormLabel>Full Name</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="Your name"
