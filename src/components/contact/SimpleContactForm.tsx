@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -76,14 +77,13 @@ const SimpleContactForm = () => {
         name: formData.name ? sanitizeInput(formData.name) : null,
         email: formData.email.trim().toLowerCase(),
         phone: formData.phone ? sanitizeInput(formData.phone) : null,
-        subject: null,
         message: sanitizeInput(formData.message)
       };
       
       console.log("Attempting to insert data:", insertData);
       
       const { data, error } = await supabase
-        .from('contact_submissions')
+        .from('contact_form_submissions')
         .insert(insertData)
         .select();
 
