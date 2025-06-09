@@ -57,7 +57,7 @@ interface WaitlistEntry {
 }
 
 interface NewsletterSubscription {
-  id: string;
+  id: number;
   created_at: string;
   email: string;
 }
