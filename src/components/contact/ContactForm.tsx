@@ -75,7 +75,7 @@ const ContactForm = () => {
 
     console.log("Form submission started");
     console.log("Current URL:", window.location.href);
-    console.log("Supabase URL:", supabase.supabaseUrl);
+    console.log("Supabase URL:", "https://ykcidfmkvreidsuscert.supabase.co");
     
     setIsSubmitting(true);
     
