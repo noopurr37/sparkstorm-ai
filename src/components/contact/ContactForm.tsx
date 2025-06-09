@@ -37,7 +37,6 @@ const formSchema = z.object({
     .max(2000, "Message must be less than 2000 characters"),
 });
 
-// This type ensures our form values match what Supabase expects
 type FormValues = z.infer<typeof formSchema>;
 
 const ContactForm = () => {
@@ -56,16 +55,14 @@ const ContactForm = () => {
     },
   });
 
-  // Input sanitization function
   const sanitizeInput = (input: string): string => {
     return input
       .trim()
-      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
-      .replace(/[<>]/g, ''); // Remove HTML brackets
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/[<>]/g, '');
   };
 
   const handleSubmit = async (formData: FormValues) => {
-    // Rate limiting: prevent submissions within 30 seconds
     const now = Date.now();
     if (now - lastSubmitTime < 30000) {
       toast({
@@ -80,7 +77,6 @@ const ContactForm = () => {
     setIsSubmitting(true);
     
     try {
-      // Sanitize all text inputs
       const insertData = {
         name: sanitizeInput(formData.name),
         email: formData.email.trim().toLowerCase(),
@@ -89,16 +85,20 @@ const ContactForm = () => {
         message: sanitizeInput(formData.message)
       };
       
-      console.log("Inserting sanitized data to Supabase:", insertData);
+      console.log("Inserting data to Supabase:", insertData);
       
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from('contact_submissions')
         .insert(insertData);
 
-      console.log("Supabase response:", { data, error });
-
       if (error) {
         console.error("Supabase error:", error);
+        
+        // Handle specific CORS or network errors
+        if (error.message?.includes('Failed to fetch') || error.message?.includes('CORS')) {
+          throw new Error('Network connection issue. Please check your internet connection and try again.');
+        }
+        
         throw error;
       }
 
@@ -110,13 +110,23 @@ const ContactForm = () => {
         description: "Thank you for your inquiry. We'll get back to you soon.",
       });
       
-      // Reset form
       form.reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error submitting form:', error);
+      
+      let errorMessage = "There was an error sending your message. Please try again.";
+      
+      if (error.message?.includes('Network connection issue')) {
+        errorMessage = error.message;
+      } else if (error.message?.includes('Failed to fetch')) {
+        errorMessage = "Unable to connect to the server. Please check your internet connection and try again.";
+      } else if (error.message?.includes('CORS')) {
+        errorMessage = "Connection issue detected. Please try refreshing the page and submitting again.";
+      }
+      
       toast({
         title: "Error",
-        description: "There was an error sending your message. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       });
     } finally {
