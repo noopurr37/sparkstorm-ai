@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import UserPreferences from "./pages/UserPreferences";
 import AIEvents from "./pages/AIEvents";
 import Dashboard from "./pages/Dashboard";
+import AdminDashboard from "./pages/AdminDashboard";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
@@ -37,6 +38,7 @@ const App = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/user-preferences" element={<UserPreferences />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/admin" element={<AdminDashboard />} />
               <Route path="/ai-events" element={<AIEvents />} />
               <Route path="/ai-talk" element={<AIEvents />} /> {/* Keep old route for compatibility */}
               <Route path="/terms-of-service" element={<TermsOfService />} />
