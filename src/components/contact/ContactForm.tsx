@@ -73,9 +73,9 @@ const ContactForm = () => {
       return;
     }
 
-    console.log("Form submission started with data:", formData);
-    console.log("Supabase URL:", "https://ykcidfmkvreidsuscert.supabase.co");
-    console.log("Current domain:", window.location.hostname);
+    console.log("Form submission started");
+    console.log("Current URL:", window.location.href);
+    console.log("Supabase URL:", supabase.supabaseUrl);
     
     setIsSubmitting(true);
     
@@ -88,39 +88,32 @@ const ContactForm = () => {
         message: sanitizeInput(formData.message)
       };
       
-      console.log("Inserting data to Supabase:", insertData);
+      console.log("Attempting to insert data:", insertData);
       
-      // Test Supabase connection first
+      // Test connection with a simple query first
       console.log("Testing Supabase connection...");
-      
-      const { error } = await supabase
+      const { data: testData, error: testError } = await supabase
         .from('contact_submissions')
-        .insert(insertData);
+        .select('count', { count: 'exact', head: true });
+      
+      if (testError) {
+        console.error("Connection test failed:", testError);
+        throw new Error(`Connection failed: ${testError.message}`);
+      }
+      
+      console.log("Connection test successful, proceeding with insert...");
+      
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .insert(insertData)
+        .select();
 
       if (error) {
-        console.error("Supabase error:", error);
-        console.error("Error code:", error.code);
-        console.error("Error details:", error.details);
-        console.error("Error hint:", error.hint);
-        console.error("Error message:", error.message);
-        
-        // Handle specific error types
-        if (error.message?.includes('Failed to fetch')) {
-          throw new Error('Unable to connect to the server. This might be a network connectivity issue or CORS configuration problem.');
-        }
-        
-        if (error.message?.includes('CORS')) {
-          throw new Error('CORS error: The website cannot connect to the backend. Please check the CORS configuration.');
-        }
-        
-        if (error.code === 'PGRST301') {
-          throw new Error('Database connection issue. Please try again in a moment.');
-        }
-        
+        console.error("Insert error:", error);
         throw error;
       }
 
-      console.log("Form submitted successfully");
+      console.log("Form submitted successfully:", data);
       setLastSubmitTime(now);
       
       toast({
@@ -131,19 +124,17 @@ const ContactForm = () => {
       form.reset();
     } catch (error: any) {
       console.error('Error submitting form:', error);
-      console.error('Error name:', error.name);
-      console.error('Error stack:', error.stack);
       
-      let errorMessage = "There was an error sending your message. Please try again.";
+      let errorMessage = "There was an error sending your message.";
       
-      // Handle network errors
-      if (error instanceof TypeError && error.message.includes('Failed to fetch')) {
-        errorMessage = "Network error: Unable to connect to the server. Please check your internet connection and try again.";
+      // Handle specific error types
+      if (error.message?.includes('Failed to fetch') || error.name === 'TypeError') {
+        errorMessage = "Unable to connect to the server. This might be a network or CORS issue. Please check that you're accessing the site from an allowed domain.";
       } else if (error.message?.includes('CORS')) {
-        errorMessage = "Connection blocked by browser security. Please try refreshing the page.";
-      } else if (error.message?.includes('network')) {
-        errorMessage = error.message;
-      } else if (error.message && error.message.length < 100) {
+        errorMessage = "CORS error: The current domain is not allowed to connect to the backend. Please contact support.";
+      } else if (error.code === 'PGRST301') {
+        errorMessage = "Database connection issue. Please try again in a moment.";
+      } else if (error.message && error.message.length < 200) {
         errorMessage = error.message;
       }
       
