@@ -45,38 +45,57 @@ const ContactForm = () => {
   });
 
   const handleSubmit = async (formData: FormValues) => {
+    console.log('Form submission started:', formData);
     setIsSubmitting(true);
     
     try {
       // Ensure we're passing values that match Supabase's requirements
-      const { error } = await supabase
+      const insertData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone || null,
+        subject: formData.subject || null,
+        message: formData.message
+      };
+      
+      console.log('Inserting data:', insertData);
+      
+      const { error, data } = await supabase
         .from('contact_submissions')
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone || null,
-          subject: formData.subject || null,
-          message: formData.message
-        });
+        .insert(insertData)
+        .select();
 
-      if (error) throw error;
+      console.log('Supabase response:', { data, error });
 
+      if (error) {
+        console.error('Supabase error:', error);
+        throw error;
+      }
+
+      console.log('Form submitted successfully:', data);
+      
       toast({
-        title: "Message Sent!",
-        description: "Thank you for your inquiry. We'll get back to you soon.",
+        title: "Message Sent Successfully! ✅",
+        description: "Thank you for your inquiry. We'll get back to you within 24 hours.",
+        duration: 5000,
       });
       
       // Reset form
       form.reset();
+      console.log('Form reset completed');
+      
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Complete error details:', error);
+      
       toast({
-        title: "Error",
-        description: "There was an error sending your message. Please try again.",
+        title: "Submission Failed ❌",
+        description: `There was an error sending your message: ${error.message || 'Unknown error'}. Please try again.`,
         variant: "destructive",
+        duration: 5000,
       });
     } finally {
       setIsSubmitting(false);
+      console.log('Form submission process completed');
     }
   };
 
