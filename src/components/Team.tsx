@@ -13,6 +13,15 @@ const Team = () => {
       instagramUrl: "https://www.instagram.com/noopurrofficial",
       email: "noopurr@sparkstorm.ai",
     },
+    {
+      name: "Shloak Gupta",
+      role: "Co-Founder & CTO",
+      image: "/lovable-uploads/cfacdfa5-065b-4b95-adf5-2c93abba0370.png",
+      delay: 200,
+      linkedinUrl: "https://www.linkedin.com/in/shloakgupta/",
+      instagramUrl: "https://www.instagram.com/shloak.ai",
+      email: "shloak@sparkstorm.ai",
+    },
   ];
   
   const advisoryBoard = [
