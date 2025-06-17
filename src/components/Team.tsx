@@ -1,4 +1,3 @@
-
 import TeamMember from "./team/TeamMember";
 import TeamSection from "./team/TeamSection";
 
@@ -12,15 +11,6 @@ const Team = () => {
       linkedinUrl: "https://www.linkedin.com/in/noopurgupta01/",
       instagramUrl: "https://www.instagram.com/noopurrofficial",
       email: "noopurr@sparkstorm.ai",
-    },
-    {
-      name: "Shloak Gupta",
-      role: "Co-Founder & CTO",
-      image: "/lovable-uploads/cfacdfa5-065b-4b95-adf5-2c93abba0370.png",
-      delay: 200,
-      linkedinUrl: "https://www.linkedin.com/in/shloakgupta/",
-      instagramUrl: "https://www.instagram.com/shloak.ai",
-      email: "shloak@sparkstorm.ai",
     },
   ];
   
@@ -48,19 +38,21 @@ const Team = () => {
           title="Our Team"
           description="We're a diverse team of experienced professionals passionate about creating intelligent AI solutions that transform businesses."
         >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {teamMembers.map((member, index) => (
-              <TeamMember
-                key={index}
-                name={member.name}
-                role={member.role}
-                image={member.image}
-                delay={member.delay}
-                linkedinUrl={member.linkedinUrl}
-                instagramUrl={member.instagramUrl}
-                email={member.email}
-              />
-            ))}
+          <div className="flex justify-center">
+            <div className="max-w-sm mx-auto">
+              {teamMembers.map((member, index) => (
+                <TeamMember
+                  key={index}
+                  name={member.name}
+                  role={member.role}
+                  image={member.image}
+                  delay={member.delay}
+                  linkedinUrl={member.linkedinUrl}
+                  instagramUrl={member.instagramUrl}
+                  email={member.email}
+                />
+              ))}
+            </div>
           </div>
         </TeamSection>
 
