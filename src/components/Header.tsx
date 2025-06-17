@@ -159,9 +159,6 @@ const Header = () => {
               <a href="/#team" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Team
               </a>
-              <a href="/#testimonials" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
-                Testimonials
-              </a>
               <a href="/#contact" className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors">
                 Contact
               </a>
@@ -244,13 +241,6 @@ const Header = () => {
                   onClick={closeMenu}
                 >
                   Team
-                </a>
-                <a 
-                  href="/#testimonials" 
-                  className="font-sans text-base font-medium text-gray-700 hover:text-primary transition-colors"
-                  onClick={closeMenu}
-                >
-                  Testimonials
                 </a>
                 <a 
                   href="/#contact" 

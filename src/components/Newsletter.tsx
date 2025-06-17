@@ -5,6 +5,7 @@ import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Newsletter = () => {
   const [ref, inView] = useInView({
@@ -53,25 +54,42 @@ const Newsletter = () => {
     setIsSubmitting(true);
     
     try {
-      // Store email in localStorage (just for user experience continuity)
-      localStorage.setItem("sparkstorm_newsletter_email", email);
-      
-      // Display success toast
-      toast({
-        title: "Thank you for signing up for our newsletter!",
-        description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
-        duration: 2000,
-      });
-      
-      console.log("Newsletter subscription submitted:", email);
-      
-      setEmail("");
+      // Save email to Supabase
+      const { error } = await supabase
+        .from('Newsletter Subscription')
+        .insert({ });
+
+      if (error) {
+        console.error("Newsletter subscription error:", error);
+        
+        // Check if it's a duplicate email error
+        if (error.message.includes('duplicate') || error.code === '23505') {
+          toast({
+            title: "Already subscribed!",
+            description: "This email is already subscribed to our newsletter.",
+            duration: 2000,
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        // Display success toast
+        toast({
+          title: "Thank you for signing up for our newsletter!",
+          description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
+          duration: 2000,
+        });
+        
+        console.log("Newsletter subscription saved to Supabase:", email);
+        setEmail("");
+      }
     } catch (error) {
-      console.error("Newsletter submission error:", error);
+      console.error("Newsletter subscription error:", error);
       
       toast({
-        title: "Thank you for signing up for our newsletter!",
-        description: "You will receive the latest updates on AI technology, healthcare innovation, and exclusive insights from our experts.",
+        title: "Error",
+        description: "There was an issue subscribing to the newsletter. Please try again.",
+        variant: "destructive",
         duration: 2000,
       });
     } finally {

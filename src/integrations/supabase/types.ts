@@ -75,33 +75,6 @@ export type Database = {
         }
         Relationships: []
       }
-      contact_form_submissions: {
-        Row: {
-          created_at: string
-          email: string
-          id: string
-          message: string
-          name: string | null
-          phone: string | null
-        }
-        Insert: {
-          created_at?: string
-          email: string
-          id?: string
-          message: string
-          name?: string | null
-          phone?: string | null
-        }
-        Update: {
-          created_at?: string
-          email?: string
-          id?: string
-          message?: string
-          name?: string | null
-          phone?: string | null
-        }
-        Relationships: []
-      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -153,20 +126,17 @@ export type Database = {
         }
         Relationships: []
       }
-      newsletter_subscriptions: {
+      "Newsletter Subscription": {
         Row: {
           created_at: string
-          email: string | null
           id: number
         }
         Insert: {
           created_at?: string
-          email?: string | null
           id?: number
         }
         Update: {
           created_at?: string
-          email?: string | null
           id?: number
         }
         Relationships: []
@@ -176,19 +146,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      check_rate_limit: {
-        Args: {
-          table_name: string
-          email_address: string
-          time_window?: unknown
-          max_submissions?: number
-        }
-        Returns: boolean
-      }
-      is_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never
