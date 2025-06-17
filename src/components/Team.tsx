@@ -118,33 +118,6 @@ const Team = () => {
       instagramUrl: "https://www.instagram.com/noopurrofficial",
       email: "noopurr@sparkstorm.ai",
     },
-    {
-      name: "Muzammil",
-      role: "CPO",
-      image: "/lovable-uploads/ba1a4abc-2473-4bae-8324-a56dfd73dcf2.png",
-      delay: 200,
-      linkedinUrl: "https://www.linkedin.com/in/muzammil-w-iqbal/",
-      instagramUrl: "https://www.instagram.com/muzammil.iqbal.11",
-      email: "ask@sparkstorm.ai",
-    },
-    {
-      name: "Shloak Gupta",
-      role: "AI Developer",
-      image: "/lovable-uploads/bec168c3-7297-4955-8076-b07a99337d80.png",
-      delay: 300,
-      linkedinUrl: "https://www.linkedin.com/in/shloak-gupta-428412218/",
-      instagramUrl: "https://www.instagram.com/shloakgupta",
-      email: "ask@sparkstorm.ai",
-    },
-    {
-      name: "Aarnav Chandraganti",
-      role: "AI Developer",
-      image: "/lovable-uploads/e7c668aa-10d3-4688-93eb-f9c2c4b685f9.png",
-      delay: 400,
-      linkedinUrl: "https://www.linkedin.com/in/aarnav-chandraganti/",
-      instagramUrl: "https://www.instagram.com/aarnav_c_",
-      email: "ask@sparkstorm.ai",
-    },
   ];
   
   const advisoryBoard = [
