@@ -1,3 +1,4 @@
+
 import TeamMember from "./team/TeamMember";
 import TeamSection from "./team/TeamSection";
 
@@ -6,7 +7,7 @@ const Team = () => {
     {
       name: "Noopur Gupta",
       role: "Founder & CEO",
-      image: "/lovable-uploads/ae1d15ed-0b22-438d-aede-6554e09de8ed.png",
+      image: "/lovable-uploads/5ac2a7b6-3eb0-412b-80f2-19a5e51bd19d.png",
       delay: 100,
       linkedinUrl: "https://www.linkedin.com/in/noopurgupta01/",
       instagramUrl: "https://www.instagram.com/noopurrofficial",
