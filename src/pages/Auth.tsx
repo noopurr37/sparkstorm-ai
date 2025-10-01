@@ -9,6 +9,7 @@ import { useNavigate, useLocation, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Helmet } from "react-helmet-async";
 import { Mail, Lock, User, ArrowRight, Loader2, AlertCircle } from "lucide-react";
+import { FcGoogle } from "react-icons/fc";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 interface LocationState {
@@ -107,6 +108,25 @@ const Auth = () => {
       });
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}${redirectPath}`,
+        },
+      });
+
+      if (error) throw error;
+    } catch (error) {
+      toast({
+        title: "Google sign in failed",
+        description: error.message,
+        variant: "destructive",
+      });
     }
   };
 
@@ -263,9 +283,7 @@ const Auth = () => {
                 </form>
               </TabsContent>
 
-              {/* The Google sign-in alert has been completely removed as requested */}
-
-              <div className="relative my-4 hidden">
+              <div className="relative my-4">
                 <div className="absolute inset-0 flex items-center">
                   <span className="w-full border-t border-gray-300" />
                 </div>
@@ -276,7 +294,15 @@ const Auth = () => {
                 </div>
               </div>
 
-              {/* Hidden Google button section completely removed */}
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={handleGoogleSignIn}
+              >
+                <FcGoogle className="mr-2 h-5 w-5" />
+                Continue with Google
+              </Button>
             </CardContent>
 
             <CardFooter className="text-center text-muted-foreground">
