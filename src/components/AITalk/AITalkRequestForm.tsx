@@ -1,6 +1,8 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +10,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { CalendarDays, User, Mail, Users, Speaker } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { AITalkRequestFormData } from "@/components/contact/types";
+
+const aiTalkSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  organization: z.string().trim().min(1, "Organization is required").max(200, "Organization must be less than 200 characters"),
+  eventDate: z.string().min(1, "Event date is required"),
+  audienceSize: z.string().trim().max(100, "Audience size must be less than 100 characters").optional(),
+  topic: z.string().trim().min(1, "Topic is required").max(200, "Topic must be less than 200 characters"),
+  additionalInfo: z.string().trim().max(2000, "Additional info must be less than 2000 characters").optional(),
+});
+
+type AITalkRequestFormData = z.infer<typeof aiTalkSchema>;
 
 const AITalkRequestForm = () => {
   const { toast } = useToast();
@@ -19,18 +32,38 @@ const AITalkRequestForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<AITalkRequestFormData>();
+  } = useForm<AITalkRequestFormData>({
+    resolver: zodResolver(aiTalkSchema),
+  });
   
   const onSubmit = async (data: AITalkRequestFormData) => {
     setIsSubmitting(true);
     
     try {
+      // Check rate limit
+      const { data: rateLimitOk } = await supabase.rpc('check_rate_limit', {
+        table_name: 'ai_talk_requests',
+        email_address: data.email,
+        time_window: '01:00:00',
+        max_submissions: 3
+      });
+
+      if (!rateLimitOk) {
+        toast({
+          title: "Too many attempts",
+          description: "Please wait before submitting another request",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       // Send data to Supabase
       const { error } = await supabase
         .from('ai_talk_requests')
         .insert({
           name: data.name,
-          email: data.email,
+          email: data.email.toLowerCase(),
           organization: data.organization,
           event_date: data.eventDate,
           audience_size: data.audienceSize || null,
@@ -47,10 +80,9 @@ const AITalkRequestForm = () => {
       
       reset();
     } catch (error) {
-      console.error("Error submitting form:", error);
       toast({
         title: "Error",
-        description: "There was a problem submitting your request. Please try again.",
+        description: "Failed to submit request. Please try again.",
         variant: "destructive",
       });
     } finally {

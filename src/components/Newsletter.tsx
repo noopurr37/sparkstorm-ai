@@ -5,6 +5,17 @@ import { Input } from "@/components/ui/input";
 import { Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+
+const newsletterSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .min(1, "Email is required")
+    .email("Please enter a valid email address")
+    .max(255, "Email must be less than 255 characters")
+    .toLowerCase(),
+});
 
 const Newsletter = () => {
   const [email, setEmail] = useState("");
@@ -14,10 +25,13 @@ const Newsletter = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!email) {
+    // Validate input with Zod
+    const validation = newsletterSchema.safeParse({ email });
+    
+    if (!validation.success) {
       toast({
-        title: "Error",
-        description: "Please enter your email address",
+        title: "Invalid email",
+        description: validation.error.errors[0].message,
         variant: "destructive",
       });
       return;
@@ -26,27 +40,50 @@ const Newsletter = () => {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase
-        .from('newsletter_subscriptions')
-        .insert([
-          { email }
-        ]);
+      const sanitizedEmail = validation.data.email;
 
-      if (error) {
-        throw error;
+      // Check rate limit
+      const { data: rateLimitOk } = await supabase.rpc('check_rate_limit', {
+        table_name: 'newsletter_subscriptions',
+        email_address: sanitizedEmail,
+        time_window: '01:00:00',
+        max_submissions: 3
+      });
+
+      if (!rateLimitOk) {
+        toast({
+          title: "Too many attempts",
+          description: "Please wait before subscribing again",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+        return;
       }
 
-      toast({
-        title: "Success!",
-        description: "You've been subscribed to our newsletter.",
-      });
-      
-      setEmail("");
+      const { error } = await supabase
+        .from('newsletter_subscriptions')
+        .insert([{ email: sanitizedEmail }]);
+
+      if (error) {
+        if (error.code === '23505') {
+          toast({
+            title: "Already subscribed",
+            description: "This email is already subscribed to our newsletter",
+          });
+        } else {
+          throw error;
+        }
+      } else {
+        toast({
+          title: "Success!",
+          description: "You've been subscribed to our newsletter.",
+        });
+        setEmail("");
+      }
     } catch (error) {
-      console.error('Newsletter subscription error:', error);
       toast({
-        title: "Error",
-        description: "Failed to subscribe. Please try again.",
+        title: "Subscription failed",
+        description: "Please try again later",
         variant: "destructive",
       });
     } finally {

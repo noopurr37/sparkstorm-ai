@@ -1,6 +1,8 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,13 +11,15 @@ import { Label } from "@/components/ui/label";
 import { User, Mail, Users, CalendarDays } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
-interface ConsultationFormData {
-  name: string;
-  email: string;
-  company?: string;
-  topic: string;
-  message?: string;
-}
+const consultationSchema = z.object({
+  name: z.string().trim().min(1, "Name is required").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Invalid email address").max(255, "Email must be less than 255 characters"),
+  company: z.string().trim().max(200, "Company must be less than 200 characters").optional(),
+  topic: z.string().trim().min(1, "Topic is required").max(200, "Topic must be less than 200 characters"),
+  message: z.string().trim().max(2000, "Message must be less than 2000 characters").optional(),
+});
+
+type ConsultationFormData = z.infer<typeof consultationSchema>;
 
 const ConsultationForm = () => {
   const { toast } = useToast();
@@ -26,18 +30,38 @@ const ConsultationForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ConsultationFormData>();
+  } = useForm<ConsultationFormData>({
+    resolver: zodResolver(consultationSchema),
+  });
   
   const onSubmit = async (data: ConsultationFormData) => {
     setIsSubmitting(true);
     
     try {
+      // Check rate limit
+      const { data: rateLimitOk } = await supabase.rpc('check_rate_limit', {
+        table_name: 'consultation_requests',
+        email_address: data.email,
+        time_window: '01:00:00',
+        max_submissions: 3
+      });
+
+      if (!rateLimitOk) {
+        toast({
+          title: "Too many attempts",
+          description: "Please wait before submitting another request",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
       // Send data to Supabase
       const { error } = await supabase
         .from('consultation_requests')
         .insert({
           name: data.name,
-          email: data.email,
+          email: data.email.toLowerCase(),
           company: data.company || null,
           topic: data.topic,
           message: data.message || null
@@ -52,10 +76,9 @@ const ConsultationForm = () => {
       
       reset();
     } catch (error) {
-      console.error("Error submitting form:", error);
       toast({
         title: "Error",
-        description: "There was a problem submitting your request. Please try again.",
+        description: "Failed to submit request. Please try again.",
         variant: "destructive",
       });
     } finally {
