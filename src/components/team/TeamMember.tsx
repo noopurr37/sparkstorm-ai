@@ -8,7 +8,7 @@ interface TeamMemberProps {
   role: string;
   image: string;
   delay: number;
-  linkedinUrl: string;
+  linkedinUrl?: string;
   instagramUrl?: string;
   email?: string;
 }
@@ -53,15 +53,17 @@ const TeamMember = ({ name, role, image, delay, linkedinUrl, instagramUrl, email
           <h3 className="text-xl font-semibold mb-1">{name}</h3>
           <p className="text-sm text-gray-500 mb-3">{role}</p>
           <div className="flex space-x-3">
-            <a
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-blue-600 transition-colors"
-              aria-label={`${name}'s LinkedIn`}
-            >
-              <Linkedin size={18} />
-            </a>
+            {linkedinUrl && (
+              <a
+                href={linkedinUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-blue-600 transition-colors"
+                aria-label={`${name}'s LinkedIn`}
+              >
+                <Linkedin size={18} />
+              </a>
+            )}
             {instagramUrl && (
               <a
                 href={instagramUrl}

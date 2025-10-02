@@ -13,6 +13,12 @@ const Team = () => {
       instagramUrl: "https://www.instagram.com/noopurrofficial",
       email: "noopurr@sparkstorm.ai",
     },
+    {
+      name: "Sharon",
+      role: "Chief Technology Officer",
+      image: "/lovable-uploads/sharon-cto.jpeg",
+      delay: 200,
+    },
   ];
   
   const advisoryBoard = [
@@ -40,7 +46,7 @@ const Team = () => {
           description="We're a diverse team of experienced professionals passionate about creating intelligent AI solutions that transform businesses."
         >
           <div className="flex justify-center">
-            <div className="max-w-sm mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
               {teamMembers.map((member, index) => (
                 <TeamMember
                   key={index}
