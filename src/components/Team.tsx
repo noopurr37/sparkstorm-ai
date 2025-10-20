@@ -5,7 +5,7 @@ import TeamSection from "./team/TeamSection";
 const Team = () => {
   const teamMembers = [
     {
-      name: "Noopur Gupta",
+      name: "Noopur K Gupta",
       role: "Founder & CEO",
       image: "/lovable-uploads/5ac2a7b6-3eb0-412b-80f2-19a5e51bd19d.png",
       delay: 100,
