@@ -108,8 +108,8 @@ const Services = () => {
   const services = [
     {
       icon: <MessageSquare className="w-7 h-7 text-blue-600" />,
-      title: "AI Chatbots",
-      description: "Custom conversational AI chatbots designed to automate customer interactions, answer queries, and enhance your business's digital presence 24/7.",
+      title: "Agentic AI",
+      description: "Autonomous AI agents that automate workflows, handle customer interactions, make decisions, and enhance your business's digital presence 24/7.",
       delay: 100,
     },
     {
