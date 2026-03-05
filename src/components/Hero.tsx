@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { MessageCircle, HeartPulse, BookOpen } from "lucide-react";
+import { MessageCircle, HeartPulse, BookOpen, Globe } from "lucide-react";
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -40,9 +40,9 @@ const Hero = () => {
           
           {/* Hero Visual Content - Now with feature cards only */}
           <div className={`w-full lg:w-1/2 mt-10 lg:mt-0 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="relative h-[380px] md:h-[440px]">
+            <div className="relative h-[480px] md:h-[520px]">
               {/* Chatbot Card */}
-              <div className="glass-card absolute top-0 left-0 p-6 w-[220px] md:w-[280px] animate-float">
+              <div className="glass-card absolute top-0 left-0 p-6 w-[200px] md:w-[260px] animate-float">
                 <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
                   <MessageCircle className="w-6 h-6 text-blue-600" />
                 </div>
@@ -51,16 +51,25 @@ const Hero = () => {
               </div>
 
               {/* AI Courses Card */}
-              <div className="glass-card absolute top-4 right-0 p-6 w-[220px] md:w-[280px] animate-float" style={{ animationDelay: "0.8s" }}>
+              <div className="glass-card absolute top-0 right-0 p-6 w-[200px] md:w-[260px] animate-float" style={{ animationDelay: "0.8s" }}>
                 <div className="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mb-4">
                   <BookOpen className="w-6 h-6 text-green-600" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">AI Courses</h3>
                 <p className="text-sm text-gray-500">Master AI skills for your business growth</p>
               </div>
+
+              {/* AI Websites Card */}
+              <div className="glass-card absolute top-[200px] md:top-[210px] left-0 p-6 w-[200px] md:w-[260px] animate-float" style={{ animationDelay: "1.2s" }}>
+                <div className="w-12 h-12 rounded-full bg-yellow-100 flex items-center justify-center mb-4">
+                  <Globe className="w-6 h-6 text-yellow-600" />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">AI Websites</h3>
+                <p className="text-sm text-gray-500">Hire us to get your website done today</p>
+              </div>
               
               {/* MediWallet Card */}
-              <div className="glass-card absolute bottom-0 left-1/2 -translate-x-1/2 p-6 w-[220px] md:w-[280px] animate-float" style={{ animationDelay: "1.5s" }}>
+              <div className="glass-card absolute top-[200px] md:top-[210px] right-0 p-6 w-[200px] md:w-[260px] animate-float" style={{ animationDelay: "1.5s" }}>
                 <div className="w-12 h-12 rounded-full bg-purple-100 flex items-center justify-center mb-4">
                   <HeartPulse className="w-6 h-6 text-purple-600" />
                 </div>
