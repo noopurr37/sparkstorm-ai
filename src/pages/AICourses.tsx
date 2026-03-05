@@ -3,58 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { BookOpen, Brain, Code, TrendingUp, Users, Zap, ArrowRight, CalendarDays } from "lucide-react";
-
-const courses = [
-  {
-    title: "AI Fundamentals",
-    description: "Master the foundations of artificial intelligence, machine learning concepts, and neural networks. Perfect for beginners looking to enter the AI space.",
-    duration: "6 Weeks",
-    level: "Beginner",
-    icon: <Brain className="w-8 h-8 text-blue-600" />,
-    topics: ["Introduction to AI & ML", "Neural Networks Basics", "Data Preprocessing", "Model Training & Evaluation"],
-  },
-  {
-    title: "Generative AI & LLMs",
-    description: "Deep dive into large language models, prompt engineering, fine-tuning, and building applications with GPT, Claude, and open-source models.",
-    duration: "8 Weeks",
-    level: "Intermediate",
-    icon: <Zap className="w-8 h-8 text-purple-600" />,
-    topics: ["LLM Architecture", "Prompt Engineering", "RAG Systems", "Fine-Tuning & Deployment"],
-  },
-  {
-    title: "AI for Business Leaders",
-    description: "Strategic AI adoption for executives and managers. Learn to identify AI opportunities, manage AI projects, and drive digital transformation.",
-    duration: "4 Weeks",
-    level: "All Levels",
-    icon: <TrendingUp className="w-8 h-8 text-green-600" />,
-    topics: ["AI Strategy & ROI", "Use Case Identification", "AI Project Management", "Ethics & Governance"],
-  },
-  {
-    title: "AI Chatbot Development",
-    description: "Build production-ready AI chatbots from scratch. Covers NLP, dialog management, integrations, and deployment best practices.",
-    duration: "6 Weeks",
-    level: "Intermediate",
-    icon: <Code className="w-8 h-8 text-orange-600" />,
-    topics: ["NLP & Intent Recognition", "Dialog Flow Design", "API Integrations", "Production Deployment"],
-  },
-  {
-    title: "AI in Healthcare",
-    description: "Explore AI applications in healthcare including medical imaging, clinical NLP, drug discovery, and health data analytics with HIPAA compliance.",
-    duration: "8 Weeks",
-    level: "Advanced",
-    icon: <BookOpen className="w-8 h-8 text-red-600" />,
-    topics: ["Medical Imaging AI", "Clinical NLP", "Health Data Analytics", "Regulatory Compliance"],
-  },
-  {
-    title: "Corporate AI Training",
-    description: "Customized AI training programs for teams. Upskill your workforce with hands-on workshops tailored to your industry and use cases.",
-    duration: "Custom",
-    level: "Custom",
-    icon: <Users className="w-8 h-8 text-teal-600" />,
-    topics: ["Custom Curriculum", "Hands-On Workshops", "Industry-Specific Cases", "Team Certification"],
-  },
-];
+import { CheckCircle, CalendarDays, ArrowRight, Sparkles, Star, Diamond } from "lucide-react";
 
 const AICourses = () => {
   const handleBookDemo = () => {
@@ -65,7 +14,7 @@ const AICourses = () => {
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
       <Helmet>
         <title>AI Courses | SparkStorm AI</title>
-        <meta name="description" content="Learn AI with SparkStorm AI's comprehensive courses — from fundamentals to advanced generative AI, chatbot development, and corporate training." />
+        <meta name="description" content="Master AI for your business — from basics to advanced tools. Learn prompting, content creation, website building, chatbots, and cinematic video generation." />
       </Helmet>
 
       <Header />
@@ -80,80 +29,139 @@ const AICourses = () => {
             AI Courses by SparkStorm AI
           </h1>
           <p className="mx-auto max-w-3xl text-lg text-gray-600">
-            Master artificial intelligence with industry-led courses designed for professionals, 
-            developers, and business leaders. Learn by building real-world AI applications.
+            Transform your business with AI — from mastering the basics to building 
+            landing pages, chatbots, and cinematic videos. No tech experience needed.
           </p>
         </div>
 
-        {/* CTA Banner */}
-        <div className="mb-16 rounded-2xl bg-gradient-primary p-8 text-white shadow-lg text-center">
-          <h2 className="mb-4 text-3xl font-bold">Transform Your Career with AI Skills</h2>
-          <p className="mb-6 text-lg max-w-2xl mx-auto">
-            Our expert-led courses combine theory with hands-on projects, 
-            ensuring you can apply AI in real-world scenarios from day one.
-          </p>
-          <Button
-            onClick={handleBookDemo}
-            size="lg"
-            className="bg-white text-primary hover:bg-gray-100 flex items-center mx-auto"
-          >
-            <CalendarDays className="mr-2 h-5 w-5" /> Book a Consultation
-          </Button>
-        </div>
+        {/* ============ BASIC COURSE ============ */}
+        <section className="mb-20">
+          <div className="rounded-2xl bg-gradient-primary p-8 text-white shadow-lg text-center mb-10">
+            <div className="inline-flex items-center gap-2 mb-3 px-4 py-1.5 bg-white/20 rounded-full">
+              <Star className="w-4 h-4" />
+              <span className="text-sm font-medium">Basic Course</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">Reserve Your Spot — Basic</h2>
+            <p className="text-lg max-w-2xl mx-auto opacity-90">
+              Learn the foundations of AI and start using it to create content, save time, and grow your business.
+            </p>
+          </div>
 
-        {/* Course Listings */}
-        <section className="mb-16">
-          <h2 className="mb-8 text-center text-3xl font-bold">Our Courses</h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {courses.map((course, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-lg transition-shadow h-full">
-                <CardContent className="p-6 flex flex-col h-full">
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gray-50">
-                      {course.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-semibold">{course.title}</h3>
-                      <div className="flex gap-2 mt-1">
-                        <span className="text-xs px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full">{course.duration}</span>
-                        <span className="text-xs px-2 py-0.5 bg-gray-100 text-gray-600 rounded-full">{course.level}</span>
-                      </div>
-                    </div>
+          {/* Modules */}
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-10">
+            {[
+              { num: 1, title: "AI Basics", desc: "What it really is & why it matters" },
+              { num: 2, title: "Prompting 101", desc: "How to talk to AI & get results" },
+              { num: 3, title: "Context & Framework", desc: "Teach AI your voice" },
+              { num: 4, title: "Practical Practice", desc: "Write blogs & eBooks" },
+              { num: 5, title: "Choosing Your AI Tools", desc: "ChatGPT & more" },
+              { num: "★", title: "Bonus", desc: "Live Q&A + Marie's secret spiritual prompts!" },
+            ].map((mod, i) => (
+              <Card key={i} className="hover:shadow-md transition-shadow">
+                <CardContent className="p-5 flex items-start gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 font-bold text-sm flex-shrink-0">
+                    {mod.num}
                   </div>
-                  <p className="text-gray-600 mb-4 flex-grow">{course.description}</p>
                   <div>
-                    <p className="text-sm font-medium mb-2">Topics Covered:</p>
-                    <ul className="space-y-1">
-                      {course.topics.map((topic, i) => (
-                        <li key={i} className="text-sm text-gray-500 flex items-center gap-2">
-                          <ArrowRight className="w-3 h-3 text-blue-500" /> {topic}
-                        </li>
-                      ))}
-                    </ul>
+                    <h3 className="font-semibold text-base">{mod.title}</h3>
+                    <p className="text-sm text-gray-500">{mod.desc}</p>
                   </div>
                 </CardContent>
               </Card>
             ))}
           </div>
+
+          {/* What You'll Be Able to Do */}
+          <div className="rounded-xl bg-gray-50 p-8 mb-10">
+            <h3 className="text-2xl font-bold text-center mb-6">What You'll Be Able to Do</h3>
+            <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 max-w-3xl mx-auto">
+              {[
+                "Write blogs in minutes",
+                "Draft eBooks and workbooks",
+                "Get marketing ideas instantly",
+                "Have AI as a 'team member'",
+                "Save hours of time for your purpose",
+                "Video replays included",
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-gray-700">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
-        {/* Why Choose Us */}
-        <section className="mb-16 rounded-xl bg-blue-50 p-8">
-          <h2 className="mb-6 text-center text-3xl font-bold">Why Learn with SparkStorm AI?</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {/* ============ ADVANCED COURSE ============ */}
+        <section className="mb-20">
+          <div className="rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-700 p-8 text-white shadow-lg mb-10">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+              <div>
+                <div className="inline-flex items-center gap-2 mb-3 px-4 py-1.5 bg-white/20 rounded-full">
+                  <Diamond className="w-4 h-4" />
+                  <span className="text-sm font-medium">Diamond AI Advanced</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-3">Advanced Course — Next Level</h2>
+                <p className="text-lg opacity-90 max-w-xl">
+                  Ready for the next level? Join us after your basic training to master advanced AI tools for your spiritual business.
+                </p>
+              </div>
+              <div className="text-center md:text-right flex-shrink-0">
+                <div className="text-lg line-through opacity-60">$998</div>
+                <div className="text-4xl font-bold">$498</div>
+                <div className="inline-block mt-1 px-3 py-1 bg-yellow-400 text-yellow-900 rounded-full text-xs font-bold">
+                  Save $500 Early Bird
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Live Sessions */}
+          <div className="rounded-xl border border-purple-200 bg-purple-50 p-6 mb-10 text-center">
+            <h3 className="text-lg font-semibold mb-2 text-purple-800">Live Sessions</h3>
+            <p className="text-purple-700 font-medium">Nov 11, 18, 25 &bull; Dec 2, 9</p>
+            <p className="text-purple-600 text-sm">9:00–11:30 AM PDT</p>
+          </div>
+
+          {/* What You'll Learn */}
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mb-10">
             {[
-              { title: "Industry Experts", desc: "Learn from practitioners building real AI products." },
-              { title: "Hands-On Projects", desc: "Build a portfolio of AI projects during the course." },
-              { title: "Flexible Learning", desc: "Self-paced modules with live mentorship sessions." },
-              { title: "Career Support", desc: "Job placement assistance and networking opportunities." },
-            ].map((item, i) => (
-              <Card key={i}>
-                <CardContent className="p-6 text-center">
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
+              { num: 1, title: "Build Landing Pages", desc: "Create high-converting AI-powered landing pages" },
+              { num: 2, title: "Build Custom Websites", desc: "Design and deploy professional websites with AI" },
+              { num: 3, title: "PowerPoint Decks", desc: "Professional grade presentations with AI assistance" },
+              { num: 4, title: "Chatbots for Business", desc: "Build and deploy chatbots for your website" },
+              { num: 5, title: "Cinematic Video Generation", desc: "Hyper realistic AI-generated video content" },
+            ].map((mod, i) => (
+              <Card key={i} className="hover:shadow-md transition-shadow border-purple-100">
+                <CardContent className="p-5 flex items-start gap-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-50 text-purple-600 font-bold text-sm flex-shrink-0">
+                    {mod.num}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-base">{mod.title}</h3>
+                    <p className="text-sm text-gray-500">{mod.desc}</p>
+                  </div>
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Advanced Training Includes */}
+          <div className="rounded-xl bg-gray-50 p-8 mb-10">
+            <h3 className="text-2xl font-bold text-center mb-6">Advanced Training Includes</h3>
+            <div className="grid gap-3 md:grid-cols-2 max-w-2xl mx-auto">
+              {[
+                "Build AI-powered landing pages & websites",
+                "Create your own chatbot for your site",
+                "Generate beautiful images & videos",
+                "Marie & Noopur's proven business templates",
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                  <span className="text-gray-700">{item}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -161,7 +169,7 @@ const AICourses = () => {
         <section className="text-center mb-8">
           <h2 className="text-2xl font-bold mb-4">Ready to Start Your AI Journey?</h2>
           <p className="text-gray-600 mb-6 max-w-xl mx-auto">
-            Get in touch to discuss which course is right for you or to arrange corporate training for your team.
+            Get in touch to reserve your spot or learn more about our upcoming cohorts.
           </p>
           <Button onClick={handleBookDemo} size="lg" className="flex items-center mx-auto">
             <CalendarDays className="mr-2 h-5 w-5" /> Schedule a Call
