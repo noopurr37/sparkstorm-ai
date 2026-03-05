@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import Header from "@/components/Header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, CalendarDays, ArrowRight, Sparkles, Star, Diamond } from "lucide-react";
+import { CheckCircle, CalendarDays, ArrowRight, Sparkles, Star } from "lucide-react";
 
 const AICourses = () => {
   const handleBookDemo = () => {
@@ -98,8 +98,8 @@ const AICourses = () => {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
                 <div className="inline-flex items-center gap-2 mb-3 px-4 py-1.5 bg-white/20 rounded-full">
-                  <Diamond className="w-4 h-4" />
-                  <span className="text-sm font-medium">Diamond AI Advanced</span>
+                  <Star className="w-4 h-4" />
+                  <span className="text-sm font-medium">AI Advanced</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-3">Advanced Course — Next Level</h2>
                 <p className="text-lg opacity-90 max-w-xl">
