@@ -13,6 +13,8 @@ import BookDemo from "./pages/BookDemo";
 import Profile from "./pages/Profile";
 import UserPreferences from "./pages/UserPreferences";
 import AIEvents from "./pages/AIEvents";
+import AICourses from "./pages/AICourses";
+import AIWebsites from "./pages/AIWebsites";
 import Dashboard from "./pages/Dashboard";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -35,7 +37,9 @@ const App = () => (
             <Route path="/user-preferences" element={<UserPreferences />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/ai-events" element={<AIEvents />} />
-            <Route path="/ai-talk" element={<AIEvents />} /> {/* Keep old route for compatibility */}
+            <Route path="/ai-talk" element={<AIEvents />} />
+            <Route path="/ai-courses" element={<AICourses />} />
+            <Route path="/ai-websites" element={<AIWebsites />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

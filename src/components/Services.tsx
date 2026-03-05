@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useInView } from "react-intersection-observer";
-import { MessageSquare, Globe, Smartphone, HeartPulse } from "lucide-react";
+import { MessageSquare, Globe, Smartphone, HeartPulse, BookOpen, Monitor } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -113,10 +113,11 @@ const Services = () => {
       delay: 100,
     },
     {
-      icon: <Globe className="w-7 h-7 text-blue-600" />,
-      title: "Website Development",
-      description: "Professional, responsive websites built with modern technologies to showcase your brand, engage visitors, and drive conversions.",
+      icon: <Monitor className="w-7 h-7 text-blue-600" />,
+      title: "AI Websites",
+      description: "AI-powered websites with intelligent design, content generation, SEO optimization, and smart user engagement to grow your business online.",
       delay: 200,
+      linkTo: "/ai-websites",
     },
     {
       icon: <Smartphone className="w-7 h-7 text-blue-600" />,
@@ -125,10 +126,17 @@ const Services = () => {
       delay: 300,
     },
     {
+      icon: <BookOpen className="w-7 h-7 text-blue-600" />,
+      title: "AI Courses",
+      description: "Comprehensive AI training programs for professionals, developers, and business leaders — from fundamentals to advanced generative AI.",
+      delay: 400,
+      linkTo: "/ai-courses",
+    },
+    {
       icon: <HeartPulse className="w-7 h-7 text-blue-600" />,
       title: "MediWallet",
       description: "Secure, HIPAA-compliant applications for storing and managing personal health records with advanced security features to protect sensitive information.",
-      delay: 400,
+      delay: 500,
       linkTo: "/mediwallet",
       requiresAuth: true,
     },
@@ -157,7 +165,7 @@ const Services = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
