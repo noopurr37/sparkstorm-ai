@@ -46,8 +46,8 @@ const Hero = () => {
                 <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-4">
                   <MessageCircle className="w-6 h-6 text-blue-600" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">AI Chatbots</h3>
-                <p className="text-sm text-gray-500">Custom conversational AI for your business</p>
+                <h3 className="text-lg font-semibold mb-2">Agentic AI</h3>
+                <p className="text-sm text-gray-500">Autonomous AI agents for your business</p>
               </div>
 
               {/* AI Courses Card */}

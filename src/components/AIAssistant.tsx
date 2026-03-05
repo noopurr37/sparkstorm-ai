@@ -117,7 +117,7 @@ const AIAssistant = () => {
     else if (lowerCaseMessage.includes('services') || lowerCaseMessage.includes('go to services')) {
       navigate('/#services');
       return { 
-        text: "Our services include AI chatbots, MediWallet health records platform, NLP solutions, computer vision systems, and custom AI development. Each solution is tailored to meet your specific business needs."
+        text: "Our services include Agentic AI, MediWallet health records platform, NLP solutions, computer vision systems, and custom AI development. Each solution is tailored to meet your specific business needs."
       };
     }
     
