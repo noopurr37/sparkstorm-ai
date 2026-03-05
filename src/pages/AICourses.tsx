@@ -55,7 +55,7 @@ const AICourses = () => {
               { num: 3, title: "Context & Framework", desc: "Teach AI your voice" },
               { num: 4, title: "Practical Practice", desc: "Write blogs & eBooks" },
               { num: 5, title: "Choosing Your AI Tools", desc: "ChatGPT & more" },
-              { num: "★", title: "Bonus", desc: "Live Q&A + Marie's secret spiritual prompts!" },
+              { num: "★", title: "Bonus", desc: "Live Q&A + secret AI prompts!" },
             ].map((mod, i) => (
               <Card key={i} className="hover:shadow-md transition-shadow">
                 <CardContent className="p-5 flex items-start gap-4">
@@ -103,7 +103,7 @@ const AICourses = () => {
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-3">Advanced Course — Next Level</h2>
                 <p className="text-lg opacity-90 max-w-xl">
-                  Ready for the next level? Join us after your basic training to master advanced AI tools for your spiritual business.
+                  Ready for the next level? Join us after your basic training to master advanced AI tools for your business.
                 </p>
               </div>
               <div className="text-center md:text-right flex-shrink-0">
@@ -154,7 +154,7 @@ const AICourses = () => {
                 "Build AI-powered landing pages & websites",
                 "Create your own chatbot for your site",
                 "Generate beautiful images & videos",
-                "Marie & Noopur's proven business templates",
+                "Proven business templates",
               ].map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
