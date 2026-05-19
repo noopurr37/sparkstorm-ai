@@ -2,17 +2,30 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.8";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+const ALLOWED_ORIGINS = new Set([
+  "https://sparkstorm.ai",
+  "https://www.sparkstorm.ai",
+  "https://sparkstorm-ai.lovable.app",
+  "https://id-preview--cc6d6f83-4311-4cf2-8ac1-b7c63eba7dce.lovable.app",
+]);
+
+function buildCorsHeaders(req: Request): Record<string, string> {
+  const origin = req.headers.get("origin") ?? "";
+  const allowOrigin = ALLOWED_ORIGINS.has(origin) ? origin : "https://sparkstorm.ai";
+  return {
+    "Access-Control-Allow-Origin": allowOrigin,
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type",
+    "Vary": "Origin",
+  };
+}
 
 interface NewsletterRequest {
   email: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
+  const corsHeaders = buildCorsHeaders(req);
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -181,9 +194,9 @@ const handler = async (req: Request): Promise<Response> => {
     });
   } catch (error: any) {
     console.error("Error in newsletter-confirmation function:", error);
-    
+
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "An internal error occurred. Please try again." }),
       {
         status: 500,
         headers: { "Content-Type": "application/json", ...corsHeaders },
