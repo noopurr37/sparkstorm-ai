@@ -46,27 +46,6 @@ const Team = () => {
           </div>
         </TeamSection>
 
-        <div className="mt-20">
-          <TeamSection
-            title="Advisory Board"
-            description="Our advisory board brings decades of industry experience and expertise to guide our strategic direction."
-          >
-            <div className="flex justify-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                {advisoryBoard.map((member, index) => (
-                  <TeamMember
-                    key={`advisor-${index}`}
-                    name={member.name}
-                    role={member.role}
-                    image={member.image}
-                    delay={member.delay}
-                    linkedinUrl={member.linkedinUrl}
-                  />
-                ))}
-              </div>
-            </div>
-          </TeamSection>
-        </div>
       </div>
     </section>
   );
