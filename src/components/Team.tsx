@@ -20,8 +20,8 @@ const Team = () => {
       delay: 200,
     },
   ];
-  
-  const advisoryBoard: Array<{name:string;role:string;image:string;delay:number;linkedinUrl?:string}> = [];
+
+
 
   return (
     <section id="team" className="py-8 bg-white">
