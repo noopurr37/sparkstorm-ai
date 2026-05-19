@@ -19,15 +19,46 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { email }: NewsletterRequest = await req.json();
-    
+    const body: NewsletterRequest = await req.json();
+    const rawEmail = typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+
+    // Strict email validation (RFC-5321-ish, length cap)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!rawEmail || rawEmail.length > 255 || !emailRegex.test(rawEmail)) {
+      return new Response(JSON.stringify({ error: "Invalid email address" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+    const email = rawEmail;
+
+    // HTML-escape helper for safe interpolation into email body
+    const escapeHtml = (s: string) =>
+      s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+       .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+    const safeEmail = escapeHtml(email);
+    const safeEmailUrl = encodeURIComponent(email);
+
     // Create a Supabase client for database operations
     const supabaseUrl = Deno.env.get("SUPABASE_URL") || "https://ykcidfmkvreidsuscert.supabase.co";
     const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY") || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlrY2lkZm1rdnJlaWRzdXNjZXJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU1MzM3MDgsImV4cCI6MjA2MTEwOTcwOH0.GpYPY1nmmrv2tgaMzt5K-6P4lE347Vt_SoaUgYrX93g";
     const supabase = createClient(supabaseUrl, supabaseKey);
-    
-    // Log the subscription
-    console.log(`Newsletter subscription received for: ${email}`);
+
+    // Server-side rate limit (3 per hour per email)
+    const { data: rateLimitOk } = await supabase.rpc('check_rate_limit', {
+      table_name: 'newsletter_subscriptions',
+      email_address: email,
+      time_window: '01:00:00',
+      max_submissions: 3,
+    });
+    if (rateLimitOk === false) {
+      return new Response(JSON.stringify({ error: "Too many requests" }), {
+        status: 429,
+        headers: { "Content-Type": "application/json", ...corsHeaders },
+      });
+    }
+
+    console.log("Newsletter subscription received");
     
     // Create the newsletter_subscribers table if it doesn't exist
     const { error: tableError } = await supabase.rpc('create_newsletter_table_if_not_exists');
