@@ -20,23 +20,8 @@ const Team = () => {
       delay: 200,
     },
   ];
-  
-  const advisoryBoard = [
-    {
-      name: "Sivapunniyam Dakshinamurthy",
-      role: "Advisory Board Member",
-      image: "/lovable-uploads/16c72fb9-4b68-4d2c-9837-ed5d77bdf7c7.png",
-      delay: 500,
-      linkedinUrl: "https://www.linkedin.com/in/sivapunniyamdakshinamurthy",
-    },
-    {
-      name: "Girija Sivapunniyam",
-      role: "Advisory Board Member",
-      image: "/lovable-uploads/e799f8e7-efe8-421a-8904-fb3bc81e1aae.png",
-      delay: 600,
-      linkedinUrl: "https://www.linkedin.com/in/girijasivapunniyam/",
-    }
-  ];
+
+
 
   return (
     <section id="team" className="py-8 bg-white">
@@ -61,27 +46,6 @@ const Team = () => {
           </div>
         </TeamSection>
 
-        <div className="mt-20">
-          <TeamSection
-            title="Advisory Board"
-            description="Our advisory board brings decades of industry experience and expertise to guide our strategic direction."
-          >
-            <div className="flex justify-center">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                {advisoryBoard.map((member, index) => (
-                  <TeamMember
-                    key={`advisor-${index}`}
-                    name={member.name}
-                    role={member.role}
-                    image={member.image}
-                    delay={member.delay}
-                    linkedinUrl={member.linkedinUrl}
-                  />
-                ))}
-              </div>
-            </div>
-          </TeamSection>
-        </div>
       </div>
     </section>
   );
