@@ -21,22 +21,7 @@ const Team = () => {
     },
   ];
   
-  const advisoryBoard = [
-    {
-      name: "Sivapunniyam Dakshinamurthy",
-      role: "Advisory Board Member",
-      image: "/lovable-uploads/16c72fb9-4b68-4d2c-9837-ed5d77bdf7c7.png",
-      delay: 500,
-      linkedinUrl: "https://www.linkedin.com/in/sivapunniyamdakshinamurthy",
-    },
-    {
-      name: "Girija Sivapunniyam",
-      role: "Advisory Board Member",
-      image: "/lovable-uploads/e799f8e7-efe8-421a-8904-fb3bc81e1aae.png",
-      delay: 600,
-      linkedinUrl: "https://www.linkedin.com/in/girijasivapunniyam/",
-    }
-  ];
+  const advisoryBoard: Array<{name:string;role:string;image:string;delay:number;linkedinUrl?:string}> = [];
 
   return (
     <section id="team" className="py-8 bg-white">
