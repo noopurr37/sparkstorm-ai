@@ -146,7 +146,7 @@ const handler = async (req: Request): Promise<Response> => {
         <div class="footer">
           <p>© ${new Date().getFullYear()} SparkStorm AI. All rights reserved.</p>
           <p>You're receiving this email because you subscribed to our newsletter.</p>
-          <p>If you no longer wish to receive these emails, <a href="https://sparkstorm.ai/unsubscribe?email=${email}">unsubscribe here</a>.</p>
+          <p>If you no longer wish to receive these emails, <a href="https://sparkstorm.ai/unsubscribe?email=${safeEmailUrl}">unsubscribe here</a>.</p>
         </div>
       </div>
     </body>
@@ -154,26 +154,23 @@ const handler = async (req: Request): Promise<Response> => {
     `;
     
     // Send the actual email via Supabase's built-in email functionality
-    // In a real application, you would use a proper email service
     const { error: emailError } = await supabase.rpc('send_newsletter_confirmation_email', {
       p_email: email,
       p_html_content: emailHtmlContent
     });
     
     if (emailError) {
-      console.log("Email sending function not available, would have sent:", emailHtmlContent);
-      // Not failing the whole function if just the email sending fails
+      console.log("Email sending function not available");
     }
     
     const emailResponse = {
       id: `newsletter-${Date.now()}`,
       status: "sent",
-      email: email,
+      email: safeEmail,
       message: "Thank you for subscribing to the SparkStorm AI newsletter!"
     };
     
-    // Log successful operation
-    console.log("Newsletter subscription processed successfully for:", email);
+    console.log("Newsletter subscription processed successfully");
 
     return new Response(JSON.stringify(emailResponse), {
       status: 200,
